@@ -48,11 +48,9 @@
                                                     <td><?php echo $admins->username ?></td>
                                                     <td><?php echo $admins->name ?></td>
                                                     <td><?php echo $admins->role=='0' ? 'super admin' : 'admin' ?></td>
-                                                    <td align="center">
+                                                    <td>
                                                         <div class="hidden-sm hidden-xs action-buttons">
-                                                            <?php 
-                                                                echo anchor(site_url('admins/delete/'.$admins->admins_id),'<i class="ace-icon fa fa-trash-o bigger-130"></i>',' class="red" onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
-                                                            ?>
+                                                            <button href="#full-colored" data-toggle="modal" type="button" class="btn btn-sm btn-icon btn-rounded btn-danger"><i class="ace-icon fa fa-trash-o bigger-130"></i></button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -67,6 +65,28 @@
                 </div>
                 <!-- END MAIN CONTENT -->
             </div>
+            <div class="modal fade" id="full-colored" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-primary">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                </div>
+                <div class="modal-body">
+                  <p class="m-t-40">Apakah anda yakin akan menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
+                    <?php 
+                        echo anchor(site_url('admins/delete/'.$admins->admins_id),'Delete</i>',' class="btn btn-dark" ');
+
+                    ?>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END MODALS -->
        </section>
         <?php $this->load->view('lib/footer')?>
     </body>
