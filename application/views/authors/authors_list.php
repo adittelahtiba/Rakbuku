@@ -1,83 +1,75 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html class="" lang="en">
     <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
+        <?php $this->load->view('lib/head')?>
     </head>
-    <body>
-        <h2 style="margin-top:0px">Authors List</h2>
-        <div class="row" style="margin-bottom: 10px">
-            <div class="col-md-4">
-                <?php echo anchor(site_url('authors/create'),'Create', 'class="btn btn-primary"'); ?>
-            </div>
-            <div class="col-md-4 text-center">
-                <div style="margin-top: 8px" id="message">
-                    <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                </div>
-            </div>
-            <div class="col-md-1 text-right">
-            </div>
-            <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('authors/index'); ?>" class="form-inline" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
-                        <span class="input-group-btn">
-                            <?php 
-                                if ($q <> '')
-                                {
-                                    ?>
-                                    <a href="<?php echo site_url('authors'); ?>" class="btn btn-default">Reset</a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit">Search</button>
-                        </span>
+    <body class="fixed-topbar theme-sdtl fixed-sidebar color-blue bg-light-dark">
+        <section>
+            <?php $this->load->view('lib/sidebar')?>
+            <!-- END MAIN CONTENT -->
+            <div class="main-content">
+                <?php $this->load->view('lib/topbar')?>
+                <div class="page-content">
+                    <div class="header">
+                        <h2>Tables <strong>Authors</strong></h2>
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb">
+                                <!-- <li><a href="dashboard.html">Make</a></li> -->
+                                <li><a href="tables.html">Home</a></li>
+                                <li class="active">Authors</li>
+                            </ol>
+                        </div>
                     </div>
-                </form>
+                    <div class="row">
+                        <div class="col-md-12 portlets">
+                            <div class="panel">
+                                <div class="panel-header panel-controls">
+                                    <br>
+                                    <?php echo anchor(site_url('authors/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
+                                    <div style="margin-top: 8px" id="message">
+                                        <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                                    </div>
+                                </div>
+                                <div class="panel-content">
+                                    <table class="table table-hover table-dynamic filter-head">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                        		<th>Authors Name</th>
+                                        		<th>Telp Number</th>
+                                        		<th>Email</th>
+                                        		<th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($authors_data as $authors){ ?>
+                                                <tr>
+                                        			<td width="80px"><?php echo ++$start ?></td>
+                                        			<td><?php echo $authors->authors_name ?></td>
+                                        			<td><?php echo $authors->telp_number ?></td>
+                                        			<td><?php echo $authors->email ?></td>
+                                        			<td style="text-align:center" width="200px">
+                                        				<?php 
+                                        				echo anchor(site_url('authors/read/'.$authors->authors_id),'Read'); 
+                                        				echo ' | '; 
+                                        				echo anchor(site_url('authors/update/'.$authors->authors_id),'Update'); 
+                                        				echo ' | '; 
+                                        				echo anchor(site_url('authors/delete/'.$authors->authors_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                                        				?>
+                                        			</td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- END PAGE CONTENT -->
+                </div>
+                <!-- END MAIN CONTENT -->
             </div>
-        </div>
-        <table class="table table-bordered" style="margin-bottom: 10px">
-            <tr>
-                <th>No</th>
-		<th>Authors Name</th>
-		<th>Telp Number</th>
-		<th>Email</th>
-		<th>Action</th>
-            </tr><?php
-            foreach ($authors_data as $authors)
-            {
-                ?>
-                <tr>
-			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $authors->authors_name ?></td>
-			<td><?php echo $authors->telp_number ?></td>
-			<td><?php echo $authors->email ?></td>
-			<td style="text-align:center" width="200px">
-				<?php 
-				echo anchor(site_url('authors/read/'.$authors->authors_id),'Read'); 
-				echo ' | '; 
-				echo anchor(site_url('authors/update/'.$authors->authors_id),'Update'); 
-				echo ' | '; 
-				echo anchor(site_url('authors/delete/'.$authors->authors_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-				?>
-			</td>
-		</tr>
-                <?php
-            }
-            ?>
-        </table>
-        <div class="row">
-            <div class="col-md-6">
-                <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-	    </div>
-            <div class="col-md-6 text-right">
-                <?php echo $pagination ?>
-            </div>
-        </div>
+       </section>
+        <?php $this->load->view('lib/footer')?>
     </body>
-</html>
+</html>        

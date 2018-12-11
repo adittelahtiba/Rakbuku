@@ -9,9 +9,8 @@
   <link href="<?php echo base_url('')?>assets/bootstrap/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->
   <link href="<?php echo base_url('')?>assets/bootstrap/css/ui.css" rel="stylesheet"> <!-- MANDATORY -->
   <link href="<?php echo base_url('')?>assets/bootstrap/plugins/datatables/dataTables.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-  <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
-  <link rel="stylesheet" href="<?php echo base_url('assets/datatables/dataTables.bootstrap.css') ?>"/>
+
+
 
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>

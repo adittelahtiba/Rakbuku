@@ -14,25 +14,6 @@ class Admins extends CI_Controller
 
     public function index()
     {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->input->get('start'));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . 'admins/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'admins/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'admins/index.html';
-            $config['first_url'] = base_url() . 'admins/index.html';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Admins_model->total_rows($q);
-        $admins = $this->Admins_model->get_limit_data($config['per_page'], $start, $q);
-
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
         $data = array(
             'admins_data' => $this->Admins_model->get_all()
         );

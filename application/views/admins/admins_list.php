@@ -11,12 +11,12 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Dynamic</strong></h2>
+                        <h2>Tables <strong>Admin</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li><a href="dashboard.html">Make</a></li>
-                                <li><a href="tables.html">Tables</a></li>
-                                <li class="active">Tables Filter</li>
+                                <!-- <li><a href="dashboard.html">Make</a></li> -->
+                                <li><a href="tables.html">Home</a></li>
+                                <li class="active">Admin</li>
                             </ol>
                         </div>
                     </div>
@@ -26,6 +26,9 @@
                                 <div class="panel-header panel-controls">
                                     <br>
                                     <?php echo anchor(site_url('admins/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
+                                    <div style="margin-top: 8px" id="message">
+                                        <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                                    </div>
                                 </div>
                                 <div class="panel-content">
                                     <table class="table table-hover table-dynamic filter-head">
