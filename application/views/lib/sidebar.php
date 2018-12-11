@@ -19,7 +19,8 @@
               <li class="tm nav-active <?php echo $this->uri->segment(1)==='admins' ? 'active' : '' ; ?>"><a href="<?php echo site_url('admins')?>"><i class="icon-home"></i><span>Admin</span></a></li>
             <!-- <?php } ?> -->
 
-            
+                <li class="tm nav-active <?php echo $this->uri->segment(1)==='authors' ? 'active' : '' ; ?>"><a href="<?php echo site_url('authors')?>"><i class="icon-home"></i><span>Authors</span></a></li>
+
             <li class="tm nav-parent">
               <a href="#"><i class="icon-puzzle"></i><span>Menu 2</span> <span class="fa arrow"></span></a>
               <ul class="children collapse">

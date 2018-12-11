@@ -65,7 +65,9 @@
                 </div>
                 <!-- END MAIN CONTENT -->
             </div>
-            <div class="modal fade" id="full-colored" tabindex="-1" role="dialog" aria-hidden="true">
+          <!-- END MODALS -->
+       </section>
+       <div class="modal fade" id="full-colored" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content bg-primary">
                 <div class="modal-header">
@@ -86,8 +88,6 @@
               </div>
             </div>
           </div>
-          <!-- END MODALS -->
-       </section>
         <?php $this->load->view('lib/footer')?>
     </body>
 </html>        

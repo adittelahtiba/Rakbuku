@@ -37,7 +37,7 @@
                                                 </div>
                                         	    <div class="form-group">
                                                     <label class="form-label" for="varchar">Telp Number <?php echo form_error('telp_number') ?></label>
-                                                    <input type="text" class="form-control" name="telp_number" id="telp_number" placeholder="Telp Number" value="<?php echo $telp_number; ?>" />
+                                                    <input type="text" class="form-control" name="telp_number" id="telp_number" placeholder="Telp Number" onkeypress="return isNumberKey(event)" value="<?php echo $telp_number; ?>" />
                                                 </div>
                                         	    <div class="form-group">
                                                     <label class="form-label" for="varchar">Email <?php echo form_error('email') ?></label>
@@ -59,4 +59,12 @@
         <?php $this->load->view('lib/footer')?>
     </body>
 </html>
-    
+<script type="text/javascript">
+    function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+</script>
+            

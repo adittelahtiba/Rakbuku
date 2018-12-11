@@ -52,10 +52,12 @@
                                         				<?php 
                                         				echo anchor(site_url('authors/read/'.$authors->authors_id),'Read'); 
                                         				echo ' | '; 
-                                        				echo anchor(site_url('authors/update/'.$authors->authors_id),'Update'); 
+                                        				echo anchor(site_url('authors/update/'.$authors->authors_id),'edit'); 
                                         				echo ' | '; 
-                                        				echo anchor(site_url('authors/delete/'.$authors->authors_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
                                         				?>
+                                                        
+                                                           <button href="#full-colored" data-toggle="modal" type="button" class="btn btn-sm btn-icon btn-rounded btn-danger"><i class="ace-icon fa fa-trash-o bigger-130"></i></button>
+                                                        
                                         			</td>
                                                 </tr>
                                             <?php } ?>
@@ -70,6 +72,27 @@
                 <!-- END MAIN CONTENT -->
             </div>
        </section>
+       <div class="modal fade" id="full-colored" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-primary">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                </div>
+                <div class="modal-body">
+                  <p class="m-t-40">Apakah anda yakin akan menghapus data ini?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
+                    <?php 
+                        echo anchor(site_url('authors/delete/'.$authors->authors_id),'Delete',' class="btn btn-dark" '); 
+
+                    ?>
+                </div>
+              </div>
+            </div>
+          </div>
         <?php $this->load->view('lib/footer')?>
     </body>
-</html>        
+</html>    

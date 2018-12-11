@@ -42,7 +42,7 @@ class Authors extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('authors/create_action'),
-	    'authors_id' => set_value('authors_id'),
+	    'authors_id' => $this->Authors_model->get_kode(),
 	    'authors_name' => set_value('authors_name'),
 	    'telp_number' => set_value('telp_number'),
 	    'email' => set_value('email'),
@@ -58,9 +58,10 @@ class Authors extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'authors_name' => $this->input->post('authors_name',TRUE),
-		'telp_number' => $this->input->post('telp_number',TRUE),
-		'email' => $this->input->post('email',TRUE),
+            'authors_id' => $this->input->post('authors_id',TRUE),
+    		'authors_name' => $this->input->post('authors_name',TRUE),
+    		'telp_number' => $this->input->post('telp_number',TRUE),
+    		'email' => $this->input->post('email',TRUE),
 	    );
 
             $this->Authors_model->insert($data);
@@ -122,11 +123,20 @@ class Authors extends CI_Controller
         }
     }
 
+    public function reg_email($str){
+        if (!preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $str)) {
+            $this->form_validation->set_message('reg_email', 'Email is Invalid');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
     public function _rules() 
     {
 	$this->form_validation->set_rules('authors_name', 'authors name', 'trim|required');
-	$this->form_validation->set_rules('telp_number', 'telp number', 'trim|required');
-	$this->form_validation->set_rules('email', 'email', 'trim|required');
+	$this->form_validation->set_rules('telp_number', 'telp number', 'trim|required|numeric');
+	$this->form_validation->set_rules('email', 'email', 'trim|required|callback_reg_email|is_unique[admins.email]');
 
 	$this->form_validation->set_rules('authors_id', 'authors_id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
