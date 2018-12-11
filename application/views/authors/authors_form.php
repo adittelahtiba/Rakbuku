@@ -41,7 +41,7 @@
                                                 </div>
                                         	    <div class="form-group">
                                                     <label class="form-label" for="varchar">Email <?php echo form_error('email') ?></label>
-                                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" />
+                                                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" />
                                                 </div>
                                         	    <input type="hidden" name="authors_id" value="<?php echo $authors_id; ?>" /> 
                                         	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

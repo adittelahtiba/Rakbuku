@@ -42,9 +42,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($authors_data as $authors){ ?>
+                                            <?php $no=1; foreach ($authors_data as $authors){ ?>
                                                 <tr>
-                                        			<td width="80px"><?php echo ++$start ?></td>
+                                        			<td width="80px"><?php echo $no++ ?></td>
                                         			<td><?php echo $authors->authors_name ?></td>
                                         			<td><?php echo $authors->telp_number ?></td>
                                         			<td><?php echo $authors->email ?></td>

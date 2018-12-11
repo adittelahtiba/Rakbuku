@@ -10,13 +10,16 @@
               <img src="<?php echo base_url('')?>assets/bootstrap/images/profil_page/friend8.jpg" class="img-responsive img-circle">
             </div>
             <h4>Bryan Raynolds</h4>
-            
-</div>
+          </div>
           <div class="menu-title">
             
           </div>
           <ul class="nav nav-sidebar">
-            <li class="tm nav-active active"><a href="my-link.html"><i class="icon-home"></i><span>Active Menu 1</span></a></li>
+            <!-- <?php if ($this->session->userdata('is_superadmin')!==FALSE) {?> -->
+              <li class="tm nav-active <?php echo $this->uri->segment(1)==='admins' ? 'active' : '' ; ?>"><a href="<?php echo site_url('admins')?>"><i class="icon-home"></i><span>Admin</span></a></li>
+            <!-- <?php } ?> -->
+
+            
             <li class="tm nav-parent">
               <a href="#"><i class="icon-puzzle"></i><span>Menu 2</span> <span class="fa arrow"></span></a>
               <ul class="children collapse">

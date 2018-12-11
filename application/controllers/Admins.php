@@ -33,6 +33,7 @@ class Admins extends CI_Controller
 		'birth_date' => $row->birth_date,
 		'Address' => $row->Address,
 		'telp_number' => $row->telp_number,
+        'email' => $row->email,
 		'role' => $row->role,
 	    );
             $this->load->view('admins/admins_read', $data);
@@ -47,7 +48,7 @@ class Admins extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('admins/create_action'),
-	    'admins_id' => set_value('admins_id'),
+	    'admins_id' => $this->Admins_model->get_kode(),
 	    'username' => set_value('username'),
 	    'password' => set_value('password'),
 	    'name' => set_value('name'),
@@ -55,6 +56,7 @@ class Admins extends CI_Controller
 	    'birth_date' => set_value('birth_date'),
 	    'Address' => set_value('Address'),
 	    'telp_number' => set_value('telp_number'),
+        'email' => set_value('email'),
 	    'role' => set_value('role'),
 	);
         $this->load->view('admins/admins_form', $data);
@@ -68,6 +70,7 @@ class Admins extends CI_Controller
             $this->create();
         } else {
             $data = array(
+        'admins_id' => $this->input->post('admins_id',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
 		'name' => $this->input->post('name',TRUE),
@@ -75,6 +78,7 @@ class Admins extends CI_Controller
 		'birth_date' => $this->input->post('birth_date',TRUE),
 		'Address' => $this->input->post('Address',TRUE),
 		'telp_number' => $this->input->post('telp_number',TRUE),
+        'email' => $this->input->post('email',TRUE),
 		'role' => $this->input->post('role',TRUE),
 	    );
 
@@ -100,6 +104,7 @@ class Admins extends CI_Controller
 		'birth_date' => set_value('birth_date', $row->birth_date),
 		'Address' => set_value('Address', $row->Address),
 		'telp_number' => set_value('telp_number', $row->telp_number),
+        'email' => set_value('email', $row->email),
 		'role' => set_value('role', $row->role),
 	    );
             $this->load->view('admins/admins_form', $data);
@@ -124,6 +129,7 @@ class Admins extends CI_Controller
 		'birth_date' => $this->input->post('birth_date',TRUE),
 		'Address' => $this->input->post('Address',TRUE),
 		'telp_number' => $this->input->post('telp_number',TRUE),
+        'email' => $this->input->post('email',TRUE),
 		'role' => $this->input->post('role',TRUE),
 	    );
 
@@ -147,15 +153,34 @@ class Admins extends CI_Controller
         }
     }
 
+    public function reg_email($str){
+        if (!preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $str)) {
+            $this->form_validation->set_message('reg_email', 'Email is Invalid');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
+    public function reg_username($str){
+        if (!preg_match("/^[a-zA-Z]*$/", $str)) {
+            $this->form_validation->set_message('reg_username', 'Only Letters Are Allowed For Lastname');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
     public function _rules() 
     {
-	$this->form_validation->set_rules('username', 'username', 'trim|required');
+	$this->form_validation->set_rules('username', 'username', 'trim|required|callback_reg_username|is_unique[admins.username]');
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('name', 'name', 'trim|required');
+    $this->form_validation->set_rules('email', 'email', 'trim|required|callback_reg_email|is_unique[admins.email]');
 	$this->form_validation->set_rules('Gender', 'gender', 'trim|required');
 	$this->form_validation->set_rules('birth_date', 'birth date', 'trim|required');
 	$this->form_validation->set_rules('Address', 'address', 'trim|required');
-	$this->form_validation->set_rules('telp_number', 'telp number', 'trim|required');
+	$this->form_validation->set_rules('telp_number', 'telp number', 'trim|required|numeric');
 	$this->form_validation->set_rules('role', 'role', 'trim|required');
 
 	$this->form_validation->set_rules('admins_id', 'admins_id', 'trim');
