@@ -25,14 +25,6 @@
             <textarea class="form-control" rows="3" name="address" id="address" placeholder="Address"><?php echo $address; ?></textarea>
         </div>
 	    <div class="form-group">
-            <label for="varchar">Lat <?php echo form_error('lat') ?></label>
-            <input type="text" class="form-control" name="lat" id="lat" placeholder="Lat" value="<?php echo $lat; ?>" />
-        </div>
-	    <div class="form-group">
-            <label for="varchar">Lang <?php echo form_error('lang') ?></label>
-            <input type="text" class="form-control" name="lang" id="lang" placeholder="Lang" value="<?php echo $lang; ?>" />
-        </div>
-	    <div class="form-group">
             <label for="varchar">Open <?php echo form_error('open') ?></label>
             <input type="text" class="form-control" name="open" id="open" placeholder="Open" value="<?php echo $open; ?>" />
         </div>
@@ -41,8 +33,12 @@
             <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact" value="<?php echo $contact; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="varchar">Owners Id <?php echo form_error('owners_id') ?></label>
-            <input type="text" class="form-control" name="owners_id" id="owners_id" placeholder="Owners Id" value="<?php echo $owners_id; ?>" />
+            <label for="time">Opening At <?php echo form_error('opening_at') ?></label>
+            <input type="text" class="form-control" name="opening_at" id="opening_at" placeholder="Opening At" value="<?php echo $opening_at; ?>" />
+        </div>
+	    <div class="form-group">
+            <label for="time">Closing At <?php echo form_error('closing_at') ?></label>
+            <input type="text" class="form-control" name="closing_at" id="closing_at" placeholder="Closing At" value="<?php echo $closing_at; ?>" />
         </div>
 	    <input type="hidden" name="stores_id" value="<?php echo $stores_id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

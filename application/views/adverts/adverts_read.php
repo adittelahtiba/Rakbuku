@@ -14,6 +14,8 @@
         <table class="table">
 	    <tr><td>Adverts Name</td><td><?php echo $adverts_name; ?></td></tr>
 	    <tr><td>Stores Id</td><td><?php echo $stores_id; ?></td></tr>
+	    <tr><td>Date Of Order</td><td><?php echo $date_of_order; ?></td></tr>
+	    <tr><td>Date Of Com</td><td><?php echo $date_of_com; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

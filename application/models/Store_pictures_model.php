@@ -51,7 +51,7 @@ class Store_pictures_model extends CI_Model
     // insert data
     function insert($data)
     {
-        $this->db->insert($this->table, $data);
+        $this->db->insert_batch($this->table, $data);
     }
 
     // update data

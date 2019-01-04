@@ -20,6 +20,14 @@
             <label for="varchar">Stores Id <?php echo form_error('stores_id') ?></label>
             <input type="text" class="form-control" name="stores_id" id="stores_id" placeholder="Stores Id" value="<?php echo $stores_id; ?>" />
         </div>
+	    <div class="form-group">
+            <label for="date">Date Of Order <?php echo form_error('date_of_order') ?></label>
+            <input type="text" class="form-control" name="date_of_order" id="date_of_order" placeholder="Date Of Order" value="<?php echo $date_of_order; ?>" />
+        </div>
+	    <div class="form-group">
+            <label for="date">Date Of Com <?php echo form_error('date_of_com') ?></label>
+            <input type="text" class="form-control" name="date_of_com" id="date_of_com" placeholder="Date Of Com" value="<?php echo $date_of_com; ?>" />
+        </div>
 	    <input type="hidden" name="adverts_id" value="<?php echo $adverts_id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Cancel</a>

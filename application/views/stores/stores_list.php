@@ -47,11 +47,10 @@
 		<th>Store Name</th>
 		<th>Description</th>
 		<th>Address</th>
-		<th>Lat</th>
-		<th>Lang</th>
 		<th>Open</th>
 		<th>Contact</th>
-		<th>Owners Id</th>
+		<th>Opening At</th>
+		<th>Closing At</th>
 		<th>Action</th>
             </tr><?php
             foreach ($stores_data as $stores)
@@ -62,11 +61,10 @@
 			<td><?php echo $stores->store_name ?></td>
 			<td><?php echo $stores->description ?></td>
 			<td><?php echo $stores->address ?></td>
-			<td><?php echo $stores->lat ?></td>
-			<td><?php echo $stores->lang ?></td>
 			<td><?php echo $stores->open ?></td>
 			<td><?php echo $stores->contact ?></td>
-			<td><?php echo $stores->owners_id ?></td>
+			<td><?php echo $stores->opening_at ?></td>
+			<td><?php echo $stores->closing_at ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('stores/read/'.$stores->stores_id),'Read'); 

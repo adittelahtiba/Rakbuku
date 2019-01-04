@@ -19,9 +19,13 @@
               <li class="tm nav-active <?php echo $this->uri->segment(1)==='admins' ? 'active' : '' ; ?>"><a href="<?php echo site_url('admins')?>"><i class="icon-home"></i><span>Admin</span></a></li>
             <!-- <?php } ?> -->
 
-                <li class="tm nav-active <?php echo $this->uri->segment(1)==='authors' ? 'active' : '' ; ?>"><a href="<?php echo site_url('authors')?>"><i class="icon-home"></i><span>Authors</span></a></li>
+                <!-- <li class="tm nav-active <?php echo $this->uri->segment(1)==='authors' ? 'active' : '' ; ?>"><a href="<?php echo site_url('authors')?>"><i class="icon-home"></i><span>Authors</span></a></li> -->
 
-            <li class="tm nav-parent">
+                <li class="tm nav-active <?php echo $this->uri->segment(1)==='owners' ? 'active' : '' ; ?>"><a href="<?php echo site_url('owners')?>"><i class="icon-home"></i><span>Owners</span></a></li>
+
+                <li class="tm nav-active <?php echo $this->uri->segment(1)==='adverts' ? 'active' : '' ; ?>"><a href="<?php echo site_url('adverts')?>"><i class="icon-home"></i><span>Adverts</span></a></li>
+
+           <!--  <li class="tm nav-parent">
               <a href="#"><i class="icon-puzzle"></i><span>Menu 2</span> <span class="fa arrow"></span></a>
               <ul class="children collapse">
                 <li><a href="submenu1.html">Submenu 1</a></li>
@@ -52,7 +56,7 @@
                 <li><a href="submenu2.html">Submenu 2</a></li>
                 <li><a href="submenu3.html">Submenu 3</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
           <div class="sidebar-widgets" style=""></div>
           <div class="sidebar-footer clearfix" style="">

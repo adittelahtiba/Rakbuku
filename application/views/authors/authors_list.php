@@ -36,8 +36,6 @@
                                             <tr>
                                                 <th>No</th>
                                         		<th>Authors Name</th>
-                                        		<th>Telp Number</th>
-                                        		<th>Email</th>
                                         		<th>Action</th>
                                             </tr>
                                         </thead>
@@ -46,8 +44,6 @@
                                                 <tr>
                                         			<td width="80px"><?php echo $no++ ?></td>
                                         			<td><?php echo $authors->authors_name ?></td>
-                                        			<td><?php echo $authors->telp_number ?></td>
-                                        			<td><?php echo $authors->email ?></td>
                                         			<td style="text-align:center" width="200px">
                                         				<?php 
                                         				echo anchor(site_url('authors/read/'.$authors->authors_id),'Read'); 

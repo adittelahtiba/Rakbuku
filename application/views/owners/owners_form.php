@@ -17,24 +17,32 @@
             <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="<?php echo $name; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="address">Address <?php echo form_error('address') ?></label>
-            <textarea class="form-control" rows="3" name="address" id="address" placeholder="Address"><?php echo $address; ?></textarea>
-        </div>
-	    <div class="form-group">
-            <label for="date">Birth Date <?php echo form_error('birth_date') ?></label>
-            <input type="text" class="form-control" name="birth_date" id="birth_date" placeholder="Birth Date" value="<?php echo $birth_date; ?>" />
+            <label for="varchar">Email <?php echo form_error('email') ?></label>
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" />
         </div>
 	    <div class="form-group">
             <label for="enum">Gender <?php echo form_error('gender') ?></label>
             <input type="text" class="form-control" name="gender" id="gender" placeholder="Gender" value="<?php echo $gender; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="varchar">Telp Number <?php echo form_error('telp_number') ?></label>
-            <input type="text" class="form-control" name="telp_number" id="telp_number" placeholder="Telp Number" value="<?php echo $telp_number; ?>" />
+            <label for="date">Birth Date <?php echo form_error('birth_date') ?></label>
+            <input type="text" class="form-control" name="birth_date" id="birth_date" placeholder="Birth Date" value="<?php echo $birth_date; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="varchar">Email <?php echo form_error('email') ?></label>
-            <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="<?php echo $email; ?>" />
+            <label for="varchar">Username <?php echo form_error('username') ?></label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php echo $username; ?>" />
+        </div>
+	    <div class="form-group">
+            <label for="varchar">Password <?php echo form_error('password') ?></label>
+            <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
+        </div>
+	    <div class="form-group">
+            <label for="enum">Is Verify <?php echo form_error('is_verify') ?></label>
+            <input type="text" class="form-control" name="is_verify" id="is_verify" placeholder="Is Verify" value="<?php echo $is_verify; ?>" />
+        </div>
+	    <div class="form-group">
+            <label for="varchar">Stores Id <?php echo form_error('stores_id') ?></label>
+            <input type="text" class="form-control" name="stores_id" id="stores_id" placeholder="Stores Id" value="<?php echo $stores_id; ?>" />
         </div>
 	    <input type="hidden" name="owners_id" value="<?php echo $owners_id; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

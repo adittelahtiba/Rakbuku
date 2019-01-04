@@ -13,8 +13,6 @@
         <h2 style="margin-top:0px">Authors Read</h2>
         <table class="table">
 	    <tr><td>Authors Name</td><td><?php echo $authors_name; ?></td></tr>
-	    <tr><td>Telp Number</td><td><?php echo $telp_number; ?></td></tr>
-	    <tr><td>Email</td><td><?php echo $email; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('authors') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>
