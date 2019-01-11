@@ -8,6 +8,12 @@ class Adverts extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('logged')) {
+            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
+            redirect(site_url('auth'));
+        }elseif(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $this->load->model('Adverts_model');
         $this->load->library('form_validation');
     }

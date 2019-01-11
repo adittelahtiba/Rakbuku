@@ -7,23 +7,34 @@
         <div class="sidebar-inner">
           <div class="sidebar-top big-img">
             <div class="user-image">
-              <img src="<?php echo base_url('')?>assets/bootstrap/images/profil_page/friend8.jpg" class="img-responsive img-circle">
+              <img src="<?php echo base_url('')?>assets/bootstrap/images/avatars/avatar7_big@2x.png" class="img-responsive img-circle">
             </div>
-            <h4>Bryan Raynolds</h4>
+            <h4><?php echo $this->session->userdata('username'); ?></h4>
           </div>
           <div class="menu-title">
             
           </div>
           <ul class="nav nav-sidebar">
-            <!-- <?php if ($this->session->userdata('is_superadmin')!==FALSE) {?> -->
-              <li class="tm nav-active <?php echo $this->uri->segment(1)==='admins' ? 'active' : '' ; ?>"><a href="<?php echo site_url('admins')?>"><i class="icon-home"></i><span>Admin</span></a></li>
-            <!-- <?php } ?> -->
+            <?php if ($this->session->userdata('is_admin')!==FALSE) {?>
+              
+              <li class="tm nav-active <?php echo $this->uri->segment(2)==='dashboard' ? 'active' : '' ; ?>"><a href="<?php echo site_url('admins/dashboard')?>"><i class="icon-home"></i><span>Dashboard</span></a></li>
 
-                <!-- <li class="tm nav-active <?php echo $this->uri->segment(1)==='authors' ? 'active' : '' ; ?>"><a href="<?php echo site_url('authors')?>"><i class="icon-home"></i><span>Authors</span></a></li> -->
+              <?php if ($this->session->userdata('role')==1) { ?>
+              
+                <li class="tm nav-active <?php echo $this->uri->segment(1)==='admins' ? 'active' : '' ; ?>"><a href="<?php echo site_url('admins')?>"><i class="icon-home"></i><span>Admin</span></a></li>
+              
+              <?php } ?>
+              
+              <li class="tm nav-active <?php echo $this->uri->segment(1)==='owners' ? 'active' : '' ; ?>"><a href="<?php echo site_url('owners')?>"><i class="icon-home"></i><span>Owners</span></a></li>
 
-                <li class="tm nav-active <?php echo $this->uri->segment(1)==='owners' ? 'active' : '' ; ?>"><a href="<?php echo site_url('owners')?>"><i class="icon-home"></i><span>Owners</span></a></li>
+              <li class="tm nav-active <?php echo $this->uri->segment(1)==='adverts' ? 'active' : '' ; ?>"><a href="<?php echo site_url('adverts')?>"><i class="icon-home"></i><span>Adverts</span></a></li>
+            <?php } ?>
+            
+            <?php if ($this->session->userdata('is_admin')==FALSE) {?>    
+                <li class="tm nav-active <?php echo $this->uri->segment(1)==='dashboard' ? 'active' : '' ; ?>"><a href="<?php echo site_url('dashboard')?>"><i class="icon-home"></i><span>Dashboard</span></a></li>
+            <?php } ?>
 
-                <li class="tm nav-active <?php echo $this->uri->segment(1)==='adverts' ? 'active' : '' ; ?>"><a href="<?php echo site_url('adverts')?>"><i class="icon-home"></i><span>Adverts</span></a></li>
+            <li class="tm nav-active <?php echo $this->uri->segment(1)==='books' ? 'active' : '' ; ?>"><a href="<?php echo site_url('books')?>"><i class="icon-home"></i><span>Books</span></a></li>
 
            <!--  <li class="tm nav-parent">
               <a href="#"><i class="icon-puzzle"></i><span>Menu 2</span> <span class="fa arrow"></span></a>

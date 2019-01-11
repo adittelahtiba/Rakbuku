@@ -39,6 +39,7 @@ class Admins_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
+        $this->db->where('role', '0');
         return $this->db->get($this->table)->result();
     }
 
@@ -97,6 +98,7 @@ class Admins_model extends CI_Model
     function delete($id)
     {
         $this->db->where($this->id, $id);
+        $this->db->where('role', '0');
         $this->db->delete($this->table);
     }
 

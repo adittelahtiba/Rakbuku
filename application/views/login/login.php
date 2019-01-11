@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<?php $this->load->view('lib/head')?>
 </head>
 <body>
 	<form action="<?php echo $action; ?>" method="post">
@@ -22,7 +22,8 @@
 
 	</form>
 	<?php echo anchor(site_url('Register'),'Daftar'); ?>
-	<?php echo anchor(site_url('owners/forgpass'),'Lupa password'); ?>
+	<?php echo anchor(site_url('Reset_password'),'Lupa password'); ?>
 
 </body>
 </html>
+<?php $this->load->view('lib/footer')?>

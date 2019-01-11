@@ -12,21 +12,20 @@
               <!-- BEGIN USER DROPDOWN -->
               <li class="dropdown" id="user-header">
                 <a href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                <img src="<?php echo base_url('')?>assets/bootstrap/images/avatars/user1.png" alt="user image">
-                <span class="username">Hi, John Doe</span>
+                <img src="<?php echo base_url('')?>assets/bootstrap/images/avatars/avatar7_big@2x.png" alt="user image">
+                <span class="username">Hi, <?php echo $this->session->userdata('username'); ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="#"><i class="icon-user"></i><span>My Profile</span></a>
+                    <a href="<?= site_url($this->session->userdata('is_admin') ? 'admins' .'/update/'.$this->session->userdata('id') : 'owners'.'/update/'.$this->session->userdata('id')) ?>"><i class="icon-user"></i><span>Profile</span></a>
                   </li>
+                  <?php if (!$this->session->userdata('is_admin')) { ?>
+                    <li>
+                      <a href="#"><i class="icon-settings"></i><span>Pengaturan Toko</span></a>
+                    </li>
+                  <?php } ?>
                   <li>
-                    <a href="#"><i class="icon-calendar"></i><span>My Calendar</span></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="icon-settings"></i><span>Account Settings</span></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="icon-logout"></i><span>Logout</span></a>
+                    <a href="<?= site_url('auth/logout') ?>"><i class="icon-logout"></i><span>Logout</span></a>
                   </li>
                 </ul>
               </li>

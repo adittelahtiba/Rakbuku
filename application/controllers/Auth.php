@@ -35,20 +35,23 @@ class Auth extends CI_Controller {
                 $data = array(
                     'logged' => TRUE,
                     'username' => $row->username,
+                    'id' => $row->admins_id,
                     'role'=>$row->role,
                     'is_admin'=>TRUE,
                 );
                 $this->session->set_userdata($data);
-                redirect(site_url('dashboard'));
+                redirect(site_url('admins/dashboard'));
             }elseif ($loginown==1) {
                 $row = $this->Auth_model->data_loginown($this->input->post('username'), ($this->input->post('password')));
                 $data = array(
                     'logged' => TRUE,
+                    'id' => $row->owners_id,
                     'username' => $row->username,
+                    'stores_id' => $row->stores_id,
                     'is_admin'=>FALSE,
                 );
                 $this->session->set_userdata($data);
-                redirect(site_url('xxx'));
+                redirect(site_url('dashboard'));
         
              }else{
                 $this->session->set_flashdata('message', '<div class="alert alert-danger">Username atau Password Salah.</div>');
@@ -62,17 +65,13 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules('password', 'password', 'trim|required');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
+
     
-    function adminlogout() {
-        $this->session->sess_destroy();
-        $this->session->set_flashdata('message', '<div class="alert alert-success">Berhasil Logout.</div>');
-        redirect(site_url('auth'));
-    }
 
     function logout() {
         $this->session->sess_destroy();
         $this->session->set_flashdata('message', '<div class="alert alert-success">Berhasil Logout.</div>');
-        redirect(site_url('kurilingbandung/login'));
+        redirect(site_url('Auth'));
     }
  
 }

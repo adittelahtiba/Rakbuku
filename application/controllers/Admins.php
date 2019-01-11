@@ -8,12 +8,22 @@ class Admins extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('logged')) {
+            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
+            redirect(site_url('auth'));
+        }
+
         $this->load->model('Admins_model');
         $this->load->library('form_validation');
     }
 
+    public function dashboard() {
+        $this->load->view('admins/dashboard');
+    }
+
     public function index()
     {
+        $this->_admin();
         $data = array(
             'admins_data' => $this->Admins_model->get_all()
         );
@@ -45,6 +55,7 @@ class Admins extends CI_Controller
 
     public function create() 
     {
+        $this->_admin();
         $data = array(
             'button' => 'Create',
             'action' => site_url('admins/create_action'),
@@ -65,6 +76,7 @@ class Admins extends CI_Controller
     public function create_action() 
     {
         $this->_rules();
+        $this->_admin();
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
@@ -90,6 +102,12 @@ class Admins extends CI_Controller
     
     public function update($id) 
     {
+        if($this->session->userdata('id')!==$id) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $row = $this->Admins_model->get_by_id($id);
 
         if ($row) {
@@ -117,6 +135,9 @@ class Admins extends CI_Controller
     public function update_action() 
     {
         $this->_rules();
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('admins_id', TRUE));
@@ -141,6 +162,7 @@ class Admins extends CI_Controller
     
     public function delete($id) 
     {
+        $this->_admin();
         $row = $this->Admins_model->get_by_id($id);
 
         if ($row) {
@@ -168,6 +190,14 @@ class Admins extends CI_Controller
             return FALSE;
         }else{
             return TRUE;
+        }
+    }
+
+    public function _admin(){
+        if($this->session->userdata('role')==0) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }elseif(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
         }
     }
 

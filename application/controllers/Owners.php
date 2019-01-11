@@ -8,6 +8,10 @@ class Owners extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('logged')) {
+            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
+            redirect(site_url('auth'));
+        }
         $this->load->model('Owners_model');
         $this->load->library('form_validation');
     }

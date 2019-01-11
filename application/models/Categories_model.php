@@ -15,6 +15,26 @@ class Categories_model extends CI_Model
         parent::__construct();
     }
 
+    function get_kode(){
+        $this->db->select('RIGHT(books.books_id,4) as kode', FALSE);
+        $this->db->order_by('books_id','DESC');    
+        $this->db->limit(1);
+          $query = $this->db->get('books');      //cek dulu apakah ada sudah ada kode di tabel.    
+          if($query->num_rows() <> 0){      
+           //jika kode ternyata sudah ada.      
+           $data = $query->row();      
+           $kode = intval($data->kode) + 1;    
+          }
+          else {      
+           //jika kode belum ada      
+           $kode = 1;    
+          }
+          $kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT); // angka 4 menunjukkan jumlah digit angka 0
+          $d = date('Ymd');
+          $kodejadi = "book-".$d.'-'.$kodemax;    // hasilnya ODJ-9921-0001 dst.
+          return $kodejadi;  
+    }
+
     // get all
     function get_all()
     {
@@ -49,14 +69,14 @@ class Categories_model extends CI_Model
     // insert data
     function insert($data)
     {
-        $this->db->insert($this->table, $data);
+        $this->db->insert_batch($this->table, $data);
     }
 
     // update data
-    function update($id, $data)
+    function update($data, $id_categ)
     {
-        $this->db->where($this->id, $id);
-        $this->db->update($this->table, $data);
+        // $this->db->where($this->id, $id);
+        $this->db->update_batch($this->table, $data, $id_categ);
     }
 
     // delete data

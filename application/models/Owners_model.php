@@ -35,11 +35,24 @@ class Owners_model extends CI_Model
         $this->db->where('code', $code);
         return $this->db->get($this->table)->row();
     }
+
+    function get_by_email($email)
+    {
+        $this->db->where('email', $email);
+        return $this->db->get($this->table)->row();
+    }
     
     function register($id)
     {
         $this->db->set('is_verify', '1');
         $this->db->set('reg_time', 'NOW()', false);
+        $this->db->where($this->id, $id);
+        $this->db->update($this->table);
+    }
+
+    function reset_password($id, $data)
+    {
+        $this->db->set('password', $data);
         $this->db->where($this->id, $id);
         $this->db->update($this->table);
     }
