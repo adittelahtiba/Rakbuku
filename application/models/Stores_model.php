@@ -28,6 +28,13 @@ class Stores_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+
+    function get_name_by_id($id)
+    {
+        $this->db->select('store_naxxme');
+        $this->db->where($this->id, $id);
+        $this->db->get($this->table);
+    }
     
     // get total rows
     function total_rows($q = NULL) {
@@ -76,6 +83,17 @@ class Stores_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function get_gambar(){
+      $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
+      return $this->db->get('stores')->result();
+    }
+
+    function get_gambardb($id){
+        $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
+        $this->db->where('stores.stores_id=', $id);
+        return $this->db->get('stores')->result();
     }
 
     function get_kode(){

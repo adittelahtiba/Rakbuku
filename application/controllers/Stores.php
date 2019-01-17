@@ -9,6 +9,7 @@ class Stores extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Stores_model');
+        $this->load->model('Store_pictures_model');
         $this->load->library('form_validation');
     }
 
@@ -104,7 +105,7 @@ class Stores extends CI_Controller
         }
     }
     
-    public function update($id) 
+    public function update($id, $error = null) 
     {
         $row = $this->Stores_model->get_by_id($id);
 
@@ -112,15 +113,19 @@ class Stores extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('stores/update_action'),
-		'stores_id' => set_value('stores_id', $row->stores_id),
-		'store_name' => set_value('store_name', $row->store_name),
-		'description' => set_value('description', $row->description),
-		'address' => set_value('address', $row->address),
-		'open' => set_value('open', $row->open),
-		'contact' => set_value('contact', $row->contact),
-		'opening_at' => set_value('opening_at', $row->opening_at),
-		'closing_at' => set_value('closing_at', $row->closing_at),
-	    );
+        		'stores_id' => set_value('stores_id', $row->stores_id),
+        		'store_name' => set_value('store_name', $row->store_name),
+        		'description' => set_value('description', $row->description),
+        		'address' => set_value('address', $row->address),
+        		'open' => set_value('open', $row->open),
+                'lat' => set_value('lat', $row->lat),
+                'lang' => set_value('lang', $row->lang),
+        		'contact' => set_value('contact', $row->contact),
+        		'opening_at' => set_value('opening_at', $row->opening_at),
+        		'closing_at' => set_value('closing_at', $row->closing_at),
+                'store_p' => $this->Stores_model->get_gambar(),
+                'error' => $error['error']
+	       );
             $this->load->view('stores/stores_form', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
@@ -135,15 +140,98 @@ class Stores extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('stores_id', TRUE));
         } else {
+
+        $post = $this->input->post();
+            $config = array();
+            $config['upload_path']    ='./upload/store_pictures/'; 
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['overwrite']     = TRUE;
+            $this->load->library('upload');
+            $gambar = array();
+            $files = $_FILES;
+            $nama_gambar = $this->input->post('store_pictures_name');
+            
+            
+            $xxxoo = $this->Stores_model->get_gambardb($this->input->post('stores_id',TRUE));
+            $yy = count($xxxoo);
+            for($i=0; $i< count($_FILES['store_pictures_name']['name']); $i++){
+                $xooii = $yy + $i;
+                $_FILES['userfile']['name']= $files['store_pictures_name']['name'][$i];
+                $_FILES['userfile']['type']= $files['store_pictures_name']['type'][$i];
+                $_FILES['userfile']['tmp_name']= $files['store_pictures_name']['tmp_name'][$i];
+                $_FILES['userfile']['error']= $files['store_pictures_name']['error'][$i];
+                $_FILES['userfile']['size']= $files['store_pictures_name']['size'][$i];
+
+                $image = explode(".", $_FILES['userfile']['name']);
+                $rename = $this->input->post('stores_id',TRUE) . $xooii . '.' . end($image);
+                $config['file_name']    = $rename;
+
+                $this->upload->initialize($config);
+                $this->upload->do_upload();
+                
+                $fileData = $this->upload->data();
+                $gambar[$i]['store_pictures_name'] = $fileData['file_name'];
+                $gambar[$i]['stores_id'] = $this->input->post('stores_id',TRUE);
+            }
+            if(!$this->upload->do_upload('userfile')){ //berfungsi untuk melakukan fungsi upload
+                $error = array('error' => $this->upload->display_errors());
+                $this->update($this->input->post('stores_id', TRUE), $error);
+            }else{
+                $this->Store_pictures_model->insert($gambar);
+            }
+
+            if (!empty($_FILES['store_pictures_name1']['name'])) {
+                $config1 = array();
+                $config1['upload_path']    ='./upload/store_pictures/'; 
+                $config1['allowed_types'] = 'gif|jpg|png';
+                $config1['overwrite']     = TRUE;
+                $this->load->library('upload');
+                $gambar1 = array();
+                $files = $_FILES;
+                $store_pictures_name1 = $this->input->post('store_pictures_name1');
+                $post = $this->input->post();
+                
+                $xxxoo = $this->Stores_model->get_gambardb($this->input->post('stores_id',TRUE));
+                $yy = count($xxxoo);
+                for($i=0; $i< count($_FILES['store_pictures_name1']['name']); $i++){
+                    $xooii = $yy + $i;
+                    $_FILES['userfile']['name']= $files['store_pictures_name1']['name'][$i];
+                    $_FILES['userfile']['type']= $files['store_pictures_name1']['type'][$i];
+                    $_FILES['userfile']['tmp_name']= $files['store_pictures_name1']['tmp_name'][$i];
+                    $_FILES['userfile']['error']= $files['store_pictures_name1']['error'][$i];
+                    $_FILES['userfile']['size']= $files['store_pictures_name1']['size'][$i];
+                    
+                    $image = explode(".", $_FILES['userfile']['name']);
+                    $rename1 = $this->input->post('stores_id',TRUE) . $i . '.' . end($image);
+                    
+                    $config1['file_name']    = $rename1;
+                    $this->upload->initialize($config1);
+                    $this->upload->do_upload();
+                    
+                    $fileData = $this->upload->data();
+                    $gambar1[$i]['store_pictures_id'] = $post['store_pictures_id1'][$i];
+                    $gambar1[$i]['store_pictures_name'] = $fileData['file_name'];
+                    //$gambar[$i]['id_wisata'] = $this->input->post('id_wisata',TRUE);
+                }
+                if(!$this->upload->do_upload('userfile')){ //berfungsi untuk melakukan fungsi upload
+                    $error = array('error' => $this->upload->display_errors());
+                    $this->update($this->input->post('stores_id', TRUE), $error);
+                }else{
+                    $this->Store_pictures_model->update($gambar1, 'store_pictures_id');
+                }
+            }
+
             $data = array(
-		'store_name' => $this->input->post('store_name',TRUE),
-		'description' => $this->input->post('description',TRUE),
-		'address' => $this->input->post('address',TRUE),
-		'open' => $this->input->post('open',TRUE),
-		'contact' => $this->input->post('contact',TRUE),
-		'opening_at' => $this->input->post('opening_at',TRUE),
-		'closing_at' => $this->input->post('closing_at',TRUE),
-	    );
+        		'store_name' => $this->input->post('store_name',TRUE),
+        		'description' => $this->input->post('description',TRUE),
+        		'address' => $this->input->post('address',TRUE),
+        		'open' => $this->input->post('open',TRUE),
+        		'contact' => $this->input->post('contact',TRUE),
+        		'opening_at' => $this->input->post('opening_at',TRUE),
+        		'closing_at' => $this->input->post('closing_at',TRUE),
+                'lat' => $this->input->post('lat',TRUE),
+                'lang' => $this->input->post('lang',TRUE),
+    	    );
 
             $this->Stores_model->update($this->input->post('stores_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');

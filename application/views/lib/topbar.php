@@ -21,11 +21,11 @@
                   </li>
                   <?php if (!$this->session->userdata('is_admin')) { ?>
                     <li>
-                      <a href="#"><i class="icon-settings"></i><span>Pengaturan Toko</span></a>
+                      <a href="<?= site_url('stores/update/'.$this->session->userdata('stores_id')) ?>"><i class="icon-settings"></i><span>Pengaturan Toko</span></a>
                     </li>
                   <?php } ?>
                   <li>
-                    <a href="<?= site_url('auth/logout') ?>"><i class="icon-logout"></i><span>Logout</span></a>
+                    <a href="<?= site_url('welcome/logout') ?>"><i class="icon-logout"></i><span>Logout</span></a>
                   </li>
                 </ul>
               </li>

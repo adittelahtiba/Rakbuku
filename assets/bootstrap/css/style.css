@@ -1531,7 +1531,7 @@ body:not(.sidebar-collapsed) .topbar .header-left .topnav .menutoggle:hover .men
 }
 .sidebar .logopanel {
   background: #202226;
-  height: 50px;
+  height: 110px;
   left: 0;
   padding: 10px;
   position: fixed;
@@ -1555,9 +1555,9 @@ body:not(.sidebar-collapsed) .topbar .header-left .topnav .menutoggle:hover .men
   margin: 0;
 }
 .sidebar .logopanel h1 a {
-  background: url(../images/logo/logo-white.png) no-repeat;
+  background: url(../images/logo/logo-png.png) no-repeat;
   display: block;
-  height: 31px;
+  height: 100px;
 }
 .sidebar .logopanel h1 span {
   color: #E6E7E8;
@@ -1652,6 +1652,7 @@ body:not(.sidebar-collapsed) .topbar .header-left .topnav .menutoggle:hover .men
   padding: 10px 0;
 }
 .sidebar .sidebar-inner .nav-sidebar {
+  margin-top: 50px;
   margin-bottom: 30px;
 }
 .sidebar .sidebar-inner .nav-sidebar .arrow {
@@ -3156,7 +3157,7 @@ body:not(.sidebar-collapsed) .sidebar .sidebar-inner .nav-sidebar > li.nav-paren
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.05);
   }
   .sidebar-top .sidebar .logopanel h1 a {
-    background: url(../images/logo/logo-dark.png) no-repeat;
+    background: url(../images/logo/logo-png.png) no-repeat;
   }
   .sidebar-top .sidebar:before {
     display: none;
@@ -12457,7 +12458,7 @@ blockquote i {
     width: 100%;
   }
   .rtl .sidebar-top .sidebar .logopanel h1 a {
-    background: url(../images/logo/logo-dark.png) no-repeat;
+    background: url(../images/logo/logo-png.png) no-repeat;
   }
   .rtl .sidebar-top .sidebar:before {
     display: none;

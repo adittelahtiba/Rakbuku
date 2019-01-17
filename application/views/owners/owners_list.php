@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-content">
-                                    <table class="table table-hover table-dynamic filter-head">
+                                    <table class="table table-hover table-dynamic">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -46,16 +46,19 @@
                                                 <tr>
                                         			<td width="80px"><?php echo $no++ ?></td>
                                         			<td><?php echo $owners->username ?></td>
-                                        			<td><?php echo $owners->is_verify ?></td>
+                                        			<td><?php echo $owners->is_verify=='1' ? 'Sudah Registrasi' : 'Belum Registrasi' ?></td>
                                         			<td><?php echo $owners->store_name ?></td>
                                         			<td style="text-align:center" width="200px">
-                                        				<?php 
-                                        				echo anchor(site_url('owners/read/'.$owners->owners_id),'Read'); 
-                                        				echo ' | '; 
-                                        				echo anchor(site_url('owners/update/'.$owners->owners_id),'Update'); 
-                                        				echo ' | '; 
-                                        				echo anchor(site_url('owners/delete/'.$owners->owners_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-                                        				?>
+                                                        <?php
+                                                            echo anchor(site_url('owners/read/'.$owners->owners_id),'Read'); 
+                                                            if($this->session->userdata('is_admin') == false) {
+                                                                echo ' | '; 
+                                                                echo anchor(site_url('owners/update/'.$owners->owners_id),'Update'); 
+                                                                echo ' | '; 
+                                                                echo anchor(site_url('owners/delete/'.$owners->owners_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                                                            } 
+                                                        ?>
+                                        				
                                         			</td>
                                         		</tr>
                                             <?php } ?>

@@ -1,23 +1,66 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html class="" lang="en">
     <head>
-        <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
-        <style>
-            body{
-                padding: 15px;
-            }
-        </style>
+        <?php $this->load->view('lib/head')?>
     </head>
-    <body>
-        <h2 style="margin-top:0px">Books Read</h2>
-        <table class="table">
-	    <tr><td>Title</td><td><?php echo $title; ?></td></tr>
-	    <tr><td>Release Date</td><td><?php echo $Release_date; ?></td></tr>
-	    <tr><td>Categories Id</td><td><?php echo $categories_id; ?></td></tr>
-	    <tr><td>Authors</td><td><?php echo $authors; ?></td></tr>
-	    <tr><td>Publishers</td><td><?php echo $publishers; ?></td></tr>
-	    <tr><td></td><td><a href="<?php echo site_url('books') ?>" class="btn btn-default">Cancel</a></td></tr>
-	</table>
-        </body>
+    <body class="fixed-topbar theme-sdtl fixed-sidebar color-blue bg-light-dark">
+        <section>
+            <?php $this->load->view('lib/sidebar')?>
+            <!-- END MAIN CONTENT -->
+            <div class="main-content">
+                <?php $this->load->view('lib/topbar')?>
+                <div class="page-content">
+                    <div class="header">
+                        <h2>Input <strong>Masks</strong></h2>
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb">
+                                <li><a href="#">Make</a></li>
+                                <li><a href="forms.html">Forms</a>
+                                </li><li class="active">Input Masks</li>
+                            </ol>
+                        </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-lg-12 portlets ui-sortable">
+                      <div class="panel">
+                        <div class="panel-header panel-controls">
+                          <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                        </div>
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table">
+                                        <tr><td>Judul</td><td><?php echo $title; ?></td></tr>
+                                        <tr><td>ISBN</td><td><?php echo $ISBN; ?></td></tr>
+                                        <tr><td>Tanggal Terbit</td><td><?php echo $Release_date; ?></td></tr>
+                                        <tr><td>Penulis</td><td><?php echo $authors; ?></td></tr>
+                                        <tr><td>Penerbit</td><td><?php echo $publishers; ?></td></tr>
+                                        <tr><td>Harga</td><td><?php echo $price; ?></td></tr>
+                                        <tr><td>Stok</td><td><?php echo $book_stock; ?></td></tr>
+
+                                        <tr><td></td><td><a href="<?php echo site_url('books') ?>" class="btn btn-default">Kembali</a></td></tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <style type="text/css">
+                                        .imgdd img{
+                                            float: right;
+                                            margin-right: 30%;
+                                        }
+                                    </style>
+                                    <div class="imgdd">
+                                        <img src="<?php echo base_url('upload/cover/'. $cover);?>" width="50%" height="50%">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+        </div>
+    </div>
+</section>
+<?php $this->load->view('lib/footer')?>
+</body>
 </html>

@@ -9,6 +9,10 @@
   <link href="<?php echo base_url('')?>assets/bootstrap/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->
   <link href="<?php echo base_url('')?>assets/bootstrap/css/ui.css" rel="stylesheet"> <!-- MANDATORY -->
   <link href="<?php echo base_url('')?>assets/bootstrap/plugins/datatables/dataTables.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('')?>assets/bootstrap/plugins/magnific/magnific-popup.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('')?>assets/bootstrap/plugins/hover-effects/hover-effects.min.css" rel="stylesheet">
+  <!-- END PAGE STYLE -->
+  <script src="<?php echo base_url('')?>assets/bootstrap/plugins/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
 
 

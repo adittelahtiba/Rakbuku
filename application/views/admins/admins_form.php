@@ -37,7 +37,7 @@
                                             </div>
                                     	    <div class="form-group">
                                                 <label class="form-label for="varchar">Password <?php echo form_error('password') ?></label>
-                                                <input type="Password" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
+                                                <input type="Password" class="form-control" name="password" id="password" placeholder="Password" />
                                             </div>
                                     	    <div class="form-group">
                                                 <label class="form-label for="varchar">Name <?php echo form_error('name') ?></label>

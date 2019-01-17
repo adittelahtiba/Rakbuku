@@ -28,6 +28,13 @@ class Store_pictures_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+
+    function get_by_sid($idx)
+    {
+        // $this->db->select('store_pictures_name');
+        $this->db->where('store_pictures.stores_id', $idx);
+        return $this->db->get($this->table)->row();
+    }
     
     // get total rows
     function total_rows($q = NULL) {
@@ -55,10 +62,10 @@ class Store_pictures_model extends CI_Model
     }
 
     // update data
-    function update($id, $data)
+    function update($data, $id_gambar)
     {
-        $this->db->where($this->id, $id);
-        $this->db->update($this->table, $data);
+        $this->db->update_batch($this->table, $data, $id_gambar);
+        
     }
 
     // delete data

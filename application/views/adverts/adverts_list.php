@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-content">
-                                    <table class="table table-hover table-dynamic filter-head">
+                                    <table class="table table-hover table-dynamic">
                                         <thead>
                                             <tr>
                                                 <th>No</th>

@@ -43,15 +43,21 @@ class Books extends CI_Controller
     public function read($id) 
     {
         $row = $this->Books_model->get_by_id($id);
+        $row2 = $this->Booklist_model->get_by_books_id($id);
+
         if ($row) {
             $data = array(
-		'books_id' => $row->books_id,
-		'title' => $row->title,
-		'Release_date' => $row->Release_date,
-		'categories_id' => $row->categories_id,
-		'authors' => $row->authors,
-		'publishers' => $row->publishers,
-	    );
+                'books_id' => set_value('books_id', $row->books_id),
+                'title' => set_value('title', $row->title),
+                'Release_date' => set_value('Release_date', $row->Release_date),
+                'authors' => set_value('authors', $row->authors),
+                'cover' => set_value('cover', $row->cover),
+                'categories' => $this->Books_model->get_categories(),
+                'publishers' => set_value('publishers', $row->publishers),
+                'ISBN' => set_value('ISBN', $row->ISBN),
+                'price' => set_value('price', $row2->price),
+                'book_stock' => set_value('book_stock', $row2->book_stock),
+            );
             $this->load->view('books/books_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');

@@ -1,0 +1,39 @@
+.header-cart .form-control{
+ border: 1px solid #E1E6EA;
+}
+
+.flex-w form{
+  border: none;
+}
+
+.form-control, #cari{
+ border: 1px solid #ffffff;
+}
+.header-cart .btn-primary{
+  background-color: #004ec1;
+  margin-top: 10px;
+  width: 100%;
+  border: 0px;
+  border-radius: 50px;
+  height: 40px;
+  color: #ffffff
+}
+.header-dropdown a{
+  
+  margin-top: 815px;
+ 
+}
+.header-cart form{
+ padding-bottom: 10px;
+
+}
+.header-cart .lupa{
+ padding-bottom: 10px;
+ text-align: center;
+
+}
+
+.form-check-input{
+  margin-top: 0px;
+
+}

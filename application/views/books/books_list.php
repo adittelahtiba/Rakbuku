@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-content">
-                                    <table class="table table-hover table-dynamic filter-head">
+                                    <table class="table table-hover table-dynamic">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -50,21 +50,18 @@
                                         			<td><?php echo $books->title ?></td>
                                         			<td><?php echo $books->Release_date ?></td>
                                         			<td><?php echo $books->publishers ?></td>
-                                        			<td style="text-align:center" width="200px">
+                                        			<td style="text-align:center">
 
+                                                        <?php
+                                                        echo anchor(site_url('books/read/'.$books->books_id),'Read'); 
                                                         
-                                                        <?php 
-                                        				echo anchor(site_url('books/read/'.$books->books_id),'Read'); 
-                                        				echo ' | '; 
-                                        				echo anchor(site_url('books/update/'.$books->books_id),'Update'); 
-                                        				echo ' | '; 
-                                        				// echo anchor(site_url('books/delete/'.$books->books_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-                                        				?>
-                                                        <a href="#full-colored" data-toggle="modal">Delete</a>
-                                                        
-
-
-                                                        <a href="http://www.facebook.com/sharer.php?u=https://www.youtube.com/watch?v=_bwpWvf2W9M">chale</a>
+                                                            if ($this->session->userdata('is_admin') == false) {
+                                                                echo ' | '; 
+                                                                echo anchor(site_url('books/update/'.$books->books_id),'Update'); 
+                                                                echo ' | '; ?>
+                                                            <a href="#full-colored" data-toggle="modal">Delete</a>
+                                                            <a href="http://www.facebook.com/sharer.php?u=https://www.youtube.com/watch?v=_bwpWvf2W9M">chale</a>
+                                        				<?php } ?>
                                         			</td>
                                                </tr>
                                             <?php } ?>

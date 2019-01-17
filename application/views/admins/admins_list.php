@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="panel-content">
-                                    <table class="table table-hover table-dynamic filter-head">
+                                    <table class="table table-hover table-dynamic">
                                         <thead>
                                             <tr>
                                                 <th width="80px">No</th>
@@ -47,7 +47,7 @@
                                                     <td class="center"><?php echo $no++ ?></td>
                                                     <td><?php echo $admins->username ?></td>
                                                     <td><?php echo $admins->name ?></td>
-                                                    <td><?php echo $admins->role=='0' ? 'super admin' : 'admin' ?></td>
+                                                    <td><?php echo $admins->role=='0' ? 'admin' : 'super admin' ?></td>
                                                     <td>
                                                         <div class="hidden-sm hidden-xs action-buttons">
                                                             <button href="#full-colored" data-toggle="modal" type="button" class="btn btn-sm btn-icon btn-rounded btn-danger"><i class="ace-icon fa fa-trash-o bigger-130"></i></button>

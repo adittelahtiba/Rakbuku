@@ -34,19 +34,22 @@
                                                 <label for="varchar">Judul <?php echo form_error('title') ?></label>
                                                 <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="<?php echo $title; ?>" />
                                             </div>
-                                            
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <p><strong>Cover buku</strong></p>
-
-                                                <div class="fileinput-preview fileinput-exists thumbnail">
-                                                        
+                                            <div class="form-group">
+                                                <label for="varchar">Cover buku</label>
+                                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                    <?php if ($cover !== '') { ?>
+                                                        <img src="<?php echo base_url('upload/cover/'. $cover);?>" width="180" height="200" id="preview">
+                                                    <?php }else{ ?>
+                                                        <img src="<?php echo base_url('upload/cover/Noimage.jpg');?>" width="180" height="200" id="preview">
+                                                    <?php } ?>
+                                                    
+                                                        <span class="btn btn-default btn-file">
+                                                            <span class="fileinput-new">Ubah...</span>
+                                                            <input type="file" name="cover" onchange="tampilkanPreview(this,'preview')">
+                                                        </span>    
+                                                    
+                                                    
                                                 </div>
-                                                  <div>
-                                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Unggah gambar...</span><span class="fileinput-exists">Ubah</span>
-                                                    <input type="file" name="cover">
-                                                    </span>
-                                                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Hapus</a>
-                                                  </div>
                                             </div>
 
                                             <?php echo $error; ?>
@@ -170,3 +173,32 @@
       });   
  });  
  </script>
+ <script type="text/javascript">
+function tampilkanPreview(gambar,idpreview){
+    var gb = gambar.files;
+    for (var i = 0; i < gb.length; i++){
+
+        var gbPreview = gb[i];
+        var imageType = /image.*/;
+        var preview=document.getElementById(idpreview);            
+        var reader = new FileReader();
+        
+        if (gbPreview.type.match(imageType)) {
+
+            preview.file = gbPreview;
+            reader.onload = (function(element) { 
+                return function(e) { 
+                    element.src = e.target.result; 
+                }; 
+            })(preview);
+
+
+            reader.readAsDataURL(gbPreview);
+        }else{
+
+            alert("Type file tidak sesuai. Khusus image.");
+        }
+       
+    }    
+}
+</script>

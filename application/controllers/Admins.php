@@ -10,7 +10,7 @@ class Admins extends CI_Controller
         parent::__construct();
         if (!$this->session->userdata('logged')) {
             $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
-            redirect(site_url('auth'));
+            redirect(site_url('welcome'));
         }
 
         $this->load->model('Admins_model');
@@ -134,25 +134,76 @@ class Admins extends CI_Controller
     
     public function update_action() 
     {
-        $this->_rules();
         if(!$this->session->userdata('is_admin')) {
             echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
+        $this->_rules();
+        $row = $this->Admins_model->get_by_id($this->input->post('admins_id',TRUE));
+
+        if ($this->input->post('password',TRUE) !== '') {
+            $this->form_validation->set_rules('password', 'password', 'trim|required|callback_reg_pass');
+        }
+        if ($this->input->post('email',TRUE) <> $row->email) {
+            $this->form_validation->set_rules('email', 'email', 'trim|required|callback_reg_email|is_unique[admins.email]');
+        }
+        if ($this->input->post('username',TRUE) <> $row->username) {
+            $this->form_validation->set_rules('username', 'username', 'trim|required|callback_reg_username|is_unique[admins.username]');
         }
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('admins_id', TRUE));
         } else {
-            $data = array(
-		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'name' => $this->input->post('name',TRUE),
-		'Gender' => $this->input->post('Gender',TRUE),
-		'birth_date' => $this->input->post('birth_date',TRUE),
-		'Address' => $this->input->post('Address',TRUE),
-		'telp_number' => $this->input->post('telp_number',TRUE),
-        'email' => $this->input->post('email',TRUE),
-		'role' => $this->input->post('role',TRUE),
-	    );
+             if ($this->input->post('email',TRUE) !== $row->email) {
+                if ($this->input->post('password',TRUE) !== '') {
+                    $data = array(
+                        'username' => $this->input->post('username',TRUE),
+                        'password' => $this->input->post('password',TRUE),
+                        'name' => $this->input->post('name',TRUE),
+                        'Gender' => $this->input->post('Gender',TRUE),
+                        'birth_date' => $this->input->post('birth_date',TRUE),
+                        'Address' => $this->input->post('Address',TRUE),
+                        'telp_number' => $this->input->post('telp_number',TRUE),
+                        'email' => $this->input->post('email',TRUE),
+                        'role' => $this->input->post('role',TRUE),
+                    );
+                }else{
+                    $data = array(
+                        'username' => $this->input->post('username',TRUE),
+                        'name' => $this->input->post('name',TRUE),
+                        'Gender' => $this->input->post('Gender',TRUE),
+                        'birth_date' => $this->input->post('birth_date',TRUE),
+                        'Address' => $this->input->post('Address',TRUE),
+                        'telp_number' => $this->input->post('telp_number',TRUE),
+                        'email' => $this->input->post('email',TRUE),
+                        'role' => $this->input->post('role',TRUE),
+                    );
+                }
+            }else{
+                if ($this->input->post('password',TRUE) !== '') {
+                    $data = array(
+                        'username' => $this->input->post('username',TRUE),
+                        'password' => $this->input->post('password',TRUE),
+                        'name' => $this->input->post('name',TRUE),
+                        'Gender' => $this->input->post('Gender',TRUE),
+                        'birth_date' => $this->input->post('birth_date',TRUE),
+                        'Address' => $this->input->post('Address',TRUE),
+                        'telp_number' => $this->input->post('telp_number',TRUE),
+                        'role' => $this->input->post('role',TRUE),
+                    );
+                }else{
+                    $data = array(
+                        'username' => $this->input->post('username',TRUE),
+                        'name' => $this->input->post('name',TRUE),
+                        'Gender' => $this->input->post('Gender',TRUE),
+                        'birth_date' => $this->input->post('birth_date',TRUE),
+                        'Address' => $this->input->post('Address',TRUE),
+                        'telp_number' => $this->input->post('telp_number',TRUE),
+                        'role' => $this->input->post('role',TRUE),
+                    );
+                }
+            }
+            
 
             $this->Admins_model->update($this->input->post('admins_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -201,13 +252,19 @@ class Admins extends CI_Controller
         }
     }
 
+    public function reg_pass($str){
+        if (!preg_match('/^\S*(?=\S{7,15})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/', $str)) {
+            $this->form_validation->set_message('reg_pass', 'Password Must Be Between 7 and 15 Characters and Must Contain At Least One Lowercase Letter One Uppercase Letter and One Digit');
+            return FALSE;
+        }else{
+            return TRUE;
+        }
+    }
+
     public function _rules() 
     {
-	$this->form_validation->set_rules('username', 'username', 'trim|required|callback_reg_username|is_unique[admins.username]');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('name', 'name', 'trim|required');
-    $this->form_validation->set_rules('email', 'email', 'trim|required|callback_reg_email|is_unique[admins.email]');
-	$this->form_validation->set_rules('Gender', 'gender', 'trim|required');
+    $this->form_validation->set_rules('Gender', 'gender', 'trim|required');
 	$this->form_validation->set_rules('birth_date', 'birth date', 'trim|required');
 	$this->form_validation->set_rules('Address', 'address', 'trim|required');
 	$this->form_validation->set_rules('telp_number', 'telp number', 'trim|required|numeric');

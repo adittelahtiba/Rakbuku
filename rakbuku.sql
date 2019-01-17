@@ -1,0 +1,438 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 17, 2019 at 06:53 PM
+-- Server version: 10.1.36-MariaDB
+-- PHP Version: 7.2.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `rakbuku`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `admins_id` varchar(30) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `Gender` enum('M','W') NOT NULL,
+  `birth_date` varchar(20) NOT NULL,
+  `Address` text NOT NULL,
+  `telp_number` varchar(15) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `role` enum('1','0') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admins_id`, `username`, `password`, `name`, `Gender`, `birth_date`, `Address`, `telp_number`, `email`, `role`) VALUES
+('adm-20181211-0001', 'sadmin', 'sadmin', 'helmi', 'M', '12-12-2001', 'bandung', '081219733333', 'lazer.helmi@gmail.com', '1'),
+('adm-20181211-0002', 'admin', 'admin', 'admin', 'M', '2018-12-03', 'admin', '2312312312312', 'lazer.helmi@gmail.com', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adverts`
+--
+
+CREATE TABLE `adverts` (
+  `adverts_id` int(15) NOT NULL,
+  `stores_id` varchar(15) NOT NULL,
+  `date_of_order` date NOT NULL,
+  `date_of_com` date NOT NULL,
+  `queue` int(11) NOT NULL,
+  `is_active` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggers `adverts`
+--
+DELIMITER $$
+CREATE TRIGGER `activexx1212` BEFORE UPDATE ON `adverts` FOR EACH ROW update adverts set adverts.is_active= if(date_of_com<now(), "0", "1") WHERE adverts_id = '1'
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `authors`
+--
+
+CREATE TABLE `authors` (
+  `authors_id` int(11) NOT NULL,
+  `authors_name` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `authors`
+--
+
+INSERT INTO `authors` (`authors_id`, `authors_name`) VALUES
+(5, 'aghhh'),
+(6, 'rarara');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booklist`
+--
+
+CREATE TABLE `booklist` (
+  `booklist_id` int(11) NOT NULL,
+  `stores_id` varchar(25) NOT NULL,
+  `books_id` varchar(25) NOT NULL,
+  `book_stock` int(11) NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `booklist`
+--
+
+INSERT INTO `booklist` (`booklist_id`, `stores_id`, `books_id`, `book_stock`, `price`) VALUES
+(12, 'str-20190104-0007', 'book-20190111-0001', 10, 150000),
+(13, 'str-20190104-0007', 'book-20190111-0002', 75, 100000),
+(14, 'str-20190104-0007', 'book-20190111-0003', 35, 120000),
+(15, 'str-20190104-0007', 'book-20190111-0004', 30, 25000),
+(16, 'str-20190104-0006', 'book-20190111-0005', 55, 120000),
+(17, 'str-20190104-0006', 'book-20190111-0006', 10, 80000),
+(18, 'str-20190104-0006', 'book-20190111-0007', 9, 110000),
+(19, 'str-20190104-0007', 'book-20190111-0008', 123, 121234);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `books`
+--
+
+CREATE TABLE `books` (
+  `books_id` varchar(25) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `Release_date` varchar(50) DEFAULT NULL,
+  `authors` varchar(50) DEFAULT NULL,
+  `ISBN` varchar(50) NOT NULL,
+  `publishers` varchar(50) DEFAULT NULL,
+  `cover` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`books_id`, `title`, `Release_date`, `authors`, `ISBN`, `publishers`, `cover`) VALUES
+('book-20190111-0001', 'Sebuah Seni untuk Bersikap Bodo Amat', '5/2/2018', 'Mark Manson', '9786024526986', 'Gramedia Widiasarana Indonesia', 'Angga_Pratama-book-20190111-0001-.jpg'),
+('book-20190111-0002', 'Menghafal Al-Qur`an dengan Otak Kanan', '16/7/2018', 'Tanzil Khaerul Akbar, Ardi Gunawan', '9786020461991', 'Elex Media Komputindo', 'Angga_Pratama-book-20190111-0002-.jpg'),
+('book-20190111-0003', 'Bicara Itu Ada Seninya', '30/4/2018', 'Oh Su Hyang', '9786024553920', 'Bhuana Ilmu Populer', 'Angga_Pratama-book-20190111-0003-.jpg'),
+('book-20190111-0004', 'Sano, You are Meanie!', '17-21-2018', 'MIKO SENRI', '9786024802745', 'm&c!', 'Angga_Pratama-book-20190111-0004'),
+('book-20190111-0005', 'Sebuah Seni untuk Bersikap Bodo Amat', '5/2/2018', 'Mark Manson', '9786024526986', 'Gramedia Widiasarana Indonesia', 'Gunawan-book-20190111-0005-.jpg'),
+('book-20190111-0006', 'Menghafal Al-Qur`an dengan Otak Kanan', '16/7/2018', 'Tanzil Khaerul Akbar, Ardi Gunawan', '9786020461991', 'Elex Media Komputindo', 'Gunawan-book-20190111-0006-.jpg'),
+('book-20190111-0007', 'Bicara Itu Ada Seninya', '30/4/2018', 'Oh Su Hyang', '9786024553920', 'Bhuana Ilmu Populer', 'Gunawan-book-20190111-0007-.jpg'),
+('book-20190111-0008', 'xxxxxxxxxxxxxx', '11-11-1111', 'xxxxxxxxxxxxxx', '11111111111', 'xxxxxxxxxxxxxx', 'Angga_Pratama-book-20190111-0008.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `categories_id` int(11) NOT NULL,
+  `categories_name` varchar(50) NOT NULL,
+  `books_id` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`categories_id`, `categories_name`, `books_id`) VALUES
+(190, 'Bantuan hukum', 'book-20190111-0001'),
+(191, ' Pengembangan diri', 'book-20190111-0001'),
+(192, 'Agama', 'book-20190111-0002'),
+(193, ' Islam', 'book-20190111-0002'),
+(194, 'Inspirasi', 'book-20190111-0003'),
+(195, ' Pengembangan Diri', 'book-20190111-0003'),
+(196, 'Komik', 'book-20190111-0004'),
+(197, 'Bantuan hukum', 'book-20190111-0005'),
+(198, ' Pengembangan diri', 'book-20190111-0005'),
+(199, 'Agama', 'book-20190111-0006'),
+(200, ' Islam', 'book-20190111-0006'),
+(201, 'Inspirasi', 'book-20190111-0007'),
+(202, ' Pengembangan Diri', 'book-20190111-0007'),
+(203, 'percobaan81', 'book-20190111-0008'),
+(207, 'percobaan82', 'book-20190111-0008'),
+(213, 'percobaan63', 'book-20190111-0008'),
+(214, 'percobaan64', 'book-20190111-0008'),
+(233, 'percobaan65', 'book-20190111-0008'),
+(234, 'percobaan88', 'book-20190111-0008'),
+(247, 'xxxxxxxx1', 'book-20190111-0008'),
+(248, 'xxxxxxxx2', 'book-20190111-0008'),
+(249, 'xxxxxxxx3', 'book-20190111-0008'),
+(250, 'xxxxxxxx4', 'book-20190111-0008'),
+(251, 'xxxxxxxx5', 'book-20190111-0008'),
+(252, 'xxxxxxxx6', 'book-20190111-0008'),
+(253, 'xxxxxxxx7', 'book-20190111-0008'),
+(254, 'xxxxxxxx8', 'book-20190111-0008');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `owners`
+--
+
+CREATE TABLE `owners` (
+  `owners_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `gender` enum('M','W') NOT NULL,
+  `birth_date` date NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `is_verify` enum('1','0') NOT NULL DEFAULT '0',
+  `code` varchar(255) NOT NULL,
+  `reg_time` date NOT NULL,
+  `stores_id` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `owners`
+--
+
+INSERT INTO `owners` (`owners_id`, `name`, `email`, `gender`, `birth_date`, `username`, `password`, `is_verify`, `code`, `reg_time`, `stores_id`) VALUES
+(13, 'Andra Gunawan', 'gigaby@gmail.com', 'M', '1997-12-17', 'gunawan', 'gunawan', '1', '4143f03a589c72745881781359dd6c5220db4fb0', '2019-01-15', 'str-20190104-0006'),
+(14, 'Angga Pratama', 'bloodyanmond@gmail.com', 'M', '1995-01-09', 'angga', 'angga', '1', 'fe291cb3dbf22c4b6fb6cbb7d31e8101d2400506', '2019-01-11', 'str-20190104-0007');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `social_media`
+--
+
+CREATE TABLE `social_media` (
+  `sc_id` int(11) NOT NULL,
+  `stores_id` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stores`
+--
+
+CREATE TABLE `stores` (
+  `stores_id` varchar(25) NOT NULL,
+  `store_name` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `address` text NOT NULL,
+  `open` varchar(50) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `opening_at` varchar(11) NOT NULL,
+  `closing_at` varchar(11) NOT NULL,
+  `lat` varchar(11) NOT NULL,
+  `lang` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `stores`
+--
+
+INSERT INTO `stores` (`stores_id`, `store_name`, `description`, `address`, `open`, `contact`, `opening_at`, `closing_at`, `lat`, `lang`) VALUES
+('str-20190104-0006', 'acyyyyyyy', 'acyyyyyyy', 'acyyyyyyy', 'senin', 'acyyyyyyy', '04:03', '02:00', '-6.93836785', '107.6098775'),
+('str-20190104-0007', 'Toko Buku Raja angga', 'Toko Buku Raja angga', 'Toko Buku Raja angga', 'selasa', 'percobaan1', '01:00', '01:01', '-6.93189245', '107.5230168');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `store_pictures`
+--
+
+CREATE TABLE `store_pictures` (
+  `store_pictures_id` int(11) NOT NULL,
+  `store_pictures_name` varchar(50) NOT NULL,
+  `stores_id` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `store_pictures`
+--
+
+INSERT INTO `store_pictures` (`store_pictures_id`, `store_pictures_name`, `stores_id`) VALUES
+(25, 'str-20190104-00010.jpg', 'str-20190104-0001'),
+(26, 'str-20190104-00011.jpg', 'str-20190104-0001'),
+(27, 'str-20190104-00012.jpg', 'str-20190104-0001'),
+(28, 'str-20190104-00013.jpg', 'str-20190104-0001'),
+(29, 'str-20190104-00020.jpg', 'str-20190104-0002'),
+(30, 'str-20190104-00021.png', 'str-20190104-0002'),
+(31, 'str-20190104-00022.png', 'str-20190104-0002'),
+(32, 'str-20190104-00030.jpg', 'str-20190104-0003'),
+(33, 'str-20190104-00031.JPG', 'str-20190104-0003'),
+(34, 'str-20190104-00032.jpg', 'str-20190104-0003'),
+(35, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(36, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(37, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(38, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(39, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(40, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(41, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(42, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(43, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(44, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(45, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(46, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(47, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(48, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(49, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(50, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(51, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(52, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(53, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(54, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(55, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(56, 'str-20190104-00040.jpg', 'str-20190104-0004'),
+(57, 'str-20190104-00041.jpg', 'str-20190104-0004'),
+(58, 'str-20190104-00042.jpg', 'str-20190104-0004'),
+(59, 'str-20190104-00050.jpg', 'str-20190104-0005'),
+(60, 'str-20190104-00051.jpg', 'str-20190104-0005'),
+(61, 'str-20190104-00052.jpg', 'str-20190104-0005'),
+(62, 'str-20190104-00060.jpg', 'str-20190104-0006'),
+(63, 'str-20190104-00061.jpg', 'str-20190104-0006'),
+(64, 'str-20190104-00062.jpg', 'str-20190104-0006'),
+(66, 'str-20190104-00063.jpg', 'str-20190104-0006'),
+(67, 'str-20190104-00070.jpg', 'str-20190104-0007'),
+(68, 'str-20190104-00071.jpg', 'str-20190104-0007'),
+(69, 'str-20190104-00072.jpg', 'str-20190104-0007');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admins_id`);
+
+--
+-- Indexes for table `adverts`
+--
+ALTER TABLE `adverts`
+  ADD PRIMARY KEY (`adverts_id`);
+
+--
+-- Indexes for table `authors`
+--
+ALTER TABLE `authors`
+  ADD PRIMARY KEY (`authors_id`);
+
+--
+-- Indexes for table `booklist`
+--
+ALTER TABLE `booklist`
+  ADD PRIMARY KEY (`booklist_id`);
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`books_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`categories_id`);
+
+--
+-- Indexes for table `owners`
+--
+ALTER TABLE `owners`
+  ADD PRIMARY KEY (`owners_id`);
+
+--
+-- Indexes for table `social_media`
+--
+ALTER TABLE `social_media`
+  ADD PRIMARY KEY (`sc_id`);
+
+--
+-- Indexes for table `stores`
+--
+ALTER TABLE `stores`
+  ADD PRIMARY KEY (`stores_id`);
+
+--
+-- Indexes for table `store_pictures`
+--
+ALTER TABLE `store_pictures`
+  ADD PRIMARY KEY (`store_pictures_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `adverts`
+--
+ALTER TABLE `adverts`
+  MODIFY `adverts_id` int(15) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `authors`
+--
+ALTER TABLE `authors`
+  MODIFY `authors_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `booklist`
+--
+ALTER TABLE `booklist`
+  MODIFY `booklist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+
+--
+-- AUTO_INCREMENT for table `owners`
+--
+ALTER TABLE `owners`
+  MODIFY `owners_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `social_media`
+--
+ALTER TABLE `social_media`
+  MODIFY `sc_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `store_pictures`
+--
+ALTER TABLE `store_pictures`
+  MODIFY `store_pictures_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
