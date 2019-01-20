@@ -12,7 +12,7 @@ class Books extends CI_Controller
 
         if ($this->session->userdata('logged')<>1) {
             $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
-            redirect(site_url('auth'));
+            redirect(site_url('Welcome'));
         }
         $this->load->model('Books_model');
         $this->load->model('Booklist_model');
@@ -52,7 +52,7 @@ class Books extends CI_Controller
                 'Release_date' => set_value('Release_date', $row->Release_date),
                 'authors' => set_value('authors', $row->authors),
                 'cover' => set_value('cover', $row->cover),
-                'categories' => $this->Books_model->get_categories(),
+                'categories' => $this->Books_model->get_categoriesdb($row->books_id),
                 'publishers' => set_value('publishers', $row->publishers),
                 'ISBN' => set_value('ISBN', $row->ISBN),
                 'price' => set_value('price', $row2->price),
@@ -103,6 +103,7 @@ class Books extends CI_Controller
 
             $this->load->library('upload', $config);
             $this->upload->do_upload('cover');
+            $fileData = $this->upload->data();
             if ($this->upload->do_upload('cover')) {
                 $data = array(
                     'books_id' => $this->input->post('books_id',TRUE),
@@ -111,7 +112,7 @@ class Books extends CI_Controller
                     'authors' => $this->input->post('authors',TRUE),
                     'ISBN' => $this->input->post('ISBN',TRUE),
                     'publishers' => $this->input->post('publishers',TRUE),
-                    'cover' => $this->Books_model->get_cover_code(),
+                    'cover' => $fileData['file_name'],
                 );
 
                 $data2 = array(

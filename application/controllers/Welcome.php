@@ -8,24 +8,187 @@ class Welcome extends CI_Controller {
         parent::__construct();
         $this->load->model('Auth_model');
         $this->load->model('Categories_model');
+        $this->load->model('Booklist_model');
         $this->load->model('Stores_model');
+        $this->load->model('Adverts_model');
         $this->load->library('form_validation');
         $this->load->library('encryption');
+        
+        $data = array();
+        $adsrow = $this->Adverts_model->get_is_datecom_all();
+        foreach ($adsrow as $key => $value) {
+            $idadv = $value->adverts_id;
+            $data[] = array(
+                "is_active" => '0',
+                "adverts_id" =>  $idadv,
+            );
+        }
+        $this->Adverts_model->update_b($data, 'adverts_id');
     }
 
 	public function index()
 	{
+
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+        
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'Welcome/book_search.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'Welcome/book_search.html?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'Welcome/book_search.html';
+            $config['first_url'] = base_url() . 'Welcome/book_search.html';
+        }
+
+        $config['per_page'] = 3;
+        $config['page_query_string'] = TRUE;
+        $config['total_rows'] = $this->Stores_model->total_rows($q);
+        $detail = $this->Stores_model->get_limit($config['per_page'], $start, $q);
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
 		$data = array(
+            'q' => $q,
+            'thedata' => $detail,
+            'pagination' => $this->pagination->create_links(),
             'title' => 'Login Page',
             'action' => site_url('welcome/login'),
             'username' => set_value('username'),
             'password' => set_value('password'),
-            'kategori' => $this->Categories_model->get_all(),
+            'Adverts' => $this->Adverts_model->get_is_active_all(),
+            'kategori' => $this->Categories_model->get_all_groupby(),
+            'store_limit' => $this->Stores_model->get_limit(),
             'button' => 'Login',
         );
 
 		$this->load->view('front/welcome', $data);
 	}
+
+    public function book_search()
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $kateg = urldecode($this->input->get('kateg', TRUE));
+
+        $start = intval($this->input->get('start'));
+        
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'Welcome/book_search.html?q=' . urlencode($q) . 'kateg=' . urlencode($kateg);
+            $config['first_url'] = base_url() . 'Welcome/book_search.html?q=' . urlencode($q) . 'kateg=' . urlencode($kateg);
+        } else {
+            $config['base_url'] = base_url() . 'Welcome/book_search.html';
+            $config['first_url'] = base_url() . 'Welcome/book_search.html';
+        }
+
+        $config['per_page'] = 6;
+        $config['page_query_string'] = TRUE;
+        $config['total_rows'] = $this->Booklist_model->s_total_rows($q, $kateg);
+        $store_data = $this->Booklist_model->s_get_limit_data($config['per_page'], $start, $q, $kateg);
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'kateg' => $kateg,
+            'q' => $q,
+            'thedata' => $store_data,
+            'pagination' => $this->pagination->create_links(),
+            'title' => 'Login Page',
+            'action' => site_url('welcome/login'),
+            'username' => set_value('username'),
+            'password' => set_value('password'),
+            'kategorilist' => $this->Categories_model->get_data_limit(),
+            'kategori' => $this->Categories_model->get_all_groupby(),
+            'store_limit' => $this->Stores_model->get_limit(),
+            'button' => 'Login',
+        );
+
+        $this->load->view('front/search', $data);
+    }
+
+    public function store_search()
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+
+        $start = intval($this->input->get('start'));
+        
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'Welcome/search.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'Welcome/search.html?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'Welcome/search.html';
+            $config['first_url'] = base_url() . 'Welcome/search.html';
+        }
+
+        $config['per_page'] = 6;
+        $config['page_query_string'] = TRUE;
+        $config['total_rows'] = $this->Stores_model->total_rows($q);
+        $store_data = $this->Stores_model->get_limit_data($config['per_page'], $start, $q);
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'q' => $q,
+            'thedata' => $store_data,
+            'pagination' => $this->pagination->create_links(),
+            'title' => 'Login Page',
+            'action' => site_url('welcome/login'),
+            'username' => set_value('username'),
+            'password' => set_value('password'),
+            'kategorilist' => $this->Categories_model->get_data_limit(),
+            'kategori' => $this->Categories_model->get_all_groupby(),
+            'store_limit' => $this->Stores_model->get_limit(),
+            'button' => 'Login',
+        );
+
+        $this->load->view('front/stsearch', $data);
+    }
+
+    public function detail($id)
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+        
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'Welcome/detail/'.$id;
+            $config['first_url'] = base_url() . 'Welcome/detail/'.$id;
+        } else {
+            $config['base_url'] = base_url() . 'Welcome/detail/'.$id.'.html';
+            $config['first_url'] = base_url() . 'Welcome/detail/'.$id.'.html';
+        }
+
+        $config['per_page'] = 3;
+        $config['page_query_string'] = TRUE;
+        $config['total_rows'] = $this->Booklist_model->total_rows($q, $id);
+        $detail = $this->Booklist_model->get_limit_data($config['per_page'], $start, $q, $id);
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $row = $this->Stores_model->get_by_id($id);
+        $data = array(
+            'q' => $q,
+            'thedata' => $detail,
+            'stores_id' => $row->stores_id,
+            'stores_name' => $row->stores_name,
+            'description' => $row->description,
+            'address' => $row->address,
+            'open' => $row->open,
+            'contact' => $row->contact,
+            'lat' => $row->lat,
+            'lang' => $row->lang,
+            'opening_at' => $row->opening_at,
+            'closing_at' => $row->closing_at,
+            'pagination' => $this->pagination->create_links(),
+            'gambartoko' => $this->Stores_model->get_gambardb($id),
+            'kategori' => $this->Categories_model->get_all(),
+            'kateggroupbyname' => $this->Categories_model->get_groupbyname($id),
+            'store_limit' => $this->Stores_model->get_limit(),
+        );
+
+        $this->load->view('front/stores_detail', $data);
+    }
 
 	public function login() {
         $this->login_rules();

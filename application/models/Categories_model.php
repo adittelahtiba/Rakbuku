@@ -42,6 +42,31 @@ class Categories_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_all_groupby()
+    {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->group_by('categories.categories_name');
+        return $this->db->get($this->table)->result();
+    }
+
+    function get_data_limit()
+    {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->limit(10, 0);
+        $this->db->group_by('categories.categories_name');
+        return $this->db->get($this->table)->result();
+    }
+
+    function get_groupbyname($id)
+    {
+        $this->db->join('books', 'categories.books_id=books.books_id');
+        $this->db->join('booklist', 'booklist.books_id=books.books_id'); 
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id');
+        $this->db->where('stores.stores_id', $id);
+        $this->db->group_by('categories.categories_name');
+        return $this->db->get($this->table)->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {

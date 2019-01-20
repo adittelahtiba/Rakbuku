@@ -58,7 +58,7 @@
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $stores->store_name ?></td>
+			<td><?php echo $stores->stores_name ?></td>
 			<td><?php echo $stores->description ?></td>
 			<td><?php echo $stores->address ?></td>
 			<td><?php echo $stores->open ?></td>

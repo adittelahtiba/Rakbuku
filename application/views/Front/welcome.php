@@ -46,7 +46,7 @@
 			<a href="#"><i class="logo"><img src="<?php echo base_url('')?>assets/front/images/logo/logo-png.png"></i></a>
 		</div>
 		<div class="topbar-child2">
-			<button type="button" class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true">Daftar</button>
+			<?php echo anchor(site_url('Register'),'Daftar', 'class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true"'); ?>
 			<span class="linedivide1"></span>
 			<div class="header-wrapicon2 m-r-13">
 				<button type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Login</button>
@@ -77,6 +77,7 @@
 
 						<button type="submit" class="btn btn-primary m-text6" id="masuk">Masuk</button>
 						<?php echo anchor(site_url('Reset_password'), 'Lupa Katasandi ?', 'class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;"'); ?>
+
 					</form>
 				</div>
 			</div>
@@ -91,30 +92,22 @@
 				 Rakbuku merupakan sebuah website penyedia jasa layanan pencarian toko buku
 			</div>
 			<div class="wrap_menu col-lg-8">
-				<div class="input-group">
-					<nav class="menu">
-					<ul class="main_menu">
-						<li>
-							<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Kategori</button>
-							
-							<ul class="sub_menu">
-								<?php foreach ($kategori as $kateg) { ?>
-									<li>
-										<a href="#"><?php echo $kateg->categories_name; ?></a>
-									</li>
-								<?php } ?>
-								
-							</ul>
-						</li>
-					</ul>
-					</nav>
-					<input type="text" class="form-control" placeholder="Cari Buku atau Toko Buku ...">
-					<span class="input-group-btn">
-					<button class="btn btn-default" type="button">
-					<i class="fa fa-search"><font face="Poppins-Regular">Cari</font></i>
-					</button>
-					</span>
-				</div>
+				<form action="<?php echo site_url('Welcome/book_search'); ?>">
+					<div class="input-group">
+						<select name="kateg" class="form-control col-lg-2" id="exampleFormControlSelect1">
+							<option value="">Semua Kategori</option>
+							<?php foreach ($kategori as $kateg) { ?>
+				      			<option><?php echo $kateg->categories_name; ?></option>
+						    <?php } ?>
+					    </select>
+						<input type="text" class="form-control" name="q" value="<?php echo $q; ?>" placeholder="Cari Buku atau Toko Buku ...">
+						<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							<i class="fa fa-search"><font face="Poppins-Regular"> Cari</font></i>
+						</button>
+						</span>	
+					</div>
+				</form>
 				<!-- /input-group -->
 			</div>
 			<!-- Header Icon -->
@@ -128,7 +121,8 @@
 		<div class="col-1"></div>
 		<div class="wrap-slick1 col-sm-10 col-md-8 col-lg-10 m-1-r-auto ">
 			<div class="slick1">
-				<div class="item-slick1 item1-slick1" style="background-image: url(<?php echo base_url('')?>assets/front/images/banner-2.jpg);">
+				<?php foreach ($Adverts as $key => $value) { ?>
+				<div class="item-slick1 item1-slick1" style="background-image: url(<?php echo base_url('upload/adverts/'. $value->img)?>);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<!--<h2 class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="fadeInUp"></h2>-->
 						<span class="caption2-slide1 m-text1 t-center animated visible-false m-b-33" data-appear="fadeInDown"></span>
@@ -137,15 +131,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="item-slick1 item1-slick1" style="background-image: url(<?php echo base_url('')?>assets/front/images/banner-2.jpg);">
-					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-						<!--<h2 class="caption1-slide1 xl-text2 t-center bo14 p-b-6 animated visible-false m-b-22" data-appear="fadeInUp"></h2>-->
-						<span class="caption2-slide1 m-text1 t-center animated visible-false m-b-33" data-appear="fadeInDown"></span>
-						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="zoomIn">
-							<!--<a href="product.html" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4"></a>-->
-						</div>
-					</div>
-				</div>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -164,12 +150,24 @@
 				<!-- - -->
 				<div class="tab-pane fade show active" id="best-seller" role="tabpanel">
 					<div class="row">
+
+						<?php foreach ($store_limit as $key => $value) { ?>
+						<?php
+
+							$string = strip_tags($value->address);
+							if (strlen($string) > 25) {
+								$stringCut = substr($string, 0, 25);
+								$endPoint = strrpos($stringCut, ' ');
+								$string = $endPoint? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
+								$string .= '...';
+							}
+						?>
 						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50 rounded-top">
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-img wrap-pic-w wrap-pic-h of-hidden pos-relative ">
 									<div class="img-toko">
-										<img src="<?php echo base_url('')?>assets/front/images/blog-03.jpg" alt="IMG-PRODUCT">
+										<img style="height: 270px; width: 270px;" src="<?php echo base_url('upload/store_pictures/'. $value->store_pictures_name)?>" alt="IMG-PRODUCT">
 									</div>
 									<div class="block2-overlay trans-0-4">
 										<div class="block2-btn-addcart w-size1 trans-0-4">
@@ -179,131 +177,30 @@
 									</div>
 								</div>
 								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5">Istana Buku</a>
+									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5"><?php echo $value->stores_name ?></a>
 									<a href="#" class="fs-12">
 									<span class="block2-price m-text6 p-r-5">
 									<p class="fa fa-phone tegak"></p>
 									</span>
-									+666 1313 1313 </a>
+									<?php echo $value->contact ?> </a>
 									<br>
 									<a href="#" class="fs-12">
 									<span class="block2-price m-text6 p-r-5">
 									<p class="fa fa-map-marker tegak"></p>
 									</span>
-									Jl. Setiabudi No. 45 Bandung </a>
+									<?php echo $string;  ?></a>
 									<hr>
 									<span class="block2-price m-text6 p-r-8 ">
 									<!-- Button -->
-									<a href="#" class="size26">Detail</a>
+									
+									<?php echo anchor(site_url('welcome/detail/'.$value->stores_id),'Detail', 'class="size26"');  ?>
+									
 									<!--size25 bg9 bo-rad-23 hov0 s-text0 trans-0-4--></span>
 								</div>
 							</div>
 						</div>
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50 rounded-top">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-img wrap-pic-w wrap-pic-h of-hidden pos-relative ">
-									<div class="img-toko">
-										<img src="<?php echo base_url('')?>assets/front/images/blog-03.jpg" alt="IMG-PRODUCT">
-									</div>
-									<div class="block2-overlay trans-0-4">
-										<div class="block2-btn-addcart w-size1 trans-0-4">
-											<!-- Button 
-											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">Detail</button>-->
-										</div>
-									</div>
-								</div>
-								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5">Istana Buku</a>
-									<a href="#" class="fs-12">
-									<span class="block2-price m-text6 p-r-5">
-									<p class="fa fa-phone tegak"></p>
-									</span>
-									+666 1313 1313 </a>
-									<br>
-									<a href="#" class="fs-12">
-									<span class="block2-price m-text6 p-r-5">
-									<p class="fa fa-map-marker tegak"></p>
-									</span>
-									Jl. Setiabudi No. 45 Bandung </a>
-									<hr>
-									<span class="block2-price m-text6 p-r-8 ">
-									<!-- Button -->
-									<a href="#" class="size26">Detail</a>
-									<!--size25 bg9 bo-rad-23 hov0 s-text0 trans-0-4--></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50 rounded-top">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-img wrap-pic-w wrap-pic-h of-hidden pos-relative ">
-									<div class="img-toko">
-										<img src="<?php echo base_url('')?>assets/front/images/blog-03.jpg" alt="IMG-PRODUCT">
-									</div>
-									<div class="block2-overlay trans-0-4">
-										<div class="block2-btn-addcart w-size1 trans-0-4">
-											<!-- Button 
-											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">Detail</button>-->
-										</div>
-									</div>
-								</div>
-								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5">Istana Buku</a>
-									<a href="#" class="fs-12">
-									<span class="block2-price m-text6 p-r-5">
-									<p class="fa fa-phone tegak"></p>
-									</span>
-									+666 1313 1313 </a>
-									<br>
-									<a href="#" class="fs-12">
-									<span class="block2-price m-text6 p-r-5">
-									<p class="fa fa-map-marker tegak"></p>
-									</span>
-									Jl. Setiabudi No. 45 Bandung </a>
-									<hr>
-									<span class="block2-price m-text6 p-r-8 ">
-									<!-- Button -->
-									<a href="#" class="size26">Detail</a>
-									<!--size25 bg9 bo-rad-23 hov0 s-text0 trans-0-4--></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6 col-md-4 col-lg-3 p-b-50 rounded-top">
-							<!-- Block2 -->
-							<div class="block2">
-								<div class="block2-img wrap-pic-w wrap-pic-h of-hidden pos-relative ">
-									<div class="img-toko">
-										<img src="<?php echo base_url('')?>assets/front/images/blog-03.jpg" alt="IMG-PRODUCT">
-									</div>
-									<div class="block2-overlay trans-0-4">
-										<div class="block2-btn-addcart w-size1 trans-0-4">
-											<!-- Button 
-											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">Detail</button>-->
-										</div>
-									</div>
-								</div>
-								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5">Istana Buku</a>
-									<a href="#" class="fs-12">
-									<span class="block2-price m-text6 p-r-5">
-									<p class="fa fa-phone tegak"></p>
-									</span>
-									+666 1313 1313 </a>
-									<br>
-									<a href="#" class="fs-12">
-									<span class="block2-price m-text6 p-r-5">
-									<p class="fa fa-map-marker tegak"></p>
-									</span>
-									Jl. Setiabudi No. 45 Bandung </a>
-									<hr>
-									<span class="block2-price m-text6 p-r-8 ">
-									<!-- Button -->
-									<a href="#" class="size26">Detail</a>
-									<!--size25 bg9 bo-rad-23 hov0 s-text0 trans-0-4--></span>
-								</div>
-							</div>
-						</div>
+						
+						<?php } ?>
 					</div>
 				</div>
 				<!--  -->
@@ -322,7 +219,8 @@
 					<!--Bantu pembeli untuk menemukan toko anda,<br>dengan bergabung bersama kami--></span>
 					<!--<h3 class="l-text1 fs-35-sm">Lookbook</h3>-->
 					<p>
-						<button class="sekarang s-text4 hov5 cs-pointer p-t-25 bg9" data-toggle="modal" style="">Daftar Sekarang</button>
+						<?php //echo anchor(site_url('Register'),'Daftar', 'class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true"'); ?>
+						<input type="button" class="sekarang s-text4 hov5 cs-pointer p-t-25 bg9" style="" value="Daftar Sekarang" onclick="window.location.href='<?php echo base_url('Register') ?>'">
 					</div>
 				</div>
 			</div>

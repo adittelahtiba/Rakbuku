@@ -50,11 +50,14 @@
                                                     <td><?php echo $adverts->date_of_com ?></td>
                                         			<td style="text-align:center" width="200px">
                                         				<?php 
-                                        				echo anchor(site_url('adverts/read/'.$adverts->adverts_id),'Read'); 
-                                        				echo ' | '; 
-                                        				echo anchor(site_url('adverts/update/'.$adverts->adverts_id),'Update'); 
-                                        				echo ' | '; 
-                                        				echo anchor(site_url('adverts/delete/'.$adverts->adverts_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                                                        echo anchor(site_url('adverts/read/'.$adverts->adverts_id),'Read'); 
+                                                        echo ' | '; 
+                                                            echo anchor(site_url('adverts/update/'.$adverts->adverts_id),'Update'); 
+                                                            echo ' | ';     
+                                                            echo anchor(site_url('adverts/delete/'.$adverts->adverts_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+                                                        if ($this->session->userdata('is_admin')==FALSE) {
+
+                                                        }
                                         				?>
                                         			</td>
                                         		</tr>

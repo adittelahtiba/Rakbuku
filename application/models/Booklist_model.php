@@ -56,25 +56,58 @@ class Booklist_model extends CI_Model
     }
     
     // get total rows
-    function total_rows($q = NULL) {
-        $this->db->like('booklist_id', $q);
-	$this->db->or_like('stores_id', $q);
-	$this->db->or_like('books_id', $q);
-	$this->db->or_like('book_stock', $q);
-	$this->db->or_like('price', $q);
-	$this->db->from($this->table);
-        return $this->db->count_all_results();
+    function total_rows($q = NULL, $idx) {
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id'); 
+        $this->db->join('categories', 'categories.books_id=books.books_id'); 
+        $this->db->where('stores.stores_id', $idx); 
+        $this->db->where('booklist.stores_id', $idx); 
+        $this->db->like('categories.categories_id', $q);
+        $this->db->group_by('categories.books_id', $this->order);
+	   
+        return count($this->db->get('booklist')->result());
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
+    function get_limit_data($limit, $start = 0, $q = NULL, $idx) {
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id'); 
+        $this->db->join('categories', 'categories.books_id=books.books_id'); 
+        $this->db->where('stores.stores_id', $idx); 
+        $this->db->where('booklist.stores_id', $idx); 
+        $this->db->like('categories.categories_id', $q);
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('booklist_id', $q);
-	$this->db->or_like('stores_id', $q);
-	$this->db->or_like('books_id', $q);
-	$this->db->or_like('book_stock', $q);
-	$this->db->or_like('price', $q);
+        $this->db->group_by('categories.books_id', $this->order);
+        
 	$this->db->limit($limit, $start);
+        return $this->db->get($this->table)->result();
+    }
+
+    function s_total_rows($q = NULL, $kateg=null) {
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id'); 
+        $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id'); 
+        $this->db->join('categories', 'categories.books_id=books.books_id');
+        $this->db->like('books.title', $q);
+        $this->db->like('categories.categories_name', $kateg);
+        
+        $this->db->group_by(array('booklist.booklist_id'));
+        
+        return count($this->db->get('booklist')->result());
+    }
+
+    // get data with limit and search
+    function s_get_limit_data($limit, $start = 0, $q = NULL, $kateg=null) {
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id'); 
+        $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id'); 
+        $this->db->join('categories', 'categories.books_id=books.books_id'); 
+        $this->db->like('books.title', $q);
+        $this->db->like('categories.categories_name', $kateg);
+        
+        $this->db->group_by(array('booklist.booklist_id'));
+        $this->db->limit($limit, $start);
+    
         return $this->db->get($this->table)->result();
     }
 

@@ -26,8 +26,8 @@
                                 <div class="panel-header panel-controls">
                                     <br>
                                     <?php echo anchor(site_url('books/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
-
-                                    <a href="#full-colored2" class="btn btn-success btn-rounded" data-toggle="modal"><i class="fa fa-plus"> Import</i></a>
+                                    
+                                    <a href="#full-colored2" class="btn btn-success btn-rounded" data-toggle="modal"><i class="fa fa-plus"></i>Import</a>
                                     <div style="margin-top: 8px" id="message">
                                         <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                                     </div>

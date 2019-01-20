@@ -18,7 +18,7 @@ class Reset_password extends CI_Controller {
             'email' => set_value('email'),
             'button' => 'Kirim',
         );
-        $this->load->view('login/reset_password', $data);
+        $this->load->view('front/reset_password', $data);
     }
 
     public function action() {
@@ -33,7 +33,7 @@ class Reset_password extends CI_Controller {
 
             $this->reset_password_mail();
             $this->session->set_flashdata('message', 'Email Reset Password Akan Segera Terkirim Ke Email Anda, Silahkan Perikasa Email Anda Untuk Melakukan Reset Password');
-            redirect(site_url('auth'));
+            redirect(site_url('Welcome'));
         }
     }
 
@@ -93,7 +93,7 @@ class Reset_password extends CI_Controller {
             }
         }else{
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('auth'));
+            redirect(site_url('Welcome'));
         }
     }
 
@@ -111,7 +111,7 @@ class Reset_password extends CI_Controller {
 
             $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Selamat anda sukses mereset password');
-            redirect(site_url('auth'));
+            redirect(site_url('Welcome'));
         }
     }
 

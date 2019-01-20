@@ -36,8 +36,14 @@ class Books_model extends CI_Model
     }
 
     function get_categories(){
-            $this->db->join('categories', 'categories.books_id=books.books_id');
-            return $this->db->get('books')->result();
+      $this->db->join('categories', 'categories.books_id=books.books_id');
+      return $this->db->get('books')->result();
+    }
+
+    function get_categoriesdb($id){
+      $this->db->join('categories', 'categories.books_id=books.books_id');
+      $this->db->where('books.books_id=', $id);
+      return $this->db->get('books')->result();
     }
 
     function get_cover_code(){

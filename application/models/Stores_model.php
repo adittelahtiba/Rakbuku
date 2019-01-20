@@ -22,6 +22,15 @@ class Stores_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_limit()
+    {
+        $this->db->order_by('stores.stores_id', $this->order);
+        $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
+        $this->db->limit(4, 0);
+        $this->db->group_by('store_pictures.stores_id');
+        return $this->db->get($this->table)->result();
+    }
+
     // get data by id
     function get_by_id($id)
     {
@@ -29,39 +38,29 @@ class Stores_model extends CI_Model
         return $this->db->get($this->table)->row();
     }
 
-    function get_name_by_id($id)
-    {
-        $this->db->select('store_naxxme');
-        $this->db->where($this->id, $id);
-        $this->db->get($this->table);
-    }
-    
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('stores_id', $q);
-	$this->db->or_like('store_name', $q);
-	$this->db->or_like('description', $q);
-	$this->db->or_like('address', $q);
-	$this->db->or_like('open', $q);
-	$this->db->or_like('contact', $q);
-	$this->db->or_like('opening_at', $q);
-	$this->db->or_like('closing_at', $q);
-	$this->db->from($this->table);
-        return $this->db->count_all_results();
+        $this->db->order_by('stores.stores_id', $this->order);
+        $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
+        $this->db->join('booklist', 'booklist.stores_id=stores.stores_id');
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->like('stores.stores_name', $q);
+        $this->db->or_like('books.title', $q);
+        
+        $this->db->group_by('store_pictures.stores_id');
+        return count($this->db->get('stores')->result());
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
-        $this->db->order_by($this->id, $this->order);
-        $this->db->like('stores_id', $q);
-	$this->db->or_like('store_name', $q);
-	$this->db->or_like('description', $q);
-	$this->db->or_like('address', $q);
-	$this->db->or_like('open', $q);
-	$this->db->or_like('contact', $q);
-	$this->db->or_like('opening_at', $q);
-	$this->db->or_like('closing_at', $q);
-	$this->db->limit($limit, $start);
+        $this->db->order_by('stores.stores_id', $this->order);
+        $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
+        $this->db->join('booklist', 'booklist.stores_id=stores.stores_id');
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->like('stores.stores_name', $q);
+    	$this->db->or_like('books.title', $q);
+    	$this->db->limit($limit, $start);
+        $this->db->group_by('store_pictures.stores_id');
         return $this->db->get($this->table)->result();
     }
 
@@ -89,6 +88,12 @@ class Stores_model extends CI_Model
       $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
       return $this->db->get('stores')->result();
     }
+
+    // function get_gambar_limti(){
+    //     $this->db->limit($limit, $start);
+    //   $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
+    //   return $this->db->get('stores')->result();
+    // }
 
     function get_gambardb($id){
         $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');

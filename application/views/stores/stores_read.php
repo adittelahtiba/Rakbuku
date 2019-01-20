@@ -12,7 +12,7 @@
     <body>
         <h2 style="margin-top:0px">Stores Read</h2>
         <table class="table">
-	    <tr><td>Store Name</td><td><?php echo $store_name; ?></td></tr>
+	    <tr><td>Store Name</td><td><?php echo $stores_name; ?></td></tr>
 	    <tr><td>Description</td><td><?php echo $description; ?></td></tr>
 	    <tr><td>Address</td><td><?php echo $address; ?></td></tr>
 	    <tr><td>Open</td><td><?php echo $open; ?></td></tr>

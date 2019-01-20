@@ -10,7 +10,7 @@ class Owners extends CI_Controller
         parent::__construct();
         if (!$this->session->userdata('logged')) {
             $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
-            redirect(site_url('auth'));
+            redirect(site_url('Welcome'));
         }
         $this->load->model('Owners_model');
         $this->load->model('Stores_model');
@@ -41,7 +41,7 @@ class Owners extends CI_Controller
         		'birth_date' => $row->birth_date,
         		'username' => $row->username,
         		'is_verify' => $row->is_verify,
-                'stores_name' => $rowstore->store_name,
+                'stores_name' => $rowstore->stores_name,
                 'description' => $rowstore->description,
                 'address' => $rowstore->address,
                 'open' => $rowstore->open,
@@ -190,7 +190,12 @@ class Owners extends CI_Controller
 
             $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('owners'));
+            if ($this->session->userdata('is_admin') == FALSE) {
+                redirect(site_url('dashboard'));
+            }else{
+                redirect(site_url('owners'));    
+            }
+            
         }
     }
     

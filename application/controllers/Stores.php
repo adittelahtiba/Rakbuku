@@ -50,7 +50,7 @@ class Stores extends CI_Controller
         if ($row) {
             $data = array(
 		'stores_id' => $row->stores_id,
-		'store_name' => $row->store_name,
+		'stores_name' => $row->stores_name,
 		'description' => $row->description,
 		'address' => $row->address,
 		'open' => $row->open,
@@ -71,7 +71,7 @@ class Stores extends CI_Controller
             'button' => 'Create',
             'action' => site_url('stores/create_action'),
 	    'stores_id' => set_value('stores_id'),
-	    'store_name' => set_value('store_name'),
+	    'stores_name' => set_value('stores_name'),
 	    'description' => set_value('description'),
 	    'address' => set_value('address'),
 	    'open' => set_value('open'),
@@ -90,7 +90,7 @@ class Stores extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'store_name' => $this->input->post('store_name',TRUE),
+		'stores_name' => $this->input->post('stores_name',TRUE),
 		'description' => $this->input->post('description',TRUE),
 		'address' => $this->input->post('address',TRUE),
 		'open' => $this->input->post('open',TRUE),
@@ -114,7 +114,7 @@ class Stores extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('stores/update_action'),
         		'stores_id' => set_value('stores_id', $row->stores_id),
-        		'store_name' => set_value('store_name', $row->store_name),
+        		'stores_name' => set_value('stores_name', $row->stores_name),
         		'description' => set_value('description', $row->description),
         		'address' => set_value('address', $row->address),
         		'open' => set_value('open', $row->open),
@@ -222,7 +222,7 @@ class Stores extends CI_Controller
             }
 
             $data = array(
-        		'store_name' => $this->input->post('store_name',TRUE),
+        		'stores_name' => $this->input->post('stores_name',TRUE),
         		'description' => $this->input->post('description',TRUE),
         		'address' => $this->input->post('address',TRUE),
         		'open' => $this->input->post('open',TRUE),
@@ -235,7 +235,12 @@ class Stores extends CI_Controller
 
             $this->Stores_model->update($this->input->post('stores_id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('stores'));
+            if ($this->session->userdata('is_admin') == FALSE) {
+                redirect(site_url('dashboard'));
+            }else{
+                redirect(site_url('stores'));
+            }
+            
         }
     }
     
@@ -255,7 +260,7 @@ class Stores extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('store_name', 'store name', 'trim|required');
+	$this->form_validation->set_rules('stores_name', 'store name', 'trim|required');
 	$this->form_validation->set_rules('description', 'description', 'trim|required');
 	$this->form_validation->set_rules('address', 'address', 'trim|required');
 	$this->form_validation->set_rules('open', 'open', 'trim|required');

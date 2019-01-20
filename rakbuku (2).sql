@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2019 at 06:53 PM
+-- Generation Time: Jan 20, 2019 at 07:23 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -57,20 +57,20 @@ INSERT INTO `admins` (`admins_id`, `username`, `password`, `name`, `Gender`, `bi
 
 CREATE TABLE `adverts` (
   `adverts_id` int(15) NOT NULL,
-  `stores_id` varchar(15) NOT NULL,
+  `stores_id` varchar(25) NOT NULL,
   `date_of_order` date NOT NULL,
   `date_of_com` date NOT NULL,
-  `queue` int(11) NOT NULL,
-  `is_active` varchar(55) NOT NULL
+  `img` varchar(255) NOT NULL,
+  `is_active` enum('1','0') NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Triggers `adverts`
+-- Dumping data for table `adverts`
 --
-DELIMITER $$
-CREATE TRIGGER `activexx1212` BEFORE UPDATE ON `adverts` FOR EACH ROW update adverts set adverts.is_active= if(date_of_com<now(), "0", "1") WHERE adverts_id = '1'
-$$
-DELIMITER ;
+
+INSERT INTO `adverts` (`adverts_id`, `stores_id`, `date_of_order`, `date_of_com`, `img`, `is_active`) VALUES
+(4, 'str-20190118-0008', '2019-01-19', '2019-01-19', 'adv-20190120-0001.jpg', '0'),
+(5, 'str-20190104-0007', '2019-01-21', '2019-01-22', 'adv-20190120-0005.jpg', '1');
 
 -- --------------------------------------------------------
 
@@ -110,14 +110,16 @@ CREATE TABLE `booklist` (
 --
 
 INSERT INTO `booklist` (`booklist_id`, `stores_id`, `books_id`, `book_stock`, `price`) VALUES
-(12, 'str-20190104-0007', 'book-20190111-0001', 10, 150000),
-(13, 'str-20190104-0007', 'book-20190111-0002', 75, 100000),
-(14, 'str-20190104-0007', 'book-20190111-0003', 35, 120000),
-(15, 'str-20190104-0007', 'book-20190111-0004', 30, 25000),
 (16, 'str-20190104-0006', 'book-20190111-0005', 55, 120000),
 (17, 'str-20190104-0006', 'book-20190111-0006', 10, 80000),
 (18, 'str-20190104-0006', 'book-20190111-0007', 9, 110000),
-(19, 'str-20190104-0007', 'book-20190111-0008', 123, 121234);
+(20, 'str-20190104-0006', 'book-20190118-0009', 40, 25000),
+(21, 'str-20190104-0007', 'book-20190119-0010', 10, 150000),
+(22, 'str-20190104-0007', 'book-20190119-0011', 75, 100000),
+(23, 'str-20190104-0007', 'book-20190119-0012', 35, 120000),
+(24, 'str-20190118-0008', 'book-20190119-0013', 55, 120000),
+(25, 'str-20190118-0008', 'book-20190119-0014', 10, 80000),
+(26, 'str-20190118-0008', 'book-20190119-0015', 9, 110000);
 
 -- --------------------------------------------------------
 
@@ -147,7 +149,14 @@ INSERT INTO `books` (`books_id`, `title`, `Release_date`, `authors`, `ISBN`, `pu
 ('book-20190111-0005', 'Sebuah Seni untuk Bersikap Bodo Amat', '5/2/2018', 'Mark Manson', '9786024526986', 'Gramedia Widiasarana Indonesia', 'Gunawan-book-20190111-0005-.jpg'),
 ('book-20190111-0006', 'Menghafal Al-Qur`an dengan Otak Kanan', '16/7/2018', 'Tanzil Khaerul Akbar, Ardi Gunawan', '9786020461991', 'Elex Media Komputindo', 'Gunawan-book-20190111-0006-.jpg'),
 ('book-20190111-0007', 'Bicara Itu Ada Seninya', '30/4/2018', 'Oh Su Hyang', '9786024553920', 'Bhuana Ilmu Populer', 'Gunawan-book-20190111-0007-.jpg'),
-('book-20190111-0008', 'xxxxxxxxxxxxxx', '11-11-1111', 'xxxxxxxxxxxxxx', '11111111111', 'xxxxxxxxxxxxxx', 'Angga_Pratama-book-20190111-0008.jpg');
+('book-20190111-0008', 'xxxxxxxxxxxxxx', '11-11-1111', 'xxxxxxxxxxxxxx', '11111111111', 'xxxxxxxxxxxxxx', 'Angga_Pratama-book-20190111-0008.jpg'),
+('book-20190118-0009', 'Sano, You are Meanie!', '17-12-2018', 'MIKO SENRI', '9786024802745', 'm&c!', 'gunawan-book-20190118-0009.jpg'),
+('book-20190119-0010', 'Sebuah Seni untuk Bersikap Bodo Amat', '5/2/2018', 'Mark Manson', '9786024526986', 'Gramedia Widiasarana Indonesia', 'angga-book-20190119-0010jpg'),
+('book-20190119-0011', 'Menghafal Al-Qur`an dengan Otak Kanan', '16/7/2018', 'Tanzil Khaerul Akbar, Ardi Gunawan', '9786020461991', 'Elex Media Komputindo', 'angga-book-20190119-0011jpg'),
+('book-20190119-0012', 'Bicara Itu Ada Seninya', '30/4/2018', 'Oh Su Hyang', '9786024553920', 'Bhuana Ilmu Populer', 'angga-book-20190119-0012jpg'),
+('book-20190119-0013', 'Sebuah Seni untuk Bersikap Bodo Amat', '5/2/2018', 'Mark Manson', '9786024526986', 'Gramedia Widiasarana Indonesia', 'kasandra-book-20190119-0013jpg'),
+('book-20190119-0014', 'Menghafal Al-Qur`an dengan Otak Kanan', '16/7/2018', 'Tanzil Khaerul Akbar, Ardi Gunawan', '9786020461991', 'Elex Media Komputindo', 'kasandra-book-20190119-0014jpg'),
+('book-20190119-0015', 'Bicara Itu Ada Seninya', '30/4/2018', 'Oh Su Hyang', '9786024553920', 'Bhuana Ilmu Populer', 'kasandra-book-20190119-0015jpg');
 
 -- --------------------------------------------------------
 
@@ -192,7 +201,21 @@ INSERT INTO `categories` (`categories_id`, `categories_name`, `books_id`) VALUES
 (251, 'xxxxxxxx5', 'book-20190111-0008'),
 (252, 'xxxxxxxx6', 'book-20190111-0008'),
 (253, 'xxxxxxxx7', 'book-20190111-0008'),
-(254, 'xxxxxxxx8', 'book-20190111-0008');
+(254, 'xxxxxxxx8', 'book-20190111-0008'),
+(255, 'Buku', 'book-20190118-0009'),
+(256, 'Komik', 'book-20190118-0009'),
+(257, 'Bantuan hukum', 'book-20190119-0010'),
+(258, ' Pengembangan diri', 'book-20190119-0010'),
+(259, 'Agama', 'book-20190119-0011'),
+(260, ' Islam', 'book-20190119-0011'),
+(261, 'Inspirasi', 'book-20190119-0012'),
+(262, ' Pengembangan Diri', 'book-20190119-0012'),
+(263, 'Bantuan hukum', 'book-20190119-0013'),
+(264, ' Pengembangan diri', 'book-20190119-0013'),
+(265, 'Agama', 'book-20190119-0014'),
+(266, ' Islam', 'book-20190119-0014'),
+(267, 'Inspirasi', 'book-20190119-0015'),
+(268, ' Pengembangan Diri', 'book-20190119-0015');
 
 -- --------------------------------------------------------
 
@@ -220,7 +243,8 @@ CREATE TABLE `owners` (
 
 INSERT INTO `owners` (`owners_id`, `name`, `email`, `gender`, `birth_date`, `username`, `password`, `is_verify`, `code`, `reg_time`, `stores_id`) VALUES
 (13, 'Andra Gunawan', 'gigaby@gmail.com', 'M', '1997-12-17', 'gunawan', 'gunawan', '1', '4143f03a589c72745881781359dd6c5220db4fb0', '2019-01-15', 'str-20190104-0006'),
-(14, 'Angga Pratama', 'bloodyanmond@gmail.com', 'M', '1995-01-09', 'angga', 'angga', '1', 'fe291cb3dbf22c4b6fb6cbb7d31e8101d2400506', '2019-01-11', 'str-20190104-0007');
+(14, 'Angga Pratama', 'bloodyanmond@gmail.com', 'M', '1995-01-09', 'angga', 'angga', '1', 'fe291cb3dbf22c4b6fb6cbb7d31e8101d2400506', '2019-01-11', 'str-20190104-0007'),
+(17, 'kasandra', 'lazer.helmi@gmail.com', 'M', '2015-12-31', 'kasandra', 'kasandra', '1', '3d698e0e9902162bef7ca4895c2965a1232ab000', '2019-01-18', 'str-20190118-0008');
 
 -- --------------------------------------------------------
 
@@ -241,7 +265,7 @@ CREATE TABLE `social_media` (
 
 CREATE TABLE `stores` (
   `stores_id` varchar(25) NOT NULL,
-  `store_name` varchar(50) NOT NULL,
+  `stores_name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `address` text NOT NULL,
   `open` varchar(50) NOT NULL,
@@ -256,9 +280,11 @@ CREATE TABLE `stores` (
 -- Dumping data for table `stores`
 --
 
-INSERT INTO `stores` (`stores_id`, `store_name`, `description`, `address`, `open`, `contact`, `opening_at`, `closing_at`, `lat`, `lang`) VALUES
-('str-20190104-0006', 'acyyyyyyy', 'acyyyyyyy', 'acyyyyyyy', 'senin', 'acyyyyyyy', '04:03', '02:00', '-6.93836785', '107.6098775'),
-('str-20190104-0007', 'Toko Buku Raja angga', 'Toko Buku Raja angga', 'Toko Buku Raja angga', 'selasa', 'percobaan1', '01:00', '01:01', '-6.93189245', '107.5230168');
+INSERT INTO `stores` (`stores_id`, `stores_name`, `description`, `address`, `open`, `contact`, `opening_at`, `closing_at`, `lat`, `lang`) VALUES
+('str-20190104-0006', 'acyyyyyyy', 'acyyyyyyy', 'acyyyyyyy', 'senin', '666 1313 1313 ', '04:03', '02:00', '-6.93836785', '107.6098775'),
+('str-20190104-0007', 'Toko Buku Raja angga', 'Toko Buku Raja angga', 'Toko Buku Raja angga', 'selasa', '666 1313 1313 ', '01:00', '01:01', '-6.93189245', '107.5230168'),
+('str-20190118-0008', 'kasandra', 'kasandra', 'kasandra', 'kasandra', '666 1313 1313 ', '13:00', '14:01', '-6.91894137', '107.5815533'),
+('str-20190118-0010', 'kasandra1212', 'kasandra', 'kasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandrakasandra', 'kasandra', '666 1313 1313 ', '13:00', '14:01', '-6.93666381', '107.6203488');
 
 -- --------------------------------------------------------
 
@@ -320,7 +346,16 @@ INSERT INTO `store_pictures` (`store_pictures_id`, `store_pictures_name`, `store
 (66, 'str-20190104-00063.jpg', 'str-20190104-0006'),
 (67, 'str-20190104-00070.jpg', 'str-20190104-0007'),
 (68, 'str-20190104-00071.jpg', 'str-20190104-0007'),
-(69, 'str-20190104-00072.jpg', 'str-20190104-0007');
+(69, 'str-20190104-00072.jpg', 'str-20190104-0007'),
+(70, 'str-20190118-00080.jpg', 'str-20190118-0008'),
+(71, 'str-20190118-00081.jpg', 'str-20190118-0008'),
+(72, 'str-20190118-00082.jpg', 'str-20190118-0008'),
+(73, 'str-20190118-00090.jpg', 'str-20190118-0009'),
+(74, 'str-20190118-00091.jpg', 'str-20190118-0009'),
+(75, 'str-20190118-00092.jpg', 'str-20190118-0009'),
+(76, 'str-20190118-00100.jpg', 'str-20190118-0010'),
+(77, 'str-20190118-00101.jpg', 'str-20190118-0010'),
+(78, 'str-20190118-00102.jpg', 'str-20190118-0010');
 
 --
 -- Indexes for dumped tables
@@ -394,7 +429,7 @@ ALTER TABLE `store_pictures`
 -- AUTO_INCREMENT for table `adverts`
 --
 ALTER TABLE `adverts`
-  MODIFY `adverts_id` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `adverts_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `authors`
@@ -406,19 +441,19 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT for table `booklist`
 --
 ALTER TABLE `booklist`
-  MODIFY `booklist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `booklist_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `categories_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
 
 --
 -- AUTO_INCREMENT for table `owners`
 --
 ALTER TABLE `owners`
-  MODIFY `owners_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `owners_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `social_media`
@@ -430,7 +465,7 @@ ALTER TABLE `social_media`
 -- AUTO_INCREMENT for table `store_pictures`
 --
 ALTER TABLE `store_pictures`
-  MODIFY `store_pictures_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `store_pictures_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -22,6 +22,47 @@ class Adverts_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_is_active_all()
+    {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where('is_active', '1'); 
+        return $this->db->get($this->table)->result();
+    }
+
+    function get_is_datecom_all()
+    {
+        $this->db->order_by($this->id, $this->order);
+        $this->db->where('date_of_com < now()'); 
+        return $this->db->get($this->table)->result();
+    }
+
+    public function get_store(){
+        $this->db->order_by('stores_name', 'asc');
+        $this->db->join('owners', 'owners.stores_id=stores.stores_id'); 
+        $this->db->where('owners.is_verify', '1'); 
+        return $this->db->get('stores')->result();
+    }
+
+    function get_kode(){
+        $this->db->select('RIGHT(adverts.adverts_id,4) as kode', FALSE);
+        $this->db->order_by('adverts_id','DESC');    
+        $this->db->limit(1);
+          $query = $this->db->get('adverts');      //cek dulu apakah ada sudah ada kode di tabel.    
+          if($query->num_rows() <> 0){      
+           //jika kode ternyata sudah ada.      
+           $data = $query->row();      
+           $kode = intval($data->kode) + 1;    
+          }
+          else {      
+           //jika kode belum ada      
+           $kode = 1;    
+          }
+          $kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT); // angka 4 menunjukkan jumlah digit angka 0
+          $d = date('Ymd');
+          $kodejadi = "adv-".$d.'-'.$kodemax;    // hasilnya ODJ-9921-0001 dst.
+          return $kodejadi;  
+    }
+
     // get data by id
     function get_by_id($id)
     {
@@ -63,6 +104,12 @@ class Adverts_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
+    }
+
+    function update_b( $data, $id)
+    {
+        
+        $this->db->update_batch($this->table, $data, $id);
     }
 
     // delete data

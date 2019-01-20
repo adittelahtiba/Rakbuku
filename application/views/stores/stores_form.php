@@ -32,8 +32,8 @@
                                         <div class="col-md-12">
                                             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                                     	    <div class="form-group">
-                                                <label for="varchar">Store Name <?php echo form_error('store_name') ?></label>
-                                                <input type="text" class="form-control" name="store_name" id="store_name" placeholder="Store Name" value="<?php echo $store_name; ?>" />
+                                                <label for="varchar">Store Name <?php echo form_error('stores_name') ?></label>
+                                                <input type="text" class="form-control" name="stores_name" id="stores_name" placeholder="Store Name" value="<?php echo $stores_name; ?>" />
                                             </div>
                                     	    <div class="form-group">
                                                 <label for="description">Description <?php echo form_error('description') ?></label>

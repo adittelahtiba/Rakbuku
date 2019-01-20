@@ -34,7 +34,7 @@ class Register extends CI_Controller
 
 		$data2 = array(
 			'stores_id' => $this->Stores_model->get_kode(),
-            'store_name' => set_value('store_name'),
+            'stores_name' => set_value('stores_name'),
 		    'description' => set_value('description'),
 		    'address' => set_value('address'),
 		    'open' => set_value('open'),
@@ -49,7 +49,7 @@ class Register extends CI_Controller
 
 		$load=$data+$data2;
 
-        $this->load->view('owners/reg', $load);
+        $this->load->view('front/reg', $load);
     }
 
     public function index_action()
@@ -110,12 +110,14 @@ class Register extends CI_Controller
 						'birth_date' => $this->input->post('birth_date',TRUE),
 						'username' => $this->input->post('username',TRUE),
 						'password' => $this->input->post('password',TRUE),
-						'stores_id' => $this->input->post('stores_id',TRUE),
+                        'code' => $hash = sha1($this->input->post('stores_id')),
+                        'stores_id' => $this->input->post('stores_id',TRUE),
+
 				    );
 
 		             $data2 = array(
 		             	'stores_id' => $this->input->post('stores_id',TRUE),
-						'store_name' => $this->input->post('store_name',TRUE),
+						'stores_name' => $this->input->post('stores_name',TRUE),
 						'description' => $this->input->post('description',TRUE),
 						'address' => $this->input->post('address',TRUE),
 						'open' => $this->input->post('open',TRUE),
@@ -181,10 +183,10 @@ class Register extends CI_Controller
     		if ($code == $kode) {
     			$Aktifasi = $this->Owners_model->register($id);
     			$this->session->set_flashdata('message', '<div class="alert alert-success">Selamat anda sukses mendaftar di rakbuku, silahkan login</div>');
-	        	redirect(site_url('Auth'));
+	        	redirect(site_url('Welcome'));
     		}else{
     			$this->session->set_flashdata('message', '<div class="alert alert-success">Registrasi gagal</div>');
-    			redirect(site_url('Auth'));
+    			redirect(site_url('Welcome'));
     		}
 		}
    
@@ -210,7 +212,7 @@ class Register extends CI_Controller
 
 	public function _rules() 
     {
-	$this->form_validation->set_rules('store_name', 'store name', 'trim|required|is_unique[stores|stores_name]');
+	$this->form_validation->set_rules('stores_name', 'store name', 'trim|required|is_unique[stores.stores_name]');
 	$this->form_validation->set_rules('description', 'description', 'trim|required');
 	$this->form_validation->set_rules('address', 'address', 'trim|required');
 	$this->form_validation->set_rules('lat', 'lat', 'trim|required');

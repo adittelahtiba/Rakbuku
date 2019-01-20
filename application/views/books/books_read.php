@@ -26,6 +26,8 @@
                         <div class="panel-header panel-controls">
                           <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
                         </div>
+                        
+
                         <div class="panel-content">
                             <div class="row">
                                 <div class="col-md-6">
@@ -37,9 +39,17 @@
                                         <tr><td>Penerbit</td><td><?php echo $publishers; ?></td></tr>
                                         <tr><td>Harga</td><td><?php echo $price; ?></td></tr>
                                         <tr><td>Stok</td><td><?php echo $book_stock; ?></td></tr>
-
+                                        <tr>
+                                            <td>Kategori</td>
+                                            <td>
+                                                <?php foreach ($categories as $key=>$value) { ?>
+                                                    <p class="label label-primary"><?= $value->categories_name ?></p>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
                                         <tr><td></td><td><a href="<?php echo site_url('books') ?>" class="btn btn-default">Kembali</a></td></tr>
                                     </table>
+                                        
                                 </div>
                                 <div class="col-md-6">
                                     <style type="text/css">
