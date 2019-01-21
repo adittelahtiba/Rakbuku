@@ -9,7 +9,7 @@ class Owners extends CI_Controller
     {
         parent::__construct();
         if (!$this->session->userdata('logged')) {
-            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Anda Belum Login, Silahkan Login Terlebih Dahulu.</div>');
             redirect(site_url('Welcome'));
         }
         $this->load->model('Owners_model');
@@ -52,7 +52,7 @@ class Owners extends CI_Controller
     	    );
             $this->load->view('owners/owners_read', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('owners'));
         }
     }
@@ -94,7 +94,7 @@ class Owners extends CI_Controller
 	    );
 
             $this->Owners_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Tambah Data Berhasil.</div>');
             redirect(site_url('owners'));
         }
     }
@@ -123,7 +123,7 @@ class Owners extends CI_Controller
     	    );
                 $this->load->view('owners/owners_form', $data);
             } else {
-                $this->session->set_flashdata('message', 'Record Not Found');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
                 redirect(site_url('owners'));
             }
         }
@@ -189,7 +189,7 @@ class Owners extends CI_Controller
             }
 
             $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
             if ($this->session->userdata('is_admin') == FALSE) {
                 redirect(site_url('dashboard'));
             }else{
@@ -205,10 +205,10 @@ class Owners extends CI_Controller
 
         if ($row) {
             $this->Owners_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Hapus Data Berhasil.</div>');
             redirect(site_url('owners'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('owners'));
         }
     }

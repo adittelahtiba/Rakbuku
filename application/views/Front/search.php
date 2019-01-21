@@ -45,41 +45,53 @@
 			<a href="#"><i class="logo"><img src="<?php echo base_url('')?>assets/front/images/logo/logo-png.png"></i></a>
 		</div>
 		<div class="topbar-child2">
-			<?php echo anchor(site_url('Register'),'Daftar', 'class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true"'); ?>
-			<span class="linedivide1"></span>
-			<div class="header-wrapicon2 m-r-13">
-				<button type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Login</button>
-				<!-- Header cart noti -->
-				<?php
-					if ($this->uri->segment(2)==='login' || $this->session->userdata('message')) {
-						$logclass = "header-cart header-dropdown show-header-dropdown";
-					}else{
-						$logclass = "header-cart header-dropdown";
-					}
-				?>
-				<div class="<?php echo $logclass ?>">
-					<form action="<?php echo $action; ?>" method="post">
-						<div style="margin: 8px" id="message">
-					        <?php echo $this->session->userdata('message'); ?>
-					    </div>
-						<div class="form-group">
-							<label for="exampleInputEmail1" class="m-text6">Username</label>
-							<input type="text" class="form-control m-text6" name="username" id="Username" placeholder="Masukan Username">
-							<?php echo form_error('username') ?>
-						</div>
+			<?php if ($this->session->userdata('logged') == TRUE){ ?>
+				<?php if ($this->session->userdata('is_admin') == TRUE){ ?>
+					<button style="width: 120px" onclick="window.location.href='<?php echo site_url('admins/dashboard') ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Dashboard</button>
+					<span class="linedivide1"></span>
+					<button style="width: 120px" onclick="window.location.href='<?php echo site_url('welcome/logout') ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Logout</button>
+				<?php }else{ ?>
+					<button style="width: 120px" onclick="window.location.href='<?php echo site_url('dashboard') ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Dashboard</button>
+					<span class="linedivide1"></span>
+					<button style="width: 120px" onclick="window.location.href='<?php echo site_url('welcome/logout') ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Logout</button>
+				<?php } ?>
+			<?php }else{ ?>
+				<?php echo anchor(site_url('Register'),'Daftar', 'class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true"'); ?>
+				<span class="linedivide1"></span>
+				<div class="header-wrapicon2 m-r-13">
+					<button type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Login</button>
+					<!-- Header cart noti -->
+					<?php
+						if ($this->uri->segment(2)==='login' || $this->session->userdata('message')) {
+							$logclass = "header-cart header-dropdown show-header-dropdown";
+						}else{
+							$logclass = "header-cart header-dropdown";
+						}
+					?>
+					<div class="<?php echo $logclass ?>">
+						<form action="<?php echo $action; ?>" method="post">
+							<div style="margin: 8px" id="message">
+						        <?php echo $this->session->userdata('message'); ?>
+						    </div>
+							<div class="form-group">
+								<label for="exampleInputEmail1" class="m-text6">Username</label>
+								<input type="text" class="form-control m-text6" name="username" id="Username" placeholder="Masukan Username">
+								<?php echo form_error('username') ?>
+							</div>
 
-						<div class="form-group">
-							<label for="exampleInputPassword1" class="m-text6">Katasandi</label>
-							<input type="password" class="form-control m-text6" name="password" id="katasandi" placeholder="Masukan Katasandi">
-							<?php echo form_error('password') ?>
-						</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1" class="m-text6">Katasandi</label>
+								<input type="password" class="form-control m-text6" name="password" id="katasandi" placeholder="Masukan Katasandi">
+								<?php echo form_error('password') ?>
+							</div>
 
-						<button type="submit" class="btn btn-primary m-text6" id="masuk">Masuk</button>
-						<?php echo anchor(site_url('Reset_password'), 'Lupa Katasandi ?', 'class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;"'); ?>
+							<button type="submit" class="btn btn-primary m-text6" id="masuk">Masuk</button>
+							<?php echo anchor(site_url('Reset_password'), 'Lupa Katasandi ?', 'class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;"'); ?>
 
-					</form>
+						</form>
+					</div>
 				</div>
-			</div>
+			<?php } ?>
 		</div>
 	</div>
 	<div class="wrap_header">

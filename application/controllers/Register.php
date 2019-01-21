@@ -132,7 +132,7 @@ class Register extends CI_Controller
 					$this->Stores_model->insert($data2);
 					$this->Owners_model->insert($data);
 					$this->sendMail();
-		            $this->session->set_flashdata('message', 'Create Record Success');
+		            $this->session->set_flashdata('message', '<div class="alert alert-success">Tambah Data Berhasil.</div>');
 		            redirect(site_url('owners'));
 		        }
 	    	}
@@ -182,10 +182,11 @@ class Register extends CI_Controller
     		$id = $row->owners_id;
     		if ($code == $kode) {
     			$Aktifasi = $this->Owners_model->register($id);
+
     			$this->session->set_flashdata('message', '<div class="alert alert-success">Selamat anda sukses mendaftar di rakbuku, silahkan login</div>');
 	        	redirect(site_url('Welcome'));
     		}else{
-    			$this->session->set_flashdata('message', '<div class="alert alert-success">Registrasi gagal</div>');
+    			$this->session->set_flashdata('message', '<div class="alert alert-danger">Registrasi gagal</div>');
     			redirect(site_url('Welcome'));
     		}
 		}

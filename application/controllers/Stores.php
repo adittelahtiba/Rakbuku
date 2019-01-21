@@ -12,98 +12,6 @@ class Stores extends CI_Controller
         $this->load->model('Store_pictures_model');
         $this->load->library('form_validation');
     }
-
-    public function index()
-    {
-        $q = urldecode($this->input->get('q', TRUE));
-        $start = intval($this->input->get('start'));
-        
-        if ($q <> '') {
-            $config['base_url'] = base_url() . 'stores/index.html?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 'stores/index.html?q=' . urlencode($q);
-        } else {
-            $config['base_url'] = base_url() . 'stores/index.html';
-            $config['first_url'] = base_url() . 'stores/index.html';
-        }
-
-        $config['per_page'] = 10;
-        $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->Stores_model->total_rows($q);
-        $stores = $this->Stores_model->get_limit_data($config['per_page'], $start, $q);
-
-        $this->load->library('pagination');
-        $this->pagination->initialize($config);
-
-        $data = array(
-            'stores_data' => $stores,
-            'q' => $q,
-            'pagination' => $this->pagination->create_links(),
-            'total_rows' => $config['total_rows'],
-            'start' => $start,
-        );
-        $this->load->view('stores/stores_list', $data);
-    }
-
-    public function read($id) 
-    {
-        $row = $this->Stores_model->get_by_id($id);
-        if ($row) {
-            $data = array(
-		'stores_id' => $row->stores_id,
-		'stores_name' => $row->stores_name,
-		'description' => $row->description,
-		'address' => $row->address,
-		'open' => $row->open,
-		'contact' => $row->contact,
-		'opening_at' => $row->opening_at,
-		'closing_at' => $row->closing_at,
-	    );
-            $this->load->view('stores/stores_read', $data);
-        } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('stores'));
-        }
-    }
-
-    public function create() 
-    {
-        $data = array(
-            'button' => 'Create',
-            'action' => site_url('stores/create_action'),
-	    'stores_id' => set_value('stores_id'),
-	    'stores_name' => set_value('stores_name'),
-	    'description' => set_value('description'),
-	    'address' => set_value('address'),
-	    'open' => set_value('open'),
-	    'contact' => set_value('contact'),
-	    'opening_at' => set_value('opening_at'),
-	    'closing_at' => set_value('closing_at'),
-	);
-        $this->load->view('stores/stores_form', $data);
-    }
-    
-    public function create_action() 
-    {
-        $this->_rules();
-
-        if ($this->form_validation->run() == FALSE) {
-            $this->create();
-        } else {
-            $data = array(
-		'stores_name' => $this->input->post('stores_name',TRUE),
-		'description' => $this->input->post('description',TRUE),
-		'address' => $this->input->post('address',TRUE),
-		'open' => $this->input->post('open',TRUE),
-		'contact' => $this->input->post('contact',TRUE),
-		'opening_at' => $this->input->post('opening_at',TRUE),
-		'closing_at' => $this->input->post('closing_at',TRUE),
-	    );
-
-            $this->Stores_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('stores'));
-        }
-    }
     
     public function update($id, $error = null) 
     {
@@ -128,7 +36,7 @@ class Stores extends CI_Controller
 	       );
             $this->load->view('stores/stores_form', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('stores'));
         }
     }
@@ -234,7 +142,7 @@ class Stores extends CI_Controller
     	    );
 
             $this->Stores_model->update($this->input->post('stores_id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
             if ($this->session->userdata('is_admin') == FALSE) {
                 redirect(site_url('dashboard'));
             }else{
@@ -250,10 +158,10 @@ class Stores extends CI_Controller
 
         if ($row) {
             $this->Stores_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Hapus Data Berhasil.</div>');
             redirect(site_url('stores'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('stores'));
         }
     }
@@ -262,6 +170,8 @@ class Stores extends CI_Controller
     {
 	$this->form_validation->set_rules('stores_name', 'store name', 'trim|required');
 	$this->form_validation->set_rules('description', 'description', 'trim|required');
+    $this->form_validation->set_rules('lat', 'lat', 'trim|required');
+    $this->form_validation->set_rules('lang', 'lang', 'trim|required');
 	$this->form_validation->set_rules('address', 'address', 'trim|required');
 	$this->form_validation->set_rules('open', 'open', 'trim|required');
 	$this->form_validation->set_rules('contact', 'contact', 'trim|required');

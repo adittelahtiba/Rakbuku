@@ -49,6 +49,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <?php if (form_error('lat') or form_error('lang')) { ?>
+                                                            <span class="text-danger">Lokasi Harus diisi.</span>
+                                                    <?php } ?>
+                                                        
+                                                    
+                                                    
                                                 </div>
                                             </div><!-- /.span -->
                                     	    <div class="form-group">
@@ -56,12 +62,10 @@
                                                 <textarea class="form-control" rows="3" name="address" id="address" placeholder="Address"><?php echo $address; ?></textarea>
                                             </div>
                                             <div class="form-group">
-                                            <label for="varchar">Lat <?php echo form_error('lat') ?></label>
-                                                <input type="text"  name="lat" readonly class="form-control" id="lat" placeholder="Lat" value="<?php echo $lat; ?>" />
+                                                <input type="hidden"  name="lat" readonly class="form-control" id="lat" placeholder="Lat" value="<?php echo $lat; ?>" />
                                             </div>
                                             <div class="form-group">
-                                                <label for="varchar">Lang <?php echo form_error('lang') ?></label>
-                                                <input type="text" class="form-control" name="lang" id="lng" placeholder="Lang" value="<?php echo $lang; ?>" />
+                                                <input type="hidden" class="form-control" name="lang" id="lng" placeholder="Lang" value="<?php echo $lang; ?>" />
                                             </div>
                                             <div class="form-group">
                                                 <label for="varchar">Hari buka <?php echo form_error('open') ?></label>
@@ -128,10 +132,53 @@
         
     </section>
     <?php $this->load->view('lib/footer')?>
+    <script src="<?php echo base_url('assets')?>/js/mapwilayah.js"></script>
+<script src="<?php echo base_url('assets')?>/js/jquery-1.11.2.min.js"></script>
+<!-- <script>
+
+          function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('maps'), {
+              zoom: 15,
+              center: {lat: <?php echo $lat;  ?>, lng: <?php echo $lang; ?>}
+            });
+
+            // Create an array of alphabetical characters used to label the markers.
+            var labels = [
+                '<?php echo $stores_name ?>',
+            ]
+
+            // Add some markers to the map.
+            // Note: The code uses the JavaScript Array.prototype.map() method to
+            // create an array of markers based on a given "locations" array.
+            // The map() method here has nothing to do with the Google Maps API.
+            var markers = locations.map(function(location, i) {
+              return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
+              });
+            });
+
+            // Add a marker clusterer to manage the markers.
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+          }
+          var locations = [
+          
+            {lat: <?php echo $lat;  ?>, lng: <?php echo $lang; ?>},
+        
+          ]
+        </script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+        </script>
+
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAW87wcDUt1FFR8Cb8lasBUeh-yqLq9sIg&callback=initMap">
+        </script> -->
+        
 </body>
 </html>
-<script src="<?php echo base_url('assets')?>/js/mapwilayah.js"></script>
-<script src="<?php echo base_url('assets')?>/js/jquery-1.11.2.min.js"></script>
+
 <script type="text/javascript">
 function tampilkanPreview(gambar,idpreview){
     var gb = gambar.files;
@@ -161,3 +208,4 @@ function tampilkanPreview(gambar,idpreview){
     }    
 }
 </script>
+ 

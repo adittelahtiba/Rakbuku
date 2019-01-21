@@ -9,7 +9,7 @@ class Adverts extends CI_Controller
     {
         parent::__construct();
         if (!$this->session->userdata('logged')) {
-            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Anda Belum Login, Silahkan Login Terlebih Dahulu.</div>');
             redirect(site_url('Welcome'));
         }elseif(!$this->session->userdata('is_admin')) {
             echo "<script>window.location.href='javascript:history.back(-2);'</script>";
@@ -37,7 +37,7 @@ class Adverts extends CI_Controller
 	    );
             $this->load->view('adverts/adverts_read', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('adverts'));
         }
     }
@@ -83,7 +83,7 @@ class Adverts extends CI_Controller
                 'stores_id' => $this->input->post('stores_id',TRUE),
             );
             $this->Adverts_model->insert($data);
-            $this->session->set_flashdata('message', 'Create Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Tambah Data Berhasil.</div>');
             redirect(site_url('adverts'));
         }else{
             $error = array('error' => $this->upload->display_errors());
@@ -111,7 +111,7 @@ class Adverts extends CI_Controller
 	       );
             $this->load->view('adverts/adverts_form', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('adverts'));
         }
     }
@@ -143,7 +143,7 @@ class Adverts extends CI_Controller
 	       );
 
             $this->Adverts_model->update($this->input->post('adverts_id', TRUE), $data);
-            $this->session->set_flashdata('message', 'Update Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
             redirect(site_url('adverts'));
         }
     }
@@ -154,10 +154,10 @@ class Adverts extends CI_Controller
 
         if ($row) {
             $this->Adverts_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Hapus Data Berhasil.</div>');
             redirect(site_url('adverts'));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('adverts'));
         }
     }

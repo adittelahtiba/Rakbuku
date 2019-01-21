@@ -11,7 +11,7 @@ class Books extends CI_Controller
         parent::__construct();
 
         if ($this->session->userdata('logged')<>1) {
-            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Anda Belum Login, Silahkan Login Terlebih Dahulu.<br></div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Anda Belum Login, Silahkan Login Terlebih Dahulu.</div>');
             redirect(site_url('Welcome'));
         }
         $this->load->model('Books_model');
@@ -60,7 +60,7 @@ class Books extends CI_Controller
             );
             $this->load->view('books/books_read', $data);
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
             redirect(site_url('books'));
         }
     }

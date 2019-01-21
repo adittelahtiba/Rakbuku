@@ -36,7 +36,7 @@
                                             <tr>
                                                 <th>No</th>
                                         		<th>Username</th>
-                                        		<th>Is Verify</th>
+                                        		<th>Status</th>
                                         		<th>Stores name</th>
                                         		<th>Action</th>
                                             </tr>
@@ -47,7 +47,7 @@
                                         			<td width="80px"><?php echo $no++ ?></td>
                                         			<td><?php echo $owners->username ?></td>
                                         			<td><?php echo $owners->is_verify=='1' ? 'Sudah Registrasi' : 'Belum Registrasi' ?></td>
-                                        			<td><?php echo $owners->store_name ?></td>
+                                        			<td><?php echo $owners->stores_name ?></td>
                                         			<td style="text-align:center" width="200px">
                                                         <?php
                                                             echo anchor(site_url('owners/read/'.$owners->owners_id),'Read'); 
