@@ -2,6 +2,14 @@
 <html class="" lang="en">
     <head>
         <?php $this->load->view('lib/head')?>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v3.2';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
     </head>
     <body class="fixed-topbar theme-sdtl fixed-sidebar color-blue bg-light-dark">
         <section>
@@ -60,8 +68,8 @@
                                                                 echo ' | '; 
                                                                 echo anchor(site_url('books/update/'.$books->books_id),'Update'); 
                                                                 echo ' | '; ?>
-                                                            <a href="#full-colored" data-toggle="modal">Delete</a>
-                                                            <a href="http://www.facebook.com/sharer.php?u=https://www.youtube.com/watch?v=_bwpWvf2W9M">chale</a>
+                                                            <a href="#full-colored" data-toggle="modal">Delete</a> |
+                                                            <a href="#full-share" data-toggle="modal">Share</a>
                                         				<?php } ?>
                                         			</td>
                                                </tr>
@@ -103,14 +111,37 @@
               <div class="modal-content bg-primary">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                  <h4 class="modal-title">Import <strong>Excel</strong></h4>
+                </div>
+                <form action="<?php echo base_url();?>books/form/" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <p class="m-t-40">
+                            Untuk melakukan import data dari excel diwajibkan untuk mengikuti format
+                            yang sudah disediakan olah Rakbuku, silahkan download contoh format import
+                            dibawah ini :
+                        </p>
+                        <a href="https://drive.google.com/open?id=12kJu7IuoG6SYGp5QC6GyfVYWB5t8n4Gk">Download</a>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="file" name="filename"/> 
+                        <button type="submit" class="btn btn-dark ladda-button"><i class="icon-cloud-upload"></i> Import</button>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="modal fade" id="full-share" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content bg-primary">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
+                  <h4 class="modal-title">Share <strong>Buku</strong></h4>
                 </div>
                 <div class="modal-body">
                     <p class="m-t-40"></p>
-                    <form action="<?php echo base_url();?>books/form/" method="post" enctype="multipart/form-data">
-                        <input type="file" name="filename"/>
-                        <input type="submit" name="submit"/>
-                    </form>
+                    <div class="fb-share-button" data-href="https://www.youtube.com/watch?v=ac3HkriqdGQ" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
@@ -125,12 +156,3 @@
         <?php $this->load->view('lib/footer')?>
     </body>
 </html>    
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v3.2';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
