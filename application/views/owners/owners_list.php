@@ -25,7 +25,9 @@
                             <div class="panel">
                                 <div class="panel-header panel-controls">
                                     <br>
+                                    <?php if($this->session->userdata('is_admin') == false) { ?>
                                     <?php echo anchor(site_url('owners/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
+                                    <?php } ?>
                                     <div style="margin-top: 8px" id="message">
                                         <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                                     </div>

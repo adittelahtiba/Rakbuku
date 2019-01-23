@@ -59,6 +59,10 @@ class Owners extends CI_Controller
 
     public function create() 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
         $data = array(
             'button' => 'Create',
             'action' => site_url('owners/create_action'),
@@ -77,6 +81,9 @@ class Owners extends CI_Controller
     
     public function create_action() 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -131,6 +138,10 @@ class Owners extends CI_Controller
     
     public function update_action() 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
         $this->_rules();
         $row = $this->Owners_model->get_by_id($this->input->post('owners_id',TRUE));
 
@@ -148,7 +159,7 @@ class Owners extends CI_Controller
             $this->update($this->input->post('owners_id', TRUE));
 
         } else {
-
+            $mail = false;
             if ($this->input->post('email',TRUE) !== $row->email) {
                 if ($this->input->post('password',TRUE) !== '') {
                     $data = array(
@@ -158,7 +169,10 @@ class Owners extends CI_Controller
                         'birth_date' => $this->input->post('birth_date',TRUE),
                         'username' => $this->input->post('username',TRUE),
                         'password' => $this->input->post('password',TRUE),
-                    );    
+                        'is_verify' => '0',
+                        'code' => sha1($this->input->post('email')),
+                    );
+                    $mail = true;
                 }else{
                     $data = array(
                         'name' => $this->input->post('name',TRUE),
@@ -166,7 +180,10 @@ class Owners extends CI_Controller
                         'gender' => $this->input->post('gender',TRUE),
                         'birth_date' => $this->input->post('birth_date',TRUE),
                         'username' => $this->input->post('username',TRUE),
-                    );  
+                        'is_verify' => '0',
+                        'code' => sha1($this->input->post('email')),
+                    );
+                    $mail = true;
                 }
             }else{
                 if ($this->input->post('password',TRUE) !== '') {
@@ -187,20 +204,37 @@ class Owners extends CI_Controller
                     );  
                 }
             }
-
-            $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
-            if ($this->session->userdata('is_admin') == FALSE) {
-                redirect(site_url('dashboard'));
+            
+            if ($mail == true) {
+                $this->sendMail();
+                $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);
+                redirect(site_url('Welcome/logout'));
+                // echo "<pre>";
+                //     echo print_r($data);
+                // echo "</pre>";
             }else{
-                redirect(site_url('owners'));    
+                // echo "<pre>";
+                //     echo print_r($data);
+                // echo "</pre>";
+                $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
+                if ($this->session->userdata('is_admin') == FALSE) {
+                    redirect(site_url('dashboard'));
+                }else{
+                    redirect(site_url('owners'));    
+                }    
             }
+            
             
         }
     }
     
     public function delete($id) 
     {
+        if($this->session->userdata('is_admin') == false) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
         $row = $this->Owners_model->get_by_id($id);
 
         if ($row) {
@@ -237,6 +271,41 @@ class Owners extends CI_Controller
             return FALSE;
         }else{
             return TRUE;
+        }
+    }
+
+    function sendMail() {
+        $ci = get_instance();
+        $ci->load->library('email');
+        $config['protocol'] = "smtp";
+        $config['smtp_host'] = "ssl://smtp.gmail.com";
+        $config['smtp_port'] = "465";
+        $config['smtp_user'] = "Wisatabandungdotcom@gmail.com";
+        $config['smtp_pass'] = "Wisatabandungdotcom1440";
+        $config['charset'] = "utf-8";
+        $config['mailtype'] = "html";
+        $config['newline'] = "\r\n";
+        
+        
+        $ci->email->initialize($config);
+ 
+        $ci->email->from('Wisatabandungdotcom@gmail.com', 'Admin Wisata Bandung');
+        $list = array($this->input->post('email'));
+        $ci->email->to($list);
+        $email = $this->session->userdata($this->input->post('email'));
+        $username = $this->input->post('username');
+        $owners_id = $this->input->post('owners_id');
+        $kode = sha1($this->input->post('email'));
+        $ci->email->subject('Aktifasi akun anda di website wisata bandung');
+        $ci->email->message('<!DOCTYPE html><html><head></head><body>
+                                <p> Hai, '.$this->input->post('nama_pemilik'). '<br> Akun anda akan diregistrasi dengan username ' . $username .' Silahkan lanjutkan proses registrasi dengan mengklik tombol di bawah ini. <br>
+                                '. anchor(site_url('Register/Aktifasi/'.$kode),'Aktifkan Akun')  .' <br>
+                                Terima Kasih!
+                                </body></html>');
+        if ($this->email->send()) {
+            
+        } else {
+            show_error($this->email->print_debugger());
         }
     }
 

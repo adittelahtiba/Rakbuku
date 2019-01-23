@@ -146,7 +146,7 @@ class Register extends CI_Controller
         $config['smtp_host'] = "ssl://smtp.gmail.com";
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "Wisatabandungdotcom@gmail.com";
-        $config['smtp_pass'] = "Wisatabandungdotcom13";
+        $config['smtp_pass'] = "Wisatabandungdotcom1440";
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
         $config['newline'] = "\r\n";

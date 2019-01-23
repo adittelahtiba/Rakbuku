@@ -25,9 +25,10 @@
                             <div class="panel">
                                 <div class="panel-header panel-controls">
                                     <br>
+                                    <?php if($this->session->userdata('is_admin') == false) { ?>
                                     <?php echo anchor(site_url('books/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
-                                    
                                     <a href="#full-colored2" class="btn btn-success btn-rounded" data-toggle="modal"><i class="fa fa-plus"></i>Import</a>
+                                    <?php } ?>
                                     <div style="margin-top: 8px" id="message">
                                         <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                                     </div>

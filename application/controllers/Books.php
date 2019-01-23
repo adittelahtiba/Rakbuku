@@ -67,6 +67,10 @@ class Books extends CI_Controller
 
     public function create($error = null) 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
         $data = array(
             'button' => 'Create',
             'action' => site_url('books/create_action'),
@@ -88,6 +92,10 @@ class Books extends CI_Controller
     
     public function create_action() 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -146,6 +154,10 @@ class Books extends CI_Controller
     
     public function update($id, $error=null) 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
+
         $row = $this->Books_model->get_by_id($id);
         $row2 = $this->Booklist_model->get_by_books_id($id);
 
@@ -174,6 +186,9 @@ class Books extends CI_Controller
     
     public function update_action() 
     {
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -232,16 +247,21 @@ class Books extends CI_Controller
     
     public function delete($id) 
     {
-        $row = $this->Books_model->get_by_id($id);
+        if($this->session->userdata('is_admin') == true) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }else{
+            $row = $this->Books_model->get_by_id($id);
 
-        if ($row) {
-            $this->Books_model->delete($id);
-            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Data berhasil dihapus.<br></div>');
-            redirect(site_url('books'));
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Data tidak ditemukan.<br></div>');
-            redirect(site_url('books'));
+            if ($row) {
+                $this->Books_model->delete($id);
+                $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Data berhasil dihapus.<br></div>');
+                redirect(site_url('books'));
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Data tidak ditemukan.<br></div>');
+                redirect(site_url('books'));
+            }    
         }
+        
     }
 
     public function form(){
