@@ -16,7 +16,8 @@ class Welcome extends CI_Controller {
         
         $data = array();
         $adsrow = $this->Adverts_model->get_is_datecom_all();
-        foreach ($adsrow as $key => $value) {
+        if ($adsrow) {
+            foreach ($adsrow as $key => $value) {
             $idadv = $value->adverts_id;
             $data[] = array(
                 "is_active" => '0',
@@ -24,6 +25,8 @@ class Welcome extends CI_Controller {
             );
         }
         $this->Adverts_model->update_b($data, 'adverts_id');
+        }
+        
     }
 
 	public function index()
@@ -168,6 +171,9 @@ class Welcome extends CI_Controller {
 
         $row = $this->Stores_model->get_by_id($id);
         $data = array(
+            'action' => site_url('welcome/login'),
+            'username' => set_value('username'),
+            'password' => set_value('password'),
             'q' => $q,
             'thedata' => $detail,
             'stores_id' => $row->stores_id,

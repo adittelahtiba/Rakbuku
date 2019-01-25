@@ -351,7 +351,7 @@ class Books extends CI_Controller
                     fclose($zipReader);
                         $extension = $drawing->getExtension();
                     }
-                    $image_name = $this->session->userdata('username').'-'.$data[$ow++]['books_id'].'jpg';
+                    $image_name = $this->session->userdata('username').'-'.$data[$ow++]['books_id'].'.jpg';
                     file_put_contents('./upload/cover/'.$image_name,$imageContents);
                     array_push($data[$h++], $image_name);
                 }
