@@ -26,8 +26,9 @@
         </script>
         <style>
             body{
-                padding: 100px;
-                padding-top: 10px;
+                padding-right: 3%;
+                padding-left: 3%;
+                padding-top: 3%;
                 background-color: #004ec1;
             }
         </style>

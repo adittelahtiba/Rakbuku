@@ -350,7 +350,7 @@
 
 					<!-- Product -->
 					<div class="row">
-						<?php if (!$thedata or $q=="" and $kateg=="") { ?>
+						<?php if (!$thedata or $q=="") { ?>
 							<div style="margin-left: 40%;">
 								<h2>Oops, Toko tidak ditemukan :(</h2>	
 								<p>Hasil pencarian untuk "<?php echo $q; ?>" tidak ditemukan. Coba keyword lain?</p>

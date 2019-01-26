@@ -57,16 +57,10 @@
 			<div class="input-group">
 				<select name="kateg" class="form-control col-lg-2" >
 					<option value="">Semua Kategori</option>
-					<?php foreach ($kategori as $rush) { 
-						if ($rush->categories_name == $kateg) {
-							$select = 'selected';
-						}else{
-							$select = '';
-						}
-					?>
-		      			<option <?php echo $select ?>><?php echo $rush->categories_name; ?></option>
+					<?php foreach ($kategori as $kateg) { ?>
+		      			<option><?php echo $kateg->categories_name; ?></option>
 				    <?php } ?>
-				</select>
+			    </select>
 				<input type="text" class="form-control col-lg-8 m-l-20" name="q" value="<?php echo $q; ?>"  placeholder="Cari Buku atau Toko Buku ...">
 				<span class="input-group-btn">
 				<button class="btn btn-default" type="submit" type="submit">
@@ -116,7 +110,7 @@
 						<?php echo form_error('password') ?>
 					</div>
 					<button type="submit" class="btn btn-primary m-text6" >Masuk</button>
-					<a href="<?php echo site_url('Reset_password') ?>" class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;">Lupa Katasandi ?</a>
+					<a href="<?php echo 'Reset_password' ?>" class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;">Lupa Katasandi ?</a>
 				</form>
 			</div>
 		</div>
@@ -177,7 +171,7 @@
 						</div>
 
 						<button type="submit" class="btn btn-primary m-text6" >Masuk</button>
-						<a href="<?php echo site_url('Reset_password') ?>" class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;">Lupa Katasandi ?</a>
+						<a href="<?php echo 'Reset_password' ?>" class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;">Lupa Katasandi ?</a>
 						
 					</form>
 				</div>
@@ -198,14 +192,8 @@
 					<div class="input-group">
 						<select name="kateg" class="form-control col-lg-2 m-r-10" >
 							<option value="">Semua Kategori</option>
-							<?php foreach ($kategori as $rush) { 
-								if ($rush->categories_name == $kateg) {
-									$select = 'selected';
-								}else{
-									$select = '';
-								}
-							?>
-				      			<option <?php echo $select ?>><?php echo $rush->categories_name; ?></option>
+							<?php foreach ($kategori as $kateg) { ?>
+				      			<option><?php echo $kateg->categories_name; ?></option>
 						    <?php } ?>
 						</select>
 						<input type="text" class="form-control" name="q" value="<?php echo $q; ?>" placeholder="Cari Buku atau Toko Buku ...">
@@ -247,16 +235,10 @@
 				<div class="col-lg-6 m-t-10">
 					<form action="<?php echo base_url('welcome/book_search'); ?>">
 						<div class="input-group">
-							<select name="kateg" class="form-control col-lg-2 m-r-10" >
-								<option value="">Semua Kategori</option>
-								<?php foreach ($kategori as $rush) { 
-									if ($rush->categories_name == $kateg) {
-										$select = 'selected';
-									}else{
-										$select = '';
-									}
-								?>
-					      			<option <?php echo $select ?>><?php echo $rush->categories_name; ?></option>
+							<select name="kateg" class="form-control col-sm-12 m-r-10" >
+							<option value="">Semua Kategori</option>
+								<?php foreach ($kategori as $kateg) { ?>
+					      			<option><?php echo $kateg->categories_name; ?></option>
 							    <?php } ?>
 							</select>
 							
@@ -318,7 +300,7 @@
 									</div>
 
 									<button type="submit" class="btn btn-primary m-text6" >Masuk</button>
-									<a href="<?php echo site_url('Reset_password') ?>" class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;">Lupa Katasandi ?</a>
+									<a href="<?php echo 'Reset_password' ?>" class="fs-11 t-center lupa" style="margin:150px 0px 00px 60px;">Lupa Katasandi ?</a>
 								</form>
 							</div>
 						</li>
@@ -341,10 +323,10 @@
 					    <img class="d-block w-100" src="<?php echo base_url('assets/front/images/bg-banner-01.jpg')?>" alt="First slide">
 					</div>		
 				<?php }else{ ?>
-				<?php foreach ($Adverts as $key => $value){ ?>
-					<div class="carousel-item active">
+				<?php $i=0; foreach ($Adverts as $key => $value){ ?>
+					<div class="carousel-item <?php echo $i++ =='1' ? 'active' : ''  ?>">
 					    <a href="<?php echo site_url('welcome/detail/'. $value->stores_id); ?>">
-					        <img class="d-block w-100" src="<?php echo base_url('upload/adverts/'.$value->img); ?>" alt="First slide">
+					        <img class="d-block w-100" src="<?php echo base_url('upload/adverts/'.$value->img); ?>" alt="First slide" style="height:330px; width:1170px;">
 						</a>
 					</div>
 				<?php } } ?>
@@ -401,7 +383,7 @@
 									</div>
 								</div>
 								<div class="block2-txt p-t-20">
-									<a href="<?= site_url('welcome/detail/'. $value->stores_id); ?>" class="block2-name t-left dis-block s-text33 p-b-5"><?php echo $value->stores_name ?></a>
+									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5"><?php echo $value->stores_name ?></a>
 									<a href="#" class="fs-12">
 									<span class="block2-price m-text6 p-r-5">
 									<p class="fa fa-phone tegak"></p>
@@ -415,7 +397,7 @@
 									<?php echo $string;  ?></a>
 									<hr>
 									<span class="block2-price m-text6 p-r-8 ">
-									 <a class="size26" href ="<?php echo site_url('welcome/detail/'. $value->stores_id); ?>">Detail</a>
+									 <a class="size26" href ="<?php echo 'welcome/detail/'. $value->stores_id ?>">Detail</a>
 									</span>
 								</div>
 							</div>
