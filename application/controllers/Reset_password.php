@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Reset_password extends CI_Controller {
- 	
- 	function __construct()
+    
+    function __construct()
     {
         parent::__construct();
         $this->load->model('Auth_model');
@@ -18,7 +18,7 @@ class Reset_password extends CI_Controller {
             'email' => set_value('email'),
             'button' => 'Kirim',
         );
-        $this->load->view('front/reset_password', $data);
+        $this->load->view('Front/reset_password', $data);
     }
 
     public function action() {
@@ -44,7 +44,7 @@ class Reset_password extends CI_Controller {
         $config['smtp_host'] = "ssl://smtp.gmail.com";
         $config['smtp_port'] = "465";
         $config['smtp_user'] = "Wisatabandungdotcom@gmail.com";
-        $config['smtp_pass'] = "Wisatabandungdotcom13";
+        $config['smtp_pass'] = "Wisatabandungdotcom1440";
         $config['charset'] = "utf-8";
         $config['mailtype'] = "html";
         $config['newline'] = "\r\n";
@@ -89,7 +89,7 @@ class Reset_password extends CI_Controller {
                     'xcode' => $code,
                     'owners_id'=> $row->owners_id,
                 );
-                $this->load->view('login/reset', $data);
+                $this->load->view('Front/Reset', $data);
             }
         }else{
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');

@@ -19,47 +19,47 @@ class Register extends CI_Controller
 
     public function index($error = null)
     {
-    	$data = array(
+        $data = array(
             'button' => 'Create',
-            'action' => site_url('register/index_action'),
-		    'owners_id' => set_value('owners_id'),
-		    'name' => set_value('name'),
-		    'email' => set_value('email'),
-		    'gender' => set_value('gender'),
-		    'birth_date' => set_value('birth_date'),
-		    'username' => set_value('username'),
-		    'password' => set_value('password'),
+            'action' => base_url('register/index_action'),
+            'owners_id' => set_value('owners_id'),
+            'name' => set_value('name'),
+            'email' => set_value('email'),
+            'gender' => set_value('gender'),
+            'birth_date' => set_value('birth_date'),
+            'username' => set_value('username'),
+            'password' => set_value('password'),
 
-		);
+        );
 
-		$data2 = array(
-			'stores_id' => $this->Stores_model->get_kode(),
+        $data2 = array(
+            'stores_id' => $this->Stores_model->get_kode(),
             'stores_name' => set_value('stores_name'),
-		    'description' => set_value('description'),
-		    'address' => set_value('address'),
-		    'open' => set_value('open'),
-		    'contact' => set_value('contact'),
-		    'opening_at' => set_value('opening_at'),
-		    'closing_at' => set_value('closing_at'),
-		    'lat' => set_value('lat'),
-		    'lang' => set_value('lang'),
-		    'error' => $error['error']
-		);
+            'description' => set_value('description'),
+            'address' => set_value('address'),
+            'open' => set_value('open'),
+            'contact' => set_value('contact'),
+            'opening_at' => set_value('opening_at'),
+            'closing_at' => set_value('closing_at'),
+            'lat' => set_value('lat'),
+            'lang' => set_value('lang'),
+            'error' => $error['error']
+        );
 
 
-		$load=$data+$data2;
+        $load=$data+$data2;
 
-        $this->load->view('front/reg', $load);
+        $this->load->view('Front/reg', $load);
     }
 
     public function index_action()
     {
-    	$this->_rules();
+        $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->index();
         } else {
-        	$config = array();
+            $config = array();
             $config['upload_path']    ='./upload/store_pictures/'; 
             $config['allowed_types'] = 'gif|jpg|png';
             // $config['max_size']      = '0';
@@ -99,47 +99,47 @@ class Register extends CI_Controller
                     
                 }
 
-	            if(!$this->upload->do_upload('userfile')){ //berfungsi untuk melakukan fungsi upload
-	                $error = array('error' => $this->upload->display_errors());
-	                $this->index($error);
-	            }else{
-		            $data = array(
-						'name' => $this->input->post('name',TRUE),
-						'email' => $this->input->post('email',TRUE),
-						'gender' => $this->input->post('gender',TRUE),
-						'birth_date' => $this->input->post('birth_date',TRUE),
-						'username' => $this->input->post('username',TRUE),
-						'password' => $this->input->post('password',TRUE),
+                if(!$this->upload->do_upload('userfile')){ //berfungsi untuk melakukan fungsi upload
+                    $error = array('error' => $this->upload->display_errors());
+                    $this->index($error);
+                }else{
+                    $data = array(
+                        'name' => $this->input->post('name',TRUE),
+                        'email' => $this->input->post('email',TRUE),
+                        'gender' => $this->input->post('gender',TRUE),
+                        'birth_date' => $this->input->post('birth_date',TRUE),
+                        'username' => $this->input->post('username',TRUE),
+                        'password' => $this->input->post('password',TRUE),
                         'code' => $hash = sha1($this->input->post('stores_id')),
                         'stores_id' => $this->input->post('stores_id',TRUE),
 
-				    );
+                    );
 
-		             $data2 = array(
-		             	'stores_id' => $this->input->post('stores_id',TRUE),
-						'stores_name' => $this->input->post('stores_name',TRUE),
-						'description' => $this->input->post('description',TRUE),
-						'address' => $this->input->post('address',TRUE),
-						'open' => $this->input->post('open',TRUE),
-						'contact' => $this->input->post('contact',TRUE),
-						'opening_at' => $this->input->post('opening_at',TRUE),
-						'closing_at' => $this->input->post('closing_at',TRUE),
-						'lat' => $this->input->post('lat',TRUE),
-						'lang' => $this->input->post('lang',TRUE),
-					);
+                     $data2 = array(
+                        'stores_id' => $this->input->post('stores_id',TRUE),
+                        'stores_name' => $this->input->post('stores_name',TRUE),
+                        'description' => $this->input->post('description',TRUE),
+                        'address' => $this->input->post('address',TRUE),
+                        'open' => $this->input->post('open',TRUE),
+                        'contact' => $this->input->post('contact',TRUE),
+                        'opening_at' => $this->input->post('opening_at',TRUE),
+                        'closing_at' => $this->input->post('closing_at',TRUE),
+                        'lat' => $this->input->post('lat',TRUE),
+                        'lang' => $this->input->post('lang',TRUE),
+                    );
 
-		            $this->Store_pictures_model->insert($gambar);
-					$this->Stores_model->insert($data2);
-					$this->Owners_model->insert($data);
-					$this->sendMail();
-		            $this->session->set_flashdata('message', '<div class="alert alert-success">Tambah Data Berhasil.</div>');
-		            redirect(site_url('owners'));
-		        }
-	    	}
+                    $this->Store_pictures_model->insert($gambar);
+                    $this->Stores_model->insert($data2);
+                    $this->Owners_model->insert($data);
+                    $this->sendMail();
+                    $this->session->set_flashdata('message', '<div class="alert alert-success">Tambah Data Berhasil.</div>');
+                    redirect('welcome');
+                }
+            }
         }
-	}
+    }
 
-	 function sendMail() {
+     function sendMail() {
         $ci = get_instance();
         $ci->load->library('email');
         $config['protocol'] = "smtp";
@@ -175,21 +175,21 @@ class Register extends CI_Controller
     }
 
     public function Aktifasi($kode){
-    	$row = $this->Owners_model->get_by_code($kode);
-    	
-    	if ($row) {
-    		$code = $row->code;
-    		$id = $row->owners_id;
-    		if ($code == $kode) {
-    			$Aktifasi = $this->Owners_model->register($id);
+        $row = $this->Owners_model->get_by_code($kode);
+        
+        if ($row) {
+            $code = $row->code;
+            $id = $row->owners_id;
+            if ($code == $kode) {
+                $Aktifasi = $this->Owners_model->register($id);
 
-    			$this->session->set_flashdata('message', '<div class="alert alert-success">Selamat anda sukses mendaftar di rakbuku, silahkan login</div>');
-	        	redirect(site_url('Welcome'));
-    		}else{
-    			$this->session->set_flashdata('message', '<div class="alert alert-danger">Registrasi gagal</div>');
-    			redirect(site_url('Welcome'));
-    		}
-		}
+                $this->session->set_flashdata('message', '<div class="alert alert-success">Selamat anda sukses mendaftar di rakbuku, silahkan login</div>');
+                redirect('Welcome');
+            }else{
+                $this->session->set_flashdata('message', '<div class="alert alert-danger">Registrasi gagal</div>');
+                redirect('Welcome');
+            }
+        }
    
     }
 
@@ -211,28 +211,28 @@ class Register extends CI_Controller
         }
     }
 
-	public function _rules() 
+    public function _rules() 
     {
-	$this->form_validation->set_rules('stores_name', 'store name', 'trim|required|is_unique[stores.stores_name]');
-	$this->form_validation->set_rules('description', 'description', 'trim|required');
-	$this->form_validation->set_rules('address', 'address', 'trim|required');
-	$this->form_validation->set_rules('lat', 'lat', 'trim|required');
-	$this->form_validation->set_rules('lang', 'lang', 'trim|required');
-	$this->form_validation->set_rules('open', 'open', 'trim|required');
-	$this->form_validation->set_rules('contact', 'contact', 'trim|required');
-	
-	$this->form_validation->set_rules('name', 'name', 'trim|required');
-	$this->form_validation->set_rules('email', 'email', 'trim|required|is_unique[owners.email]|callback_reg_email');
-	$this->form_validation->set_rules('gender', 'gender', 'trim|required');
-	$this->form_validation->set_rules('birth_date', 'birth date', 'trim|required');
-	$this->form_validation->set_rules('username', 'username', 'trim|required|is_unique[owners.username]');
-	$this->form_validation->set_rules('password', 'password', 'trim|required|callback_reg_pass');
-	
-	
+    $this->form_validation->set_rules('stores_name', 'store name', 'trim|required|is_unique[stores.stores_name]');
+    $this->form_validation->set_rules('description', 'description', 'trim|required');
+    $this->form_validation->set_rules('address', 'address', 'trim|required');
+    $this->form_validation->set_rules('lat', 'lat', 'trim|required');
+    $this->form_validation->set_rules('lang', 'lang', 'trim|required');
+    $this->form_validation->set_rules('open', 'open', 'trim|required');
+    $this->form_validation->set_rules('contact', 'contact', 'trim|required');
+    
+    $this->form_validation->set_rules('name', 'name', 'trim|required');
+    $this->form_validation->set_rules('email', 'email', 'trim|required|is_unique[owners.email]|callback_reg_email');
+    $this->form_validation->set_rules('gender', 'gender', 'trim|required');
+    $this->form_validation->set_rules('birth_date', 'birth date', 'trim|required');
+    $this->form_validation->set_rules('username', 'username', 'trim|required|is_unique[owners.username]');
+    $this->form_validation->set_rules('password', 'password', 'trim|required|callback_reg_pass');
+    
+    
 
-	$this->form_validation->set_rules('owners_id', 'owners_id', 'trim');
+    $this->form_validation->set_rules('owners_id', 'owners_id', 'trim');
 
-	$this->form_validation->set_rules('stores_id', 'stores_id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_rules('stores_id', 'stores_id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 }

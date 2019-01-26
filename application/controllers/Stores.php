@@ -21,19 +21,19 @@ class Stores extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('stores/update_action'),
-        		'stores_id' => set_value('stores_id', $row->stores_id),
-        		'stores_name' => set_value('stores_name', $row->stores_name),
-        		'description' => set_value('description', $row->description),
-        		'address' => set_value('address', $row->address),
-        		'open' => set_value('open', $row->open),
+                'stores_id' => set_value('stores_id', $row->stores_id),
+                'stores_name' => set_value('stores_name', $row->stores_name),
+                'description' => set_value('description', $row->description),
+                'address' => set_value('address', $row->address),
+                'open' => set_value('open', $row->open),
                 'lat' => set_value('lat', $row->lat),
                 'lang' => set_value('lang', $row->lang),
-        		'contact' => set_value('contact', $row->contact),
-        		'opening_at' => set_value('opening_at', $row->opening_at),
-        		'closing_at' => set_value('closing_at', $row->closing_at),
+                'contact' => set_value('contact', $row->contact),
+                'opening_at' => set_value('opening_at', $row->opening_at),
+                'closing_at' => set_value('closing_at', $row->closing_at),
                 'store_p' => $this->Stores_model->get_gambar(),
                 'error' => $error['error']
-	       );
+           );
             $this->load->view('stores/stores_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
@@ -130,16 +130,16 @@ class Stores extends CI_Controller
             }
 
             $data = array(
-        		'stores_name' => $this->input->post('stores_name',TRUE),
-        		'description' => $this->input->post('description',TRUE),
-        		'address' => $this->input->post('address',TRUE),
-        		'open' => $this->input->post('open',TRUE),
-        		'contact' => $this->input->post('contact',TRUE),
-        		'opening_at' => $this->input->post('opening_at',TRUE),
-        		'closing_at' => $this->input->post('closing_at',TRUE),
+                'stores_name' => $this->input->post('stores_name',TRUE),
+                'description' => $this->input->post('description',TRUE),
+                'address' => $this->input->post('address',TRUE),
+                'open' => $this->input->post('open',TRUE),
+                'contact' => $this->input->post('contact',TRUE),
+                'opening_at' => $this->input->post('opening_at',TRUE),
+                'closing_at' => $this->input->post('closing_at',TRUE),
                 'lat' => $this->input->post('lat',TRUE),
                 'lang' => $this->input->post('lang',TRUE),
-    	    );
+            );
 
             $this->Stores_model->update($this->input->post('stores_id', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
@@ -168,18 +168,18 @@ class Stores extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('stores_name', 'store name', 'trim|required');
-	$this->form_validation->set_rules('description', 'description', 'trim|required');
+    $this->form_validation->set_rules('stores_name', 'store name', 'trim|required');
+    $this->form_validation->set_rules('description', 'description', 'trim|required');
     $this->form_validation->set_rules('lat', 'lat', 'trim|required');
     $this->form_validation->set_rules('lang', 'lang', 'trim|required');
-	$this->form_validation->set_rules('address', 'address', 'trim|required');
-	$this->form_validation->set_rules('open', 'open', 'trim|required');
-	$this->form_validation->set_rules('contact', 'contact', 'trim|required');
-	$this->form_validation->set_rules('opening_at', 'opening at', 'trim|required');
-	$this->form_validation->set_rules('closing_at', 'closing at', 'trim|required');
+    $this->form_validation->set_rules('address', 'address', 'trim|required');
+    $this->form_validation->set_rules('open', 'open', 'trim|required');
+    $this->form_validation->set_rules('contact', 'contact', 'trim|required');
+    $this->form_validation->set_rules('opening_at', 'opening at', 'trim|required');
+    $this->form_validation->set_rules('closing_at', 'closing at', 'trim|required');
 
-	$this->form_validation->set_rules('stores_id', 'stores_id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_rules('stores_id', 'stores_id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

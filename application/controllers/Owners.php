@@ -34,13 +34,13 @@ class Owners extends CI_Controller
         //$rowpicstore = $this->Store_pictures_model->get_by_id($row->stores_id);
         if ($row) {
             $data = array(
-        		'owners_id' => $row->owners_id,
-        		'name' => $row->name,
-        		'email' => $row->email,
-        		'gender' => $row->gender,
-        		'birth_date' => $row->birth_date,
-        		'username' => $row->username,
-        		'is_verify' => $row->is_verify,
+                'owners_id' => $row->owners_id,
+                'name' => $row->name,
+                'email' => $row->email,
+                'gender' => $row->gender,
+                'birth_date' => $row->birth_date,
+                'username' => $row->username,
+                'is_verify' => $row->is_verify,
                 'stores_name' => $rowstore->stores_name,
                 'description' => $rowstore->description,
                 'address' => $rowstore->address,
@@ -49,7 +49,7 @@ class Owners extends CI_Controller
                 'opening_at' => $rowstore->opening_at,
                 'closing_at' => $rowstore->closing_at,
                 'store_p' => $this->Stores_model->get_gambardb($row->stores_id),
-    	    );
+            );
             $this->load->view('owners/owners_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
@@ -66,16 +66,16 @@ class Owners extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('owners/create_action'),
-	    'owners_id' => set_value('owners_id'),
-	    'name' => set_value('name'),
-	    'email' => set_value('email'),
-	    'gender' => set_value('gender'),
-	    'birth_date' => set_value('birth_date'),
-	    'username' => set_value('username'),
-	    'password' => set_value('password'),
-	    'is_verify' => set_value('is_verify'),
-	    'stores_id' => set_value('stores_id'),
-	);
+        'owners_id' => set_value('owners_id'),
+        'name' => set_value('name'),
+        'email' => set_value('email'),
+        'gender' => set_value('gender'),
+        'birth_date' => set_value('birth_date'),
+        'username' => set_value('username'),
+        'password' => set_value('password'),
+        'is_verify' => set_value('is_verify'),
+        'stores_id' => set_value('stores_id'),
+    );
         $this->load->view('owners/owners_form', $data);
     }
     
@@ -90,15 +90,15 @@ class Owners extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'name' => $this->input->post('name',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'gender' => $this->input->post('gender',TRUE),
-		'birth_date' => $this->input->post('birth_date',TRUE),
-		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
-		'is_verify' => $this->input->post('is_verify',TRUE),
-		'stores_id' => $this->input->post('stores_id',TRUE),
-	    );
+        'name' => $this->input->post('name',TRUE),
+        'email' => $this->input->post('email',TRUE),
+        'gender' => $this->input->post('gender',TRUE),
+        'birth_date' => $this->input->post('birth_date',TRUE),
+        'username' => $this->input->post('username',TRUE),
+        'password' => $this->input->post('password',TRUE),
+        'is_verify' => $this->input->post('is_verify',TRUE),
+        'stores_id' => $this->input->post('stores_id',TRUE),
+        );
 
             $this->Owners_model->insert($data);
             $this->session->set_flashdata('message', '<div class="alert alert-success">Tambah Data Berhasil.</div>');
@@ -118,16 +118,16 @@ class Owners extends CI_Controller
                 $data = array(
                     'button' => 'Update',
                     'action' => site_url('owners/update_action'),
-    		'owners_id' => set_value('owners_id', $row->owners_id),
-    		'name' => set_value('name', $row->name),
-    		'email' => set_value('email', $row->email),
-    		'gender' => set_value('gender', $row->gender),
-    		'birth_date' => set_value('birth_date', $row->birth_date),
-    		'username' => set_value('username', $row->username),
-    		'password' => set_value('password', $row->password),
-    		'is_verify' => set_value('is_verify', $row->is_verify),
-    		'stores_id' => set_value('stores_id', $row->stores_id),
-    	    );
+            'owners_id' => set_value('owners_id', $row->owners_id),
+            'name' => set_value('name', $row->name),
+            'email' => set_value('email', $row->email),
+            'gender' => set_value('gender', $row->gender),
+            'birth_date' => set_value('birth_date', $row->birth_date),
+            'username' => set_value('username', $row->username),
+            'password' => set_value('password', $row->password),
+            'is_verify' => set_value('is_verify', $row->is_verify),
+            'stores_id' => set_value('stores_id', $row->stores_id),
+            );
                 $this->load->view('owners/owners_form', $data);
             } else {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
@@ -311,12 +311,12 @@ class Owners extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('name', 'name', 'trim|required');
-	$this->form_validation->set_rules('gender', 'gender', 'trim|required');
-	$this->form_validation->set_rules('birth_date', 'birth date', 'trim|required');
-	
-	$this->form_validation->set_rules('owners_id', 'owners_id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_rules('name', 'name', 'trim|required');
+    $this->form_validation->set_rules('gender', 'gender', 'trim|required');
+    $this->form_validation->set_rules('birth_date', 'birth date', 'trim|required');
+    
+    $this->form_validation->set_rules('owners_id', 'owners_id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

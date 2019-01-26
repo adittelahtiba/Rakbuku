@@ -28,13 +28,13 @@ class Booklist extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('stores_id', 'stores id', 'trim|required');
-	$this->form_validation->set_rules('books_id', 'books id', 'trim|required');
-	$this->form_validation->set_rules('book_stock', 'book stock', 'trim|required');
-	$this->form_validation->set_rules('price', 'price', 'trim|required');
+    $this->form_validation->set_rules('stores_id', 'stores id', 'trim|required');
+    $this->form_validation->set_rules('books_id', 'books id', 'trim|required');
+    $this->form_validation->set_rules('book_stock', 'book stock', 'trim|required');
+    $this->form_validation->set_rules('price', 'price', 'trim|required');
 
-	$this->form_validation->set_rules('booklist_id', 'booklist_id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_rules('booklist_id', 'booklist_id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

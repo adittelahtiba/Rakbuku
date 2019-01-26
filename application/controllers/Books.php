@@ -77,16 +77,16 @@ class Books extends CI_Controller
         'books_id' => $this->Books_model->get_kode(),
         'categories' => $this->Books_model->get_categories(),
         'title' => set_value('title'),
-	    'Release_date' => set_value('Release_date'),
-	    'categories_id' => set_value('categories_id'),
-	    'authors' => set_value('authors'),
+        'Release_date' => set_value('Release_date'),
+        'categories_id' => set_value('categories_id'),
+        'authors' => set_value('authors'),
         'ISBN' => set_value('ISBN'),
-	    'publishers' => set_value('publishers'),
+        'publishers' => set_value('publishers'),
         'cover' => set_value('cover'),
         'price' => set_value('price'),
         'book_stock' => set_value('book_stock'),
         'error' => $error['error']
-	);
+    );
         $this->load->view('books/books_form', $data);
     }
     
@@ -165,18 +165,18 @@ class Books extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('books/update_action'),
-		'books_id' => set_value('books_id', $row->books_id),
-		'title' => set_value('title', $row->title),
-		'Release_date' => set_value('Release_date', $row->Release_date),
-		'authors' => set_value('authors', $row->authors),
+        'books_id' => set_value('books_id', $row->books_id),
+        'title' => set_value('title', $row->title),
+        'Release_date' => set_value('Release_date', $row->Release_date),
+        'authors' => set_value('authors', $row->authors),
         'cover' => set_value('cover', $row->cover),
         'categories' => $this->Books_model->get_categories(),
-		'publishers' => set_value('publishers', $row->publishers),
+        'publishers' => set_value('publishers', $row->publishers),
         'ISBN' => set_value('ISBN', $row->ISBN),
         'price' => set_value('price', $row2->price),
         'book_stock' => set_value('book_stock', $row2->book_stock),
         'error' => $error['error'],
-	    );
+        );
             $this->load->view('books/books_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert media fade in alert-warning"><button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>Data tidak ditemukan.<br></div>');
@@ -209,10 +209,10 @@ class Books extends CI_Controller
             $post = $this->input->post();
 
             $data = array(
-        		'title' => $this->input->post('title',TRUE),
-        		'Release_date' => $this->input->post('Release_date',TRUE),
-        		'authors' => $this->input->post('authors',TRUE),
-        		'publishers' => $this->input->post('publishers',TRUE),
+                'title' => $this->input->post('title',TRUE),
+                'Release_date' => $this->input->post('Release_date',TRUE),
+                'authors' => $this->input->post('authors',TRUE),
+                'publishers' => $this->input->post('publishers',TRUE),
             );
 
             
@@ -404,13 +404,13 @@ class Books extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('title', 'title', 'trim|required');
-	$this->form_validation->set_rules('Release_date', 'release date', 'trim|required');
-	$this->form_validation->set_rules('authors', 'authors', 'trim|required');
-	$this->form_validation->set_rules('publishers', 'publishers', 'trim|required');
+    $this->form_validation->set_rules('title', 'title', 'trim|required');
+    $this->form_validation->set_rules('Release_date', 'release date', 'trim|required');
+    $this->form_validation->set_rules('authors', 'authors', 'trim|required');
+    $this->form_validation->set_rules('publishers', 'publishers', 'trim|required');
 
-	$this->form_validation->set_rules('books_id', 'books_id', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_rules('books_id', 'books_id', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

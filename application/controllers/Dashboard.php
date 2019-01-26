@@ -1,8 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Dashboard extends CI_Controller {
- 	
- 	function __construct()
+    
+    function __construct()
     {
         parent::__construct();
         $this->load->model('Books_model');
@@ -14,6 +14,6 @@ class Dashboard extends CI_Controller {
         $data = array(
             'books_data' => $this->Books_model->get_all()
         );
-        $this->load->view('owners/Dashboard', $data);
+        $this->load->view('owners/dashboard', $data);
     }
 }

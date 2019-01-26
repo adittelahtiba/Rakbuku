@@ -46,20 +46,20 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                        		<th>Title</th>
-                                        		<th>Release Date</th>
-                                        		<th>Publishers</th>
-                                        		<th>Action</th>
+                                            <th>Title</th>
+                                            <th>Release Date</th>
+                                            <th>Publishers</th>
+                                            <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $no=1; foreach ($books_data as $books){ ?>
                                                 <tr>
-                                        			<td width="80px"><?php echo $no++ ?></td>
-                                        			<td><?php echo $books->title ?></td>
-                                        			<td><?php echo $books->Release_date ?></td>
-                                        			<td><?php echo $books->publishers ?></td>
-                                        			<td style="text-align:center">
+                                              <td width="80px"><?php echo $no++ ?></td>
+                                              <td><?php echo $books->title ?></td>
+                                              <td><?php echo $books->Release_date ?></td>
+                                              <td><?php echo $books->publishers ?></td>
+                                              <td style="text-align:center">
 
                                                         <?php
                                                         echo anchor(site_url('books/read/'.$books->books_id),'Read'); 
@@ -70,8 +70,8 @@
                                                                 echo ' | '; ?>
                                                             <a href="#full-colored" data-toggle="modal">Delete</a> |
                                                             <a href="#full-share" data-toggle="modal">Share</a>
-                                        				<?php } ?>
-                                        			</td>
+                                                <?php } ?>
+                                              </td>
                                                </tr>
                                             <?php } ?>
                                         </tbody>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="m-t-40"></p>
-                    <div class="fb-share-button" data-href="https://www.youtube.com/watch?v=ac3HkriqdGQ" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
+                    <div class="fb-share-button" data-href="<?php echo site_url('welcome/bookdetail/'.$books->books_id) ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>

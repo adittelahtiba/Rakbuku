@@ -73,6 +73,13 @@ class Categories_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+
+    function get_by_books_id($id)
+    {
+        $this->db->join('books', 'categories.books_id=books.books_id');
+        $this->db->where('books.books_id', $id);
+        return $this->db->get($this->table)->row();
+    }
     
     // get total rows
     function total_rows($q = NULL) {

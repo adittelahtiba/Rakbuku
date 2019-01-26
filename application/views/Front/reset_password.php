@@ -10,6 +10,15 @@
         <link href="<?php echo base_url('')?>assets/bootstrap/css/style.css" rel="stylesheet">
         <link href="<?php echo base_url('')?>assets/bootstrap/css/ui.css" rel="stylesheet">
         <link href="<?php echo base_url('')?>assets/bootstrap/plugins/bootstrap-loading/lada.min.css" rel="stylesheet">
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133230430-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-133230430-1');
+        </script>
     </head>
     <body class="account" data-page="login">
         <!-- BEGIN LOGIN BOX -->
@@ -19,9 +28,9 @@
                     <div class="account-wall">
                         <i class="user-img icons-faces-users-03"></i>
                         <form action="<?php echo $action; ?>" method="post" class="form-password" role="form" style="display: block;">
-                        	<div style="margin: 8px" id="message">
-						        <?php echo $this->session->userdata('message'); ?>
-						    </div>
+                            <div style="margin: 8px" id="message">
+                                <?php echo $this->session->userdata('message'); ?>
+                            </div>
                             <div class="append-icon m-b-20">
                                 <input type="text" class="form-control form-white email" name="email" id="email" placeholder="Masukan Email Anda Saat Mendaftar" value="<?php echo $email; ?>" />
                                 <i class="icon-lock"></i>
@@ -29,7 +38,7 @@
                             <?php echo form_error('email') ?>
                             <button type="submit" class="btn btn-lg btn-danger btn-block ladda-button" data-style="expand-left">Send Password Reset Link</button>
                             <div class="clearfix">
-                            	
+                                
                                 <p class="pull-left m-t-20"><?php echo anchor(site_url('Welcome'),'Kembali'); ?></p>
                                 <p class="pull-right m-t-20"><?php echo anchor(site_url('Register'),'Belum Punya Akun? Daftar disini'); ?></p>
                             </div>
@@ -50,4 +59,4 @@
         <script src="<?php echo base_url('')?>assets/bootstrap/js/pages/login-v1.js"></script>
     </body>
 </html>
-	
+    

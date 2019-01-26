@@ -31,10 +31,10 @@ class Adverts extends CI_Controller
         $row = $this->Adverts_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'adverts_id' => $row->adverts_id,
-		'adverts_name' => $row->adverts_name,
-		'stores_id' => $row->stores_id,
-	    );
+        'adverts_id' => $row->adverts_id,
+        'adverts_name' => $row->adverts_name,
+        'stores_id' => $row->stores_id,
+        );
             $this->load->view('adverts/adverts_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
@@ -48,10 +48,10 @@ class Adverts extends CI_Controller
             'button' => 'Create',
             'get_store' => $this->Adverts_model->get_store(),
             'action' => site_url('adverts/create_action'),
-    	    'date_of_order' => set_value('date_of_order'),
+            'date_of_order' => set_value('date_of_order'),
             'date_of_com' => set_value('date_of_com'),
             'img' => set_value('img'),
-    	    'stores_id' => set_value('stores_id'),
+            'stores_id' => set_value('stores_id'),
             'error' => $error['error']
         );
         $this->load->view('adverts/adverts_form', $data);
@@ -102,13 +102,13 @@ class Adverts extends CI_Controller
                 'get_store' => $this->Adverts_model->get_store(),
                 'button' => 'Update',
                 'action' => site_url('adverts/update_action'),
-        		'adverts_id' => set_value('adverts_id', $row->adverts_id),
-        		'stores_id' => set_value('stores_id', $row->stores_id),
+                'adverts_id' => set_value('adverts_id', $row->adverts_id),
+                'stores_id' => set_value('stores_id', $row->stores_id),
                 'date_of_order' => set_value('date_of_order', $row->date_of_order),
                 'date_of_com' => set_value('date_of_com', $row->date_of_com),
                 'img' => set_value('img', $row->img),
                 'error' => $error['error']
-	       );
+           );
             $this->load->view('adverts/adverts_form', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
@@ -136,11 +136,11 @@ class Adverts extends CI_Controller
 
             $data = array(
                 'adverts_id' => $this->input->post('adverts_id',TRUE),
-		          'date_of_order' => $this->input->post('date_of_order',TRUE),
+                  'date_of_order' => $this->input->post('date_of_order',TRUE),
                 'date_of_com' => $this->input->post('date_of_com',TRUE),
                 'img' => $fileData['file_name'],
                 'stores_id' => $this->input->post('stores_id',TRUE),
-	       );
+           );
 
             $this->Adverts_model->update($this->input->post('adverts_id', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
@@ -164,10 +164,10 @@ class Adverts extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('date_of_com', 'stores id', 'trim|required');
+    $this->form_validation->set_rules('date_of_com', 'stores id', 'trim|required');
     $this->form_validation->set_rules('date_of_order', 'adverts name', 'trim|required');
     $this->form_validation->set_rules('stores_id', 'stores id', 'trim|required');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

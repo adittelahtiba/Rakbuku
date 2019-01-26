@@ -7,30 +7,30 @@
 
 $config['query_string_segment'] = 'start';
 
-$config['full_tag_open'] = '<nav><ul class="pagination" style="margin-top:0px">';
-$config['full_tag_close'] = '</ul></nav>';
+$config['full_tag_open'] = '<div class="pagination flex-m flex-w p-t-26">';
+$config['full_tag_close'] = '</div>';
 
-$config['first_link'] = 'First';
-$config['first_tag_open'] = '<li>';
-$config['first_tag_close'] = '</li>';
+$config['first_link'] = '<div class="first" style="margin-left:10px; margin-right:10px;">First';
+$config['first_tag_open'] = '<a>';
+$config['first_tag_close'] = '</a></div>';
 
-$config['last_link'] = 'Last';
-$config['last_tag_open'] = '<li>';
-$config['last_tag_close'] = '</li>';
+$config['last_link'] = '<div class="last" style="margin-left:10px; margin-right:10px;">Last';
+$config['last_tag_open'] = '<a>';
+$config['last_tag_close'] = '</a></div>';
 
-$config['next_link'] = 'Next';
-$config['next_tag_open'] = '<li>';
-$config['next_tag_close'] = '</li>';
+$config['next_link'] = '<div class="next" style="margin-left:10px; margin-right:10px;">Next';
+$config['next_tag_open'] = '<a>';
+$config['next_tag_close'] = '</a></div>';
 
-$config['prev_link'] = 'Prev';
-$config['prev_tag_open'] = '<li>';
-$config['prev_tag_close'] = '</li>';
+$config['prev_link'] = '<div class="prev" style="margin-left:10px; margin-right:10px;">Prev';
+$config['prev_tag_open'] = '<a>';
+$config['prev_tag_close'] = '</a></div>';
 
-$config['cur_tag_open'] = '<li class="active"><a>';
-$config['cur_tag_close'] = '</a></li>';
+$config['cur_tag_open'] = '<a style="color:#fff;" class="item-pagination flex-c-m trans-0-4 active-pagination">';
+$config['cur_tag_close'] = '</a>';
 
-$config['num_tag_open'] = '<li>';
-$config['num_tag_close'] = '</li>';
+$config['num_tag_open'] = '<a style="color:#fff;" item-pagination flex-c-m trans-0-4>';
+$config['num_tag_close'] = '</a>';
 
 
 /* End of file pagination.php */
