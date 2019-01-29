@@ -11,8 +11,6 @@ class Adverts extends CI_Controller
         if (!$this->session->userdata('logged')) {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Anda Belum Login, Silahkan Login Terlebih Dahulu.</div>');
             redirect(site_url('Welcome'));
-        }elseif(!$this->session->userdata('is_admin')) {
-            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
         }
         $this->load->model('Adverts_model');
         $this->load->library('form_validation');
@@ -20,9 +18,16 @@ class Adverts extends CI_Controller
 
     public function index()
     {
-        $data = array(
-            'adverts_data' => $this->Adverts_model->get_all()
-        );
+        if ($this->session->userdata('is_admin') == TRUE) {
+            $data = array(
+                'adverts_data' => $this->Adverts_model->get_all()
+            );
+        }else{
+            $data = array(
+                'adverts_data' => $this->Adverts_model->get_by_owners(null)
+            );
+        }
+        
         $this->load->view('adverts/adverts_list', $data);
     }
 
@@ -31,10 +36,13 @@ class Adverts extends CI_Controller
         $row = $this->Adverts_model->get_by_id($id);
         if ($row) {
             $data = array(
-        'adverts_id' => $row->adverts_id,
-        'adverts_name' => $row->adverts_name,
-        'stores_id' => $row->stores_id,
-        );
+                'adverts_id' => $row->adverts_id,
+                'stores_id' => $row->stores_id,
+                'date_of_order' => $row->date_of_order,
+                'date_of_com' => $row->date_of_com,
+                'stores_name' => $row->stores_name,
+                'img' => $row->img,
+            );
             $this->load->view('adverts/adverts_read', $data);
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
@@ -44,6 +52,9 @@ class Adverts extends CI_Controller
 
     public function create($error=null) 
     {
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $data = array(
             'button' => 'Create',
             'get_store' => $this->Adverts_model->get_store(),
@@ -59,6 +70,9 @@ class Adverts extends CI_Controller
     
     public function create_action() 
     {
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -95,6 +109,9 @@ class Adverts extends CI_Controller
     
     public function update($id, $error=null) 
     {
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $row = $this->Adverts_model->get_by_id($id);
 
         if ($row) {
@@ -118,6 +135,9 @@ class Adverts extends CI_Controller
     
     public function update_action() 
     {
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -150,6 +170,9 @@ class Adverts extends CI_Controller
     
     public function delete($id) 
     {
+        if(!$this->session->userdata('is_admin')) {
+            echo "<script>window.location.href='javascript:history.back(-2);'</script>";
+        }
         $row = $this->Adverts_model->get_by_id($id);
 
         if ($row) {

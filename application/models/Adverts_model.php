@@ -29,6 +29,26 @@ class Adverts_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+     function count_by_owners()
+    {
+        $this->db->join('stores', 'adverts.stores_id=stores.stores_id');
+        $this->db->join('owners', 'owners.stores_id=stores.stores_id');
+        $this->db->where('owners.owners_id', $this->session->userdata('id'));
+        $this->db->where('adverts.is_active', '1');
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
+    function get_by_owners($limit)
+    {
+        $this->db->join('stores', 'adverts.stores_id=stores.stores_id');
+        $this->db->join('owners', 'owners.stores_id=stores.stores_id');
+        $this->db->where('owners.owners_id', $this->session->userdata('id'));
+        $this->db->where('adverts.is_active', '1');
+        $this->db->limit($limit, 0);
+        return $this->db->get($this->table)->result();
+    }
+
     function get_is_datecom_all()
     {
         $this->db->order_by($this->id, $this->order);
@@ -66,6 +86,8 @@ class Adverts_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
+        $this->db->join('stores', 'adverts.stores_id=stores.stores_id');
+        $this->db->join('owners', 'owners.stores_id=stores.stores_id');
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
@@ -73,7 +95,6 @@ class Adverts_model extends CI_Model
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('adverts_id', $q);
-	$this->db->or_like('adverts_name', $q);
 	$this->db->or_like('stores_id', $q);
 	$this->db->or_like('date_of_order', $q);
 	$this->db->or_like('date_of_com', $q);

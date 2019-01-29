@@ -86,6 +86,27 @@ class Books_model extends CI_Model
         return $this->db->get('booklist')->result();
     }
 
+    function get_by_owners_limit()
+    {
+        $this->db->order_by('books.books_id', $this->order);
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id');
+        $this->db->join('books', 'booklist.books_id=books.books_id');
+        $this->db->join('owners', 'owners.stores_id=stores.stores_id');
+        $this->db->where('owners.owners_id', $this->session->userdata('id'));
+        $this->db->limit(3, 0);
+        return $this->db->get('booklist')->result();
+    }
+
+    function get_total_by_owners_limit()
+    {
+        $this->db->join('booklist', 'booklist.books_id=books.books_id');
+        $this->db->join('stores', 'booklist.stores_id=stores.stores_id');
+        $this->db->join('owners', 'owners.stores_id=stores.stores_id');
+        $this->db->where('owners.owners_id', $this->session->userdata('id'));
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
+
     // get data by id
     function get_by_id($id)
     {
@@ -98,8 +119,6 @@ class Books_model extends CI_Model
         $this->db->like('books_id', $q);
 	$this->db->or_like('title', $q);
 	$this->db->or_like('Release_date', $q);
-	$this->db->or_like('categories_id', $q);
-	$this->db->or_like('authors', $q);
 	$this->db->or_like('publishers', $q);
 	$this->db->from($this->table);
         return $this->db->count_all_results();

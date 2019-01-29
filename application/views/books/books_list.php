@@ -69,7 +69,7 @@
                                                                 echo anchor(site_url('books/update/'.$books->books_id),'Update'); 
                                                                 echo ' | '; ?>
                                                             <a href="#full-colored" data-toggle="modal">Delete</a> |
-                                                            <a href="#full-share" data-toggle="modal">Share</a>
+                                                            <a href="#colored-header" data-toggle="modal">Share</a>
                                                 <?php } ?>
                                               </td>
                                                </tr>
@@ -131,23 +131,26 @@
               </form>
             </div>
           </div>
-
-          <div class="modal fade" id="full-share" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal fade" id="colored-header" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-              <div class="modal-content bg-primary">
-                <div class="modal-header">
+              <div class="modal-content">
+                <div class="modal-header bg-primary">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                  <h4 class="modal-title">Share <strong>Buku</strong></h4>
+                  <h4 class="modal-title">Bagikan <strong>Buku</strong></h4>
                 </div>
                 <div class="modal-body">
-                    <p class="m-t-40"></p>
-                    <div class="fb-share-button" data-href="<?php echo site_url('welcome/bookdetail/'.$books->books_id) ?>" data-layout="button" data-size="large" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Bagikan</a></div>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <h3><strong>Membagikan Buku?</strong></h3><p>klik tombol dibawah ini untuk membagikan buku anda:</p> 
+                        <a target="_blank" href="https://twitter.com/intent/tweet?hashtags=Rakbuku&amp;original_referer=https%3A%2F%2Fdeveloper.twitter.com%2Fen%2Fdocs%2Ftwitter-for-websites%2Ftweet-button%2Foverview.html&amp;ref_src=twsrc%5Etfw&amp;related=twitterapi%2Ctwitter&amp;text=Hi Semua! Silahkan kunjungi toko kami&amp;tw_p=tweetbutton&amp;url=<?php echo site_url('welcome/bookdetail/'.$books->books_id) ?>;" type="button" class="btn btn btn-blue"><i class="fa fa-twitter"></i></a>
+
+                        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo site_url('welcome/bookdetail/'.$books->books_id) ?>&amp;src=sdkpreparse" data-href="<?php echo site_url('welcome/bookdetail/'.$books->books_id) ?>" class="btn btn btn-primary"><i class="fa fa-facebook"></i></a>
+                      </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                    <?php 
-                        //echo anchor(site_url('books/upload/'),'Import',' class="btn btn-dark" '); 
-                    ?>
+                  <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Save changes</button>
                 </div>
               </div>
             </div>

@@ -14,11 +14,21 @@ class Admins extends CI_Controller
         }
 
         $this->load->model('Admins_model');
+        $this->load->model('Owners_model');
+        $this->load->model('Books_model');
+        $this->load->model('Adverts_model');
         $this->load->library('form_validation');
     }
 
     public function dashboard() {
-        $this->load->view('admins/dashboard');
+        $data = array(
+            'admins_data' => $this->Admins_model->total_rows(),
+            'owners_data' => $this->Owners_model->total_rows(),
+            'books_data' => $this->Books_model->total_rows(),
+            'adverts_data' => $this->Adverts_model->total_rows(),
+
+        );
+        $this->load->view('admins/dashboard', $data);
     }
 
     public function index()

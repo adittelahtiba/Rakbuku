@@ -17,12 +17,10 @@
 
               <?php if ($this->session->userdata('role')==1) { ?>
               
-                <li class="tm nav-active <?php echo $this->uri->segment(1)==='admins' ?  'active' : '' ; ?>"><a href="<?php echo site_url('admins')?>"><i class="icon icons-faces-users-01"></i><span>Admin</span></a></li>
+                <li class="tm nav-active <?php echo $this->uri->segment(1)==='Admins' ?  'active' : '' ; ?>"><a href="<?php echo site_url('Admins')?>"><i class="icon icons-faces-users-01"></i><span>Admin</span></a></li>
               
               <?php } ?>
               <li class="tm nav-active <?php echo $this->uri->segment(1)==='owners' ? 'active' : '' ; ?>"><a href="<?php echo site_url('owners')?>"><i class="icon icons-faces-users-04"></i><span>Owners</span></a></li>
-
-              <li class="tm nav-active <?php echo $this->uri->segment(1)==='adverts' ? 'active' : '' ; ?>"><a href="<?php echo site_url('adverts')?>"><i class="icon-picture"></i><span>Adverts</span></a></li>
             <?php } ?>
             
             <?php if ($this->session->userdata('is_admin')==FALSE) {?>    
@@ -30,6 +28,8 @@
             <?php } ?>
 
             <li class="tm nav-active <?php echo $this->uri->segment(1)==='books' ? 'active' : '' ; ?>"><a href="<?php echo site_url('books')?>"><i class="glyphicon glyphicon-book"></i><span>Books</span></a></li>
+
+            <li class="tm nav-active <?php echo $this->uri->segment(1)==='adverts' ? 'active' : '' ; ?>"><a href="<?php echo site_url('adverts')?>"><i class="icon-picture"></i><span>Adverts</span></a></li>
 
            <!--  <li class="tm nav-parent">
               <a href="#"><i class="icon-puzzle"></i><span>Menu 2</span> <span class="fa arrow"></span></a>

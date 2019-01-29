@@ -25,7 +25,12 @@
                             <div class="panel">
                                 <div class="panel-header panel-controls">
                                     <br>
-                                    <?php echo anchor(site_url('adverts/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
+
+                                    <?php
+                                        if ($this->session->userdata('is_admin') == TRUE) {
+                                            echo anchor(site_url('adverts/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); 
+                                        }
+                                    ?>
                                     <div style="margin-top: 8px" id="message">
                                         <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                                     </div>
@@ -51,12 +56,11 @@
                                         			<td style="text-align:center" width="200px">
                                         				<?php 
                                                         echo anchor(site_url('adverts/read/'.$adverts->adverts_id),'Read'); 
+                                                        if ($this->session->userdata('is_admin') == TRUE) {
                                                         echo ' | '; 
                                                             echo anchor(site_url('adverts/update/'.$adverts->adverts_id),'Update'); 
                                                             echo ' | ';     
                                                             echo anchor(site_url('adverts/delete/'.$adverts->adverts_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-                                                        if ($this->session->userdata('is_admin')==FALSE) {
-
                                                         }
                                         				?>
                                         			</td>

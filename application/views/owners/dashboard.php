@@ -19,47 +19,68 @@
                             </ol>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-md-12 portlets">
-                            <div class="panel">
-                                <div class="panel-header panel-controls">
-                                    <br>
-                                    <?php echo anchor(site_url('books/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
-                                    <div style="margin-top: 8px" id="message">
-                                        <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                                    </div>
-                                </div>
-                                <div class="panel-content">
-                                    <table class="table table-hover table-dynamic filter-head">
-                                        <thead>
-                                            <tr>
-                                                <th width="80px">No</th>
-                                                <th>Username</th>
-                                                <th>Name</th>
-                                                <th>Role</th>
-                                                <th width="200px">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php $no=1; foreach ($books_data as $books){ ?>
-                                                <tr>
-                                                    <td class="center"><?php echo $no++ ?></td>
-                                                    <td><?php echo $books->username ?></td>
-                                                    <td><?php echo $books->name ?></td>
-                                                    <td><?php echo $books->role=='0' ? 'super admin' : 'admin' ?></td>
-                                                    <td>
-                                                        <div class="hidden-sm hidden-xs action-buttons">
-                                                            <button href="#full-colored" data-toggle="modal" type="button" class="btn btn-sm btn-icon btn-rounded btn-danger"><i class="ace-icon fa fa-trash-o bigger-130"></i></button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div style="margin-top: 8px" id="message">
+                            <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                         </div>
-                    </div> -->
+                        <div class="col-md-4">
+                          <div class="panel">
+                            <div class="panel-header bg-blue">
+                              <h3>Pasang <strong>Iklan</strong></h3>
+                            </div>
+                            <div class="panel-content">
+                              <p>Ingin memasang iklan di halaman depan rakbuku? berikut tatacara untuk memasang iklan:</p>
+                              <p>1. siapkan gambar banner iklan anda dengan panjang dan lebar</p>
+                              <p>2. kirim gambar tersebut ke alamat email wisatabandungdotcom@gmail.com</p>
+                              <p>dengan subjek "pasang iklan" untuk isi dari email masukan ID toko buku,</p>
+                              <p>username anda dan berapa lama iklan anda akan di pasang</p>
+                              <p>3. Tunggu konfirmasi dari admin rakbuku ke email anda untuk keterangan lebih lanjut</p>
+                              <div class="p-t-20 m-b-20 p-l-40">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xlg-12 col-lg-4 col-sm-4">
+                          <div class="panel">
+                            <a href="<?php echo site_url('books')?>">
+                            <div class="panel-content widget-small bg-green">
+                              <div class="title">
+                                <h1>Jumlah Buku <?php echo $books_data_total; ?></h1>
+                              </div>
+                              <div class="content">
+                                <div class="col-xlg-6">
+                                    <?php foreach ($books_data as $key => $value) { ?>
+                                        <p><i class="glyphicon glyphicon-bookmark"></i> <?php echo $value->title; ?></p>
+                                    <?php } ?>  
+                               </div>
+                              </div>
+                            </div>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-xlg-12 col-lg-4 col-sm-4">
+                          <div class="panel">
+                            <a href="<?php echo site_url('adverts')?>">
+                            <div class="panel-content widget-small bg-green">
+                              <div class="title">
+                                <h1>Jumlah Iklan <?php echo $Adverts_data_total; ?></h1>
+                              </div>
+                              <div class="content">
+                                <div class="col-xlg-6">
+                                    <?php
+                                        if ($Adverts_data_total<1) {
+                                            echo "Anda tidak memiliki iklan yang aktif";
+                                        }else{
+                                            foreach ($Adverts_data as $key => $value) { ?>
+                                            <p><i class="glyphicon glyphicon-bookmark"></i>Berakhir pada tanggal: <?php echo $value->date_of_com; ?></p>
+                                    <?php } } ?>  
+                               </div>
+                              </div>
+                            </div>
+                          </div>
+                            </a>
+                        </div>
+                    </div>
                      <!-- END PAGE CONTENT -->
                 </div>
                 <!-- END MAIN CONTENT -->
