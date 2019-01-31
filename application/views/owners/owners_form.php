@@ -11,12 +11,12 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Admin</strong></h2>
+                        <h2><strong>Profile</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">Admin</li>
+                                <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <li class="active">Profile</li>
                             </ol>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                         <div class="col-md-12 portlets">
                             <div class="panel">
                                 <div class="panel-header panel-controls">
-                                    <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                                    <h3><i class="icon-bulb"></i> Form <strong>Profile</strong></h3>
                                 </div>
                                 <div class="panel-content">
                                     <div class="row">
@@ -47,7 +47,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <label for="date">Tanggal Rilis <?php echo form_error('birth_date') ?></label>
+                                                <label for="date">No Telp <?php echo form_error('birth_date') ?></label>
                                                 <input type="text" data-mask="99-99-9999" class="form-control" placeholder="DD-MM-YYYY" name="birth_date" id="birth_date" placeholder="Release Date" value="<?php echo $birth_date; ?>" />
                                             </div>
                                     	    <div class="form-group">
@@ -59,8 +59,8 @@
                                                 <input type="password" class="form-control" name="password" id="password" placeholder="Password" />
                                             </div>
                                     	    <input type="hidden" name="owners_id" value="<?php echo $owners_id; ?>" /> 
-                                    	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
-                                    	    <a href="<?php echo site_url('owners') ?>" class="btn btn-default">Cancel</a>
+                                    	    <button type="submit" class="btn btn-primary"><?php echo 'Ubah' ?></button> 
+                                    	    <a href="<?php echo site_url('owners') ?>" class="btn btn-default">Batal</a>
                                         </form>
 	                               </div>
                                 </div>

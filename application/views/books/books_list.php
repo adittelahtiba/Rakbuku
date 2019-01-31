@@ -19,12 +19,12 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>books</strong></h2>
+                        <h2>Halaman <strong>Buku</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">books</li>
+                                <li><a href="tables.html">Beranda</a></li>
+                                <li class="active">Buku</li>
                             </ol>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                                 <div class="panel-header panel-controls">
                                     <br>
                                     <?php if($this->session->userdata('is_admin') == false) { ?>
-                                    <?php echo anchor(site_url('books/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
+                                    <?php echo anchor(site_url('books/create'),'<i class="fa fa-plus"></i> Tambah', 'class="btn btn-success btn-rounded"'); ?>
                                     <a href="#full-colored2" class="btn btn-success btn-rounded" data-toggle="modal"><i class="fa fa-plus"></i>Import</a>
                                     <?php } ?>
                                     <div style="margin-top: 8px" id="message">
@@ -46,10 +46,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                            <th>Title</th>
-                                            <th>Release Date</th>
-                                            <th>Publishers</th>
-                                            <th>Action</th>
+                                            <th>Judul</th>
+                                            <th>Tanggal Rilis</th>
+                                            <th>Penerbit</th>
+                                            <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,14 +62,14 @@
                                               <td style="text-align:center">
 
                                                         <?php
-                                                        echo anchor(site_url('books/read/'.$books->books_id),'Read'); 
+                                                        echo anchor(site_url('books/read/'.$books->books_id),'Detail'); 
                                                         
                                                             if ($this->session->userdata('is_admin') == false) {
                                                                 echo ' | '; 
-                                                                echo anchor(site_url('books/update/'.$books->books_id),'Update'); 
+                                                                echo anchor(site_url('books/update/'.$books->books_id),'Ubah'); 
                                                                 echo ' | '; ?>
-                                                            <a href="#full-colored" data-toggle="modal">Delete</a> |
-                                                            <a href="#colored-header" data-toggle="modal">Share</a>
+                                                            <a href="#full-colored" data-toggle="modal">Hapus</a> |
+                                                            <a href="#colored-header" data-toggle="modal">Bagikan</a>
                                                 <?php } ?>
                                               </td>
                                                </tr>
@@ -90,17 +90,18 @@
               <div class="modal-content bg-primary">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                  <h4 class="modal-title">Konfirmasi <strong>Hapus Data</strong></h4>
                 </div>
                 <div class="modal-body">
                   <p class="m-t-40">Apakah anda yakin akan menghapus data ini?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                  <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
-                    <?php 
-                        echo anchor(site_url('books/delete/'.$books->books_id),'Delete',' class="btn btn-dark" '); 
+                  <?php 
+                        echo anchor(site_url('books/delete/'.$books->books_id),'Ya',' class="btn btn-dark" '); 
                     ?>
+                  <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
+                    
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Tidak</button>
                 </div>
               </div>
             </div>
@@ -125,7 +126,7 @@
                     <div class="modal-footer">
                         <input type="file" name="filename"/> 
                         <button type="submit" class="btn btn-dark ladda-button"><i class="icon-cloud-upload"></i> Import</button>
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
                     </div>
                   </div>
               </form>
@@ -149,8 +150,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary btn-embossed" data-dismiss="modal">Save changes</button>
+                  <button type="button" class="btn btn-default btn-embossed" data-dismiss="modal">Tutup</button>
                 </div>
               </div>
             </div>

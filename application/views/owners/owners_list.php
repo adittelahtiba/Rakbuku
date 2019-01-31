@@ -11,12 +11,12 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>owners</strong></h2>
+                        <h2>Halaman <strong>Pemilik Toko</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">owners</li>
+                                <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
+                                <li class="active">Pemilik Toko</li>
                             </ol>
                         </div>
                     </div>
@@ -39,8 +39,8 @@
                                                 <th>No</th>
                                         		<th>Username</th>
                                         		<th>Status</th>
-                                        		<th>Stores name</th>
-                                        		<th>Action</th>
+                                        		<th>Nama Toko</th>
+                                        		<th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -52,14 +52,12 @@
                                         			<td><?php echo $owners->stores_name ?></td>
                                         			<td style="text-align:center" width="200px">
                                                         <?php
-                                                            echo anchor(site_url('owners/read/'.$owners->owners_id),'Read'); 
-                                                            if($this->session->userdata('is_admin') == false) {
-                                                                echo ' | '; 
-                                                                echo anchor(site_url('owners/update/'.$owners->owners_id),'Update'); 
-                                                                echo ' | '; 
-                                                                echo anchor(site_url('owners/delete/'.$owners->owners_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-                                                            } 
+                                                            echo anchor(site_url('owners/read/'.$owners->owners_id),'Detail'); 
+                                                            echo ' | '; 
+                                                            // echo anchor(site_url('owners/update/'.$owners->owners_id),'Ubah'); 
+                                                            //     echo ' | '; 
                                                         ?>
+                                                        <a href="#full-colored" data-toggle="modal">Hapus</a>
                                         				
                                         			</td>
                                         		</tr>
@@ -80,18 +78,16 @@
               <div class="modal-content bg-primary">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                  <h4 class="modal-title">Konfirmasi <strong>Hapus Data</strong></h4>
                 </div>
                 <div class="modal-body">
                   <p class="m-t-40">Apakah anda yakin akan menghapus data ini?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                <?php echo anchor(site_url('owners/delete/'.$owners->owners_id),'Hapus',' class="btn btn-dark" ');  ?>
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Tutup</button>
                   <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
-                    <?php 
-                        echo anchor(site_url('owners/delete/'.$owners->owners_id),'Delete',' class="btn btn-dark" '); 
-
-                    ?>
+                    
                 </div>
               </div>
             </div>

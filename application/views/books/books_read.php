@@ -11,12 +11,12 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Input <strong>Masks</strong></h2>
+                        <h2><strong>Detail</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li><a href="#">Make</a></li>
-                                <li><a href="forms.html">Forms</a>
-                                </li><li class="active">Input Masks</li>
+                                <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <li><a href="<?php echo site_url('books') ?>">Buku</a>
+                                </li><li class="active">Detail</li>
                             </ol>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                     <div class="col-lg-12 portlets ui-sortable">
                       <div class="panel">
                         <div class="panel-header panel-controls">
-                          <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                          <h3><i class="icon-bulb"></i> Detail <strong>Buku</strong></h3>
                         </div>
                         
 

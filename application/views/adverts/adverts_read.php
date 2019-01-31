@@ -11,12 +11,16 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Input <strong>Masks</strong></h2>
+                        <h2><strong>Detail</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li><a href="#">Make</a></li>
-                                <li><a href="forms.html">Forms</a>
-                                </li><li class="active">Input Masks</li>
+                                <?php if ($this->session->userdata('is_admin') == TRUE) { ?>
+                                    <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
+                                <?php }else{ ?>
+                                    <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <?php } ?>
+                                <li><a href="<?php echo site_url('adverts') ?>">Iklan</a></li>
+                                <li class="active">Detail</li>
                             </ol>
                         </div>
                     </div>
@@ -24,7 +28,7 @@
                     <div class="col-lg-12 portlets ui-sortable">
                       <div class="panel">
                         <div class="panel-header panel-controls">
-                          <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                          <h3><i class="icon-bulb"></i> Detail <strong>Iklan</strong></h3>
                         </div>
                         
 
@@ -51,7 +55,7 @@
                                         <tr><td>Nama Toko</td><td><?php echo $stores_name; ?></td></tr>
                                 	    <tr><td>Dipasang pada Tanggal</td><td><?php echo $date_of_order; ?></td></tr>
                                 	    <tr><td>Berakhir pada Tanggal </td><td><?php echo $date_of_com; ?></td></tr>
-                                	    <tr><td></td><td><a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Cancel</a></td></tr>
+                                	    <tr><td></td><td><a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Batal</a></td></tr>
                                 	</table>
                                 </div>
                             </div>

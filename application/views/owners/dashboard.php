@@ -11,7 +11,7 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Dashboard <strong>Page</strong></h2>
+                        <h2>Halaman <strong>Dashboard</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
@@ -32,7 +32,7 @@
                               <p>Ingin memasang iklan di halaman depan rakbuku? berikut tatacara untuk memasang iklan:</p>
                               <p>1. siapkan gambar banner iklan anda dengan panjang dan lebar</p>
                               <p>2. kirim gambar tersebut ke alamat email wisatabandungdotcom@gmail.com</p>
-                              <p>dengan subjek "pasang iklan" untuk isi dari email masukan ID toko buku,</p>
+                              <p>dengan subjek "pasang iklan" untuk isi dari email masukan ID toko "<?php echo $this->session->userdata('stores_id'); ?>" buku,</p>
                               <p>username anda dan berapa lama iklan anda akan di pasang</p>
                               <p>3. Tunggu konfirmasi dari admin rakbuku ke email anda untuk keterangan lebih lanjut</p>
                               <div class="p-t-20 m-b-20 p-l-40">

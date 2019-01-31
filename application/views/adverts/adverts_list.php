@@ -11,12 +11,17 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>adverts</strong></h2>
+                        <h2>Halaman <strong>Iklan</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">adverts</li>
+                                <?php if ($this->session->userdata('is_admin') == TRUE) { ?>
+                                    <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
+                                <?php }else{ ?>
+                                    <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <?php } ?>
+                                <li class="active">Iklan</li>
+
                             </ol>
                         </div>
                     </div>
@@ -28,7 +33,7 @@
 
                                     <?php
                                         if ($this->session->userdata('is_admin') == TRUE) {
-                                            echo anchor(site_url('adverts/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); 
+                                            echo anchor(site_url('adverts/create'),'<i class="fa fa-plus"></i> Tambah', 'class="btn btn-success btn-rounded"'); 
                                         }
                                     ?>
                                     <div style="margin-top: 8px" id="message">
@@ -40,10 +45,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                        		<th>Stores Id</th>
+                                        		<th>ID Toko</th>
                                                 <th>Tanggal Mulai</th>
                                                 <th>Tanggal Selesai</th>
-                                        		<th>Action</th>
+                                        		<th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -55,14 +60,16 @@
                                                     <td><?php echo $adverts->date_of_com ?></td>
                                         			<td style="text-align:center" width="200px">
                                         				<?php 
-                                                        echo anchor(site_url('adverts/read/'.$adverts->adverts_id),'Read'); 
+                                                        echo anchor(site_url('adverts/read/'.$adverts->adverts_id),'Detail'); 
                                                         if ($this->session->userdata('is_admin') == TRUE) {
-                                                        echo ' | '; 
-                                                            echo anchor(site_url('adverts/update/'.$adverts->adverts_id),'Update'); 
+                                                            echo ' | '; 
+                                                            echo anchor(site_url('adverts/update/'.$adverts->adverts_id),'Ubah'); 
                                                             echo ' | ';     
-                                                            echo anchor(site_url('adverts/delete/'.$adverts->adverts_id),'Delete','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-                                                        }
-                                        				?>
+                                                        ?>
+                                                            <a href="#full-colored" data-toggle="modal">Hapus</a>
+                                                            
+                                                        <?php } ?>
+                                        				
                                         			</td>
                                         		</tr>
                                             <?php } ?>
@@ -82,18 +89,16 @@
               <div class="modal-content bg-primary">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                  <h4 class="modal-title">Konfirmasi <strong>Hapus Data</strong></h4>
                 </div>
                 <div class="modal-body">
                   <p class="m-t-40">Apakah anda yakin akan menghapus data ini?</p>
                 </div>
                 <div class="modal-footer">
+                    <?php echo anchor(site_url('adverts/delete/'.$adverts->adverts_id),'Hapus',' class="btn btn-dark" '); ?>
                   <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
                   <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
-                    <?php 
-                        echo anchor(site_url('adverts/delete/'.$adverts->adverts_id),'Delete',' class="btn btn-dark" '); 
-
-                    ?>
+                    
                 </div>
               </div>
             </div>

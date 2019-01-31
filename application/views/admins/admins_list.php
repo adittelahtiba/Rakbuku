@@ -11,11 +11,11 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Admin</strong></h2>
+                        <h2>Halaman <strong>Admin</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
+                                <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
                                 <li class="active">Admin</li>
                             </ol>
                         </div>
@@ -25,7 +25,7 @@
                             <div class="panel">
                                 <div class="panel-header panel-controls">
                                     <br>
-                                    <?php echo anchor(site_url('admins/create'),'<i class="fa fa-plus"></i> Create', 'class="btn btn-success btn-rounded"'); ?>
+                                    <?php echo anchor(site_url('admins/create'),'<i class="fa fa-plus"></i> Tambah', 'class="btn btn-success btn-rounded"'); ?>
                                     <div style="margin-top: 8px" id="message">
                                         <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
                                     </div>
@@ -36,9 +36,9 @@
                                             <tr>
                                                 <th width="80px">No</th>
                                                 <th>Username</th>
-                                                <th>Name</th>
+                                                <th>Nama</th>
                                                 <th>Role</th>
-                                                <th width="200px">Action</th>
+                                                <th width="200px">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -50,7 +50,7 @@
                                                     <td><?php echo $admins->role=='0' ? 'admin' : 'super admin' ?></td>
                                                     <td>
                                                         <div class="hidden-sm hidden-xs action-buttons">
-                                                            <button href="#full-colored" data-toggle="modal" type="button" class="btn btn-sm btn-icon btn-rounded btn-danger"><i class="ace-icon fa fa-trash-o bigger-130"></i></button>
+                                                            <a href="#full-colored" data-toggle="modal">Hapus</a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -72,18 +72,16 @@
               <div class="modal-content bg-primary">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icons-office-52"></i></button>
-                  <h4 class="modal-title">Full <strong>Colored</strong></h4>
+                  <h4 class="modal-title">Konfirmasi <strong>Hapus Data</strong></h4>
                 </div>
                 <div class="modal-body">
                   <p class="m-t-40">Apakah anda yakin akan menghapus data ini?</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    <?php echo anchor(site_url('admins/delete/'.$admins->admins_id),'Ya</i>',' class="btn btn-dark" '); ?>
+                  <button type="button" class="btn btn-white" data-dismiss="modal">Tidak</button>
                   <!-- <button type="button" class="btn btn-dark" data-dismiss="modal">Delete</button> -->
-                    <?php 
-                        echo anchor(site_url('admins/delete/'.$admins->admins_id),'Delete</i>',' class="btn btn-dark" ');
-
-                    ?>
+                    
                 </div>
               </div>
             </div>

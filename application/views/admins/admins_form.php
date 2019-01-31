@@ -11,12 +11,13 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Admin</strong></h2>
+                        <h2><strong>Form</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">Admin</li>
+                                <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
+                                <li><a href="<?php echo site_url('Admins') ?>">Admin</a></li>
+                                <li class="active">Form</li>
                             </ol>
                         </div>
                     </div>
@@ -24,7 +25,7 @@
                         <div class="col-md-12 portlets">
                             <div class="panel">
                                 <div class="panel-header panel-controls">
-                                    <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                                    <h3><i class="icon-bulb"></i> Form <strong>Admin</strong></h3>
                                 </div>
                                 <div class="panel-content">
                                     <div class="row">
@@ -40,28 +41,28 @@
                                                 <input type="Password" class="form-control" name="password" id="password" placeholder="Password" />
                                             </div>
                                     	    <div class="form-group">
-                                                <label class="form-label for="varchar">Name <?php echo form_error('name') ?></label>
+                                                <label class="form-label for="varchar">Nama <?php echo form_error('name') ?></label>
                                                 <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="<?php echo $name; ?>" />
                                             </div>
                                     	    <div class="form-group">
-                                                <label class="form-label for="enum">Gender <?php echo form_error('Gender') ?></label>
+                                                <label class="form-label for="enum">Jenis Kelamin <?php echo form_error('Gender') ?></label>
                                                 <select name="Gender" id="Gender" class="form-control form-white" data-style="white">
                                                     <option value=""></option>
-                                                    <option <?= $Gender =='M' ? $selected='selected' : $selected=''?> value="<?= $Gender=='M' ? 'M' : 'M' ?>">Men</option>
-                                                    <option <?= $Gender =='W' ? $selected='selected' : $selected=''?> value="<?= $Gender=='W' ? 'W' : 'W' ?>">Women</option>
+                                                    <option <?= $Gender =='M' ? $selected='selected' : $selected=''?> value="<?= $Gender=='M' ? 'M' : 'M' ?>">Pria</option>
+                                                    <option <?= $Gender =='W' ? $selected='selected' : $selected=''?> value="<?= $Gender=='W' ? 'W' : 'W' ?>">Wanita</option>
                                                 </select>
                                                 <!-- <input type="text" class="form-control" name="Gender" id="Gender" placeholder="Gender" value="<?php echo $Gender; ?>" /> -->
                                             </div>
                                     	    <div class="form-group">
-                                                <label class="form-label for="date">Birth Date <?php echo form_error('birth_date') ?></label>
+                                                <label class="form-label for="date">Tanggal Lahir <?php echo form_error('birth_date') ?></label>
                                                 <input type="text" class="form-control" name="birth_date" id="birth_date"  data-mask="99-99-9999" class="form-control" placeholder="DD-MM-YYYY" value="<?php echo $birth_date; ?>" />
                                             </div>
                                     	    <div class="form-group">
-                                                <label class="form-label for="Address">Address <?php echo form_error('Address') ?></label>
+                                                <label class="form-label for="Address">Alamat <?php echo form_error('Address') ?></label>
                                                 <textarea class="form-control" rows="3" name="Address" id="Address" placeholder="Address"><?php echo $Address; ?></textarea>
                                             </div>
                                     	    <div class="form-group">
-                                                <label class="form-label for="varchar">Telp Number <?php echo form_error('telp_number') ?></label>
+                                                <label class="form-label for="varchar">Nomer Telp <?php echo form_error('telp_number') ?></label>
                                                 <input type="text" class="form-control" name="telp_number" id="telp_number" placeholder="Telp Number" value="<?php echo $telp_number; ?>" onkeypress="return isNumberKey(event)" />
                                             </div>
                                             <div class="form-group">
@@ -70,8 +71,8 @@
                                             </div>
                                             <input type="hidden" name="role" value="<?php echo $role='1'; ?>" /> 
                                     	    <input type="hidden" name="admins_id" value="<?php echo $admins_id; ?>" /> 
-                                    	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
-                                    	    <a href="<?php echo site_url('admins') ?>" class="btn btn-default">Cancel</a>
+                                    	    <button type="submit" class="btn btn-primary"><?php echo "Tambah"; ?></button> 
+                                    	    <a href="<?php echo site_url('admins') ?>" class="btn btn-default">Batal</a>
                                     	</form>
                                     </div>
                                 </div>

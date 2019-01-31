@@ -11,12 +11,17 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Admin</strong></h2>
+                        <h2><strong>Form</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">Admin</li>
+                                <?php if ($this->session->userdata('is_admin') == TRUE) { ?>
+                                    <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
+                                <?php }else{ ?>
+                                    <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <?php } ?>
+                                <li><a href="<?php echo site_url('adverts') ?>">Iklan</a></li>
+                                <li class="active">Form</li>
                             </ol>
                         </div>
                     </div>
@@ -46,12 +51,12 @@
                                                 <?php echo form_error('stores_id') ?>
                                             </div>
                                     	    <div class="form-group">
-                                                <label for="date">Date Of Order</label>
+                                                <label for="date">Tanggal Mulai</label>
                                                 <input type="date" class="form-control" name="date_of_order" id="date_of_order" placeholder="Date Of Order" value="<?php echo $date_of_order; ?>" />
                                                 <?php echo form_error('date_of_order') ?>
                                             </div>
                                     	    <div class="form-group">
-                                                <label for="date">Date Of Com </label>
+                                                <label for="date">Tanggal Habis</label>
                                                 <input type="date" class="form-control" name="date_of_com" id="date_of_com" placeholder="Date Of Com" value="<?php echo $date_of_com; ?>" />
                                                 <?php echo form_error('date_of_com') ?>
                                             </div>
@@ -71,8 +76,8 @@
                                                   </div>
                                                 <?php echo $error; ?>
                                             </div>
-                                    	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
-                                    	    <a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Cancel</a>
+                                    	    <button type="submit" class="btn btn-primary"><?php echo 'Tambah' ?></button> 
+                                    	    <a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Batal</a>
                                     	</form>
                                        </div>
                                 </div>

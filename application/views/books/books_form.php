@@ -11,12 +11,13 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Book</strong></h2>
+                        <h2><strong>Form</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">Book</li>
+                                <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <li><a href="<?php echo site_url('books') ?>">Buku</a>
+                                <li class="active">Buku</li>
                             </ol>
                         </div>
                     </div>
@@ -24,7 +25,7 @@
                         <div class="col-md-12 portlets">
                             <div class="panel">
                                 <div class="panel-header panel-controls">
-                                    <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                                    <h3><i class="icon-bulb"></i> Form <strong>Buku</strong></h3>
                                 </div>
                                 <div class="panel-content">
                                     <div class="row">
@@ -122,8 +123,8 @@
 
                                     	    <input type="hidden" name="books_id" value="<?php echo $books_id; ?>" /> 
                                             <input type="hidden" name="cover1" value="<?php echo $cover; ?>" /> 
-                                    	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
-                                    	    <a href="<?php echo site_url('books') ?>" class="btn btn-default">Cancel</a>
+                                    	    <button type="submit" class="btn btn-primary"><?php echo 'Ubah' ?></button> 
+                                    	    <a href="<?php echo site_url('books') ?>" class="btn btn-default">Batal</a>
                                     	</form>
                                      </div>
                                 </div>

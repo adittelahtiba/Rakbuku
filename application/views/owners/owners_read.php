@@ -11,12 +11,13 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Book</strong></h2>
+                        <h2><strong>Detail</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">Book</li>
+                                <li><a href="<?php echo site_url('Admins/dashboard') ?>">Beranda</a></li>
+                                <li><a href="<?php echo site_url('owners') ?>">Pemilik Toko</a></li>
+                                <li class="active">Detail</li>
                             </ol>
                         </div>
                     </div>
@@ -24,7 +25,7 @@
                         <div class="col-md-12 portlets">
                             <div class="panel">
                                 <div class="panel-header panel-controls">
-                                    <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                                    <h3><i class="icon-bulb"></i> Detail <strong>Pemilik Toko</strong></h3>
                                 </div>
                                 <div class="panel-content">
                                     <div class="row">
@@ -39,12 +40,12 @@
                                         	    <tr><td>Status</td><td><?php echo $is_verify == '1' ? 'Sudah Registrasi' : 'Belum Registrasi' ; ?></td></tr>
                                                 
                                         	    <tr><td>Nama Toko</td><td><?php echo $stores_name; ?></td></tr>
-                                                <tr><td>Description</td><td><?php echo $description; ?></td></tr>
-                                                <tr><td>Address</td><td><?php echo $address; ?></td></tr>
-                                                <tr><td>Open</td><td><?php echo $open; ?></td></tr>
-                                                <tr><td>Contact</td><td><?php echo $contact; ?></td></tr>
-                                                <tr><td>Opening At</td><td><?php echo $opening_at; ?></td></tr>
-                                                <tr><td>Closing At</td><td><?php echo $closing_at; ?></td></tr>
+                                                <tr><td>Descripsi</td><td><?php echo $description; ?></td></tr>
+                                                <tr><td>Alamat</td><td><?php echo $address; ?></td></tr>
+                                                <tr><td>Hari Buku</td><td><?php echo $open; ?></td></tr>
+                                                <tr><td>Kontak</td><td><?php echo $contact; ?></td></tr>
+                                                <tr><td>Jam Buka</td><td><?php echo $opening_at; ?></td></tr>
+                                                <tr><td>Jam Tutup</td><td><?php echo $closing_at; ?></td></tr>
                                         	    <tr><td></td><td><a href="<?php echo site_url('owners') ?>" class="btn btn-default">Kembali</a></td></tr>
                         	               </table>
                                         </div>

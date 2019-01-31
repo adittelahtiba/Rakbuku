@@ -12,12 +12,12 @@
                 <?php $this->load->view('lib/topbar')?>
                 <div class="page-content">
                     <div class="header">
-                        <h2>Tables <strong>Admin</strong></h2>
+                        <h2> <strong>Profile</strong></h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
-                                <li><a href="tables.html">Home</a></li>
-                                <li class="active">Admin</li>
+                                <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
+                                <li class="active">Toko</li>
                             </ol>
                         </div>
                     </div>
@@ -25,18 +25,18 @@
                         <div class="col-md-12 portlets">
                             <div class="panel">
                                 <div class="panel-header panel-controls">
-                                    <h3><i class="icon-bulb"></i> Input <strong>Masks</strong></h3>
+                                    <h3><i class="icon-bulb"></i> Form <strong>Profile</strong></h3>
                                 </div>
                                 <div class="panel-content">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
                                     	    <div class="form-group">
-                                                <label for="varchar">Store Name <?php echo form_error('stores_name') ?></label>
+                                                <label for="varchar">Nama Toko <?php echo form_error('stores_name') ?></label>
                                                 <input type="text" class="form-control" name="stores_name" id="stores_name" placeholder="Store Name" value="<?php echo $stores_name; ?>" />
                                             </div>
                                     	    <div class="form-group">
-                                                <label for="description">Description <?php echo form_error('description') ?></label>
+                                                <label for="description">Descripsi <?php echo form_error('description') ?></label>
                                                 <textarea class="form-control" rows="3" name="description" id="description" placeholder="Description"><?php echo $description; ?></textarea>
                                             </div>
                                             <div class="col-xs-12">
@@ -58,7 +58,7 @@
                                                 </div>
                                             </div><!-- /.span -->
                                     	    <div class="form-group">
-                                                <label for="address">Address <?php echo form_error('address') ?></label>
+                                                <label for="address">Alamat <?php echo form_error('address') ?></label>
                                                 <textarea class="form-control" rows="3" name="address" id="address" placeholder="Address"><?php echo $address; ?></textarea>
                                             </div>
                                             <div class="form-group">
@@ -73,15 +73,15 @@
 
                                             </div>
                                     	    <div class="form-group">
-                                                <label for="varchar">Contact <?php echo form_error('contact') ?></label>
+                                                <label for="varchar">Kontak <?php echo form_error('contact') ?></label>
                                                 <input type="text" class="form-control" name="contact" id="contact" placeholder="Contact" value="<?php echo $contact; ?>" />
                                             </div>
                                     	    <div class="form-group">
-                                                <label for="time">Opening At <?php echo form_error('opening_at') ?></label>
+                                                <label for="time">Jam Buka <?php echo form_error('opening_at') ?></label>
                                                 <input class="form-control input-sm" type="time" name="opening_at" id="opening_at" placeholder="Opening At" value="<?php echo $opening_at; ?>" />
                                             </div>
                                     	    <div class="form-group">
-                                                <label for="time">Closing At <?php echo form_error('closing_at') ?></label>
+                                                <label for="time">Jam Tutup <?php echo form_error('closing_at') ?></label>
                                                 <input class="form-control input-sm" type="time" class="form-control" name="closing_at" id="closing_at" placeholder="Closing At" value="<?php echo $closing_at; ?>" />
                                             </div>
                                             <div class="form-group">
@@ -104,7 +104,7 @@
                                                             <img src="<?php echo base_url('./upload/store_pictures/'. $value->store_pictures_name);?>" width="180" height="200" id="preview[<?=$key?>]">
                                                         </td>
                                                         <td>
-                                                            <?php echo anchor(site_url('store_pictures/delete/'.$value->store_pictures_id),'Delete', 'class="btn btn-danger", onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); ?> 
+                                                            <?php echo anchor(site_url('store_pictures/delete/'.$value->store_pictures_id),'Hapus', 'class="btn btn-danger", onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); ?> 
                                                             <span class="btn btn-default btn-file">
                                                                 <span class="fileinput-new">Ubah...</span>
                                                                 <input type="file" name="store_pictures_name1[]" onchange="tampilkanPreview(this,'preview[<?=$key?>]')">
@@ -118,8 +118,8 @@
                                             </div>
                                             <?php echo $error; ?>
                                     	    <input type="hidden" name="stores_id" value="<?php echo $stores_id; ?>" /> 
-                                    	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
-                                    	    <a href="<?php echo site_url('stores') ?>" class="btn btn-default">Cancel</a>
+                                    	    <button type="submit" class="btn btn-primary"><?php echo 'Ubah' ?></button> 
+                                    	    <a href="<?php echo site_url('stores') ?>" class="btn btn-default">Batal</a>
 	                                   </form>
                                    </div>
                                 </div>
