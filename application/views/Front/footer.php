@@ -16,9 +16,8 @@
 			<div>
 				<p class="s-text7 w-size27">
 					<ul class="p-b-9">
-						<li class="s-text7">hello@rakbuku.com</li>
-						<li class="s-text7">+666 6666 6666</li>
-						<li class="s-text7">+666 1313 1313</li>
+						<li class="s-text7">wisatabandungdotcom@gmail.com</li>
+						<li class="s-text7">+123 456 789</li>
 					</ul>
 				</p>
 				<br>
@@ -35,16 +34,13 @@
 				<h4 class="s-text12 p-b-30">Navigasi</h4>
 				<ul>
 					<li class="p-b-9">
-						<a href="index.html" class="s-text7">Beranda</a>
+						<a href="<?php echo site_url('welcome') ?>" class="s-text7">Beranda</a>
 					</li>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">Kategori</a>
+						<a href="#" class="s-text7">Tentang</a>
 					</li>
 					<li class="p-b-9">
-						<a href="about.html" class="s-text7">Tentang</a>
-					</li>
-					<li class="p-b-9">
-						<a href="contact.html" class="s-text7">Kontak</a>
+						<a href="#" class="s-text7">Kontak</a>
 					</li>
 				</ul>
 			</div>
@@ -52,30 +48,20 @@
 				<h4 class="s-text12 p-b-30">FOLLOW</h4>
 				<ul>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">Facebook</a>
+						<a target="_blank" href="https://www.facebook.com/Rakbuku-426893394516482/" class="s-text7">Facebook</a>
 					</li>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">Instagram</a>
+						<a target="_blank" href="https://www.instagram.com/rakbuku.ooo/?hl=en" class="s-text7">Instagram</a>
 					</li>
 					<li class="p-b-9">
-						<a href="#" class="s-text7">Twitter</a>
+						<a target="_blank" href="https://twitter.com/Rakbuku5" class="s-text7">Twitter</a>
 					</li>
 					<li class="p-b-9">
 						<a href="#" class="s-text7">Youtube</a>
 					</li>
 				</ul>
 			</div>
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">Info Promo</h4>
-				<form>
-					<div class="effect1 w-size9">
-						<input class="s-text7 bg6 w-full p-b-5 form-control" type="text" name="email" placeholder="email@example.com"></div>
-					<div class="w-size2 p-t-20">
-						<!-- Button -->
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">Subscribe</button>
-					</div>
-				</form>
-			</div>
+			
 		</div>
 		</footer>
 <!-- AKHIR FOOTER -->

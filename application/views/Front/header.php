@@ -72,14 +72,13 @@
 	<div class="topbar-child2-fixed offset-lg-10">
 		<?php if ($this->session->userdata('logged') == TRUE){ ?>
 				<?php if ($this->session->userdata('is_admin') == TRUE){ ?>
-					<button style="width: 120px" onclick="window.location.href='<?php echo site_url('admins/dashboard') ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Dashboard</button>
-
+					<button style="width: 120px" onclick="window.location.href='<?php echo 'admins/dashboard' ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Dashboard</button>
 					<span class="linedivide1"></span>
 					<a class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true" href="<?php echo site_url('welcome/logout') ?>">Logout</a>
 				<?php }else{ ?>
 					<button style="width: 120px" onclick="window.location.href='<?php echo site_url('dashboard') ?>'" type="button" class="btn btn-default header-icon1 js-show-header-dropdown" id="login" aria-haspopup="true" aria-expanded="true">Dashboard</button>
 					<span class="linedivide1"></span>
-					<a href="<?php echo site_url('welcome/logout') ?>" class="btn btn-default" aria-haspopup="true" aria-expanded="true">Logout</a>
+					<a class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true" href="<?php echo site_url('welcome/logout') ?>">Logout</a>
 				<?php } ?>
 			<?php }else{ ?>
 			<a href="<?php echo site_url('Register') ?>" class="btn btn-default" id="daftar" aria-haspopup="true" aria-expanded="true">Daftar</a>

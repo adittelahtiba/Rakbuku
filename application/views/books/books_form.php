@@ -17,7 +17,7 @@
                                 <!-- <li><a href="dashboard.html">Make</a></li> -->
                                 <li><a href="<?php echo site_url('dashboard') ?>">Beranda</a></li>
                                 <li><a href="<?php echo site_url('books') ?>">Buku</a>
-                                <li class="active">Buku</li>
+                                <li class="active">Form</li>
                             </ol>
                         </div>
                     </div>
