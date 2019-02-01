@@ -40,7 +40,9 @@
 				<span class="block2-price s-text88 p-r-5">
 				<p class="fa fa-map-marker tegak"></p>
 				</span>
-				<?= $address ?> </a>
+				<?= $address ?>
+				<!-- (Klik untuk melihat lokasi toko) -->
+				</a>
 				<hr></div>
 			<p class="s-text88 p-t-5">
 				<?= $description ?>

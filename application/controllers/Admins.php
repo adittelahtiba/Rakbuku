@@ -94,7 +94,7 @@ class Admins extends CI_Controller
             $data = array(
         'admins_id' => $this->input->post('admins_id',TRUE),
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+		'password' => sha1($this->input->post('password',TRUE)),
 		'name' => $this->input->post('name',TRUE),
 		'Gender' => $this->input->post('Gender',TRUE),
 		'birth_date' => $this->input->post('birth_date',TRUE),
@@ -168,7 +168,7 @@ class Admins extends CI_Controller
                 if ($this->input->post('password',TRUE) !== '') {
                     $data = array(
                         'username' => $this->input->post('username',TRUE),
-                        'password' => $this->input->post('password',TRUE),
+                        'password' => sha1($this->input->post('password',TRUE)),
                         'name' => $this->input->post('name',TRUE),
                         'Gender' => $this->input->post('Gender',TRUE),
                         'birth_date' => $this->input->post('birth_date',TRUE),
@@ -193,7 +193,7 @@ class Admins extends CI_Controller
                 if ($this->input->post('password',TRUE) !== '') {
                     $data = array(
                         'username' => $this->input->post('username',TRUE),
-                        'password' => $this->input->post('password',TRUE),
+                        'password' => sha1($this->input->post('password',TRUE)),
                         'name' => $this->input->post('name',TRUE),
                         'Gender' => $this->input->post('Gender',TRUE),
                         'birth_date' => $this->input->post('birth_date',TRUE),
@@ -217,7 +217,7 @@ class Admins extends CI_Controller
 
             $this->Admins_model->update($this->input->post('admins_id', TRUE), $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
-            redirect(site_url('admins'));
+            redirect(site_url('Admins/dashboard'));
         }
     }
     

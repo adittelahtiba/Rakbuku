@@ -4,6 +4,7 @@
   <meta name="author" content="themes-lab">
   <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
   <title>Make Admin Template - Themes Lab</title>
+  <link rel="icon" type="image/png" href="<?php echo base_url('assets/front/images/icons/favicon.png')?>" >
   <link href="http://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet" type="text/css">
   <link href="<?php echo base_url('')?>assets/bootstrap/css/style.css" rel="stylesheet"> <!-- MANDATORY -->
   <link href="<?php echo base_url('')?>assets/bootstrap/css/theme.css" rel="stylesheet"> <!-- MANDATORY -->

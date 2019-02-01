@@ -106,7 +106,7 @@ class Reset_password extends CI_Controller {
             $this->reset($this->input->post('xcode', TRUE));
         } else {
             $data = array(
-                'password' => $this->input->post('password',TRUE),
+                'password' => sha1($this->input->post('password',TRUE)),
             );
 
             $this->Owners_model->update($this->input->post('owners_id', TRUE), $data);

@@ -75,11 +75,11 @@ class Welcome extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->index();
         } else {
-            $login = $this->Auth_model->login($this->input->post('username'), ($this->input->post('password')));
+            $login = $this->Auth_model->login($this->input->post('username'), ($hash = sha1($this->input->post('password'))));
 
-            $loginown = $this->Auth_model->loginown($this->input->post('username'), ($this->input->post('password')));
+            $loginown = $this->Auth_model->loginown($this->input->post('username'), ($hash = sha1($this->input->post('password'))));
             if ($login==1) {
-                $row = $this->Auth_model->data_login($this->input->post('username'),($this->input->post('password')));
+                $row = $this->Auth_model->data_login($this->input->post('username'),($hash = sha1($this->input->post('password'))));
                 $data = array(
                     'logged' => TRUE,
                     'username' => $row->username,
@@ -90,7 +90,7 @@ class Welcome extends CI_Controller {
                 $this->session->set_userdata($data);
                 redirect('admins/dashboard');
             }elseif ($loginown==1) {
-                $row = $this->Auth_model->data_loginown($this->input->post('username'), ($this->input->post('password')));
+                $row = $this->Auth_model->data_loginown($this->input->post('username'), ($hash = sha1($this->input->post('password'))));
                 $data = array(
                     'logged' => TRUE,
                     'id' => $row->owners_id,
@@ -275,7 +275,7 @@ class Welcome extends CI_Controller {
             'ISBN' => set_value('ISBN', $row->ISBN),
             'price' => set_value('price', $row2->price),
             'book_stock' => set_value('book_stock', $row2->book_stock),
-            'categories' => $this->Books_model->get_categoriesdb($row->books_id),
+            'kategori' => $this->Categories_model->get_all(),
         );
 
         $this->load->view('Front/bookdetail', $data);

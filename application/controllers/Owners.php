@@ -95,7 +95,7 @@ class Owners extends CI_Controller
         'gender' => $this->input->post('gender',TRUE),
         'birth_date' => $this->input->post('birth_date',TRUE),
         'username' => $this->input->post('username',TRUE),
-        'password' => $this->input->post('password',TRUE),
+        'password' => sha1($this->input->post('password',TRUE)),
         'is_verify' => $this->input->post('is_verify',TRUE),
         'stores_id' => $this->input->post('stores_id',TRUE),
         );
@@ -168,7 +168,7 @@ class Owners extends CI_Controller
                         'gender' => $this->input->post('gender',TRUE),
                         'birth_date' => $this->input->post('birth_date',TRUE),
                         'username' => $this->input->post('username',TRUE),
-                        'password' => $this->input->post('password',TRUE),
+                        'password' => sha1($this->input->post('password',TRUE)),
                         'is_verify' => '0',
                         'code' => sha1($this->input->post('email')),
                     );
@@ -193,7 +193,7 @@ class Owners extends CI_Controller
                         'gender' => $this->input->post('gender',TRUE),
                         'birth_date' => $this->input->post('birth_date',TRUE),
                         'username' => $this->input->post('username',TRUE),
-                        'password' => $this->input->post('password',TRUE),
+                        'password' => sha1($this->input->post('password',TRUE)),
                     );    
                 }else{
                     $data = array(

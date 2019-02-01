@@ -109,7 +109,7 @@ class Register extends CI_Controller
                         'gender' => $this->input->post('gender',TRUE),
                         'birth_date' => $this->input->post('birth_date',TRUE),
                         'username' => $this->input->post('username',TRUE),
-                        'password' => $this->input->post('password',TRUE),
+                        'password' => sha1($this->input->post('password',TRUE)),
                         'code' => $hash = sha1($this->input->post('stores_id')),
                         'stores_id' => $this->input->post('stores_id',TRUE),
 
