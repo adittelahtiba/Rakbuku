@@ -22,13 +22,13 @@ class Stores_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-    function get_limit()
+    function get_limit($limit=4, $start = 0, $q = NULL)
     {
         $this->db->order_by('stores.stores_id', $this->order);
         $this->db->join('store_pictures', 'store_pictures.stores_id=stores.stores_id');
         $this->db->join('owners', 'owners.stores_id=stores.stores_id');
         $this->db->where('owners.is_verify=1');
-        $this->db->limit(4, 0);
+        $this->db->limit($limit, $start);
         $this->db->group_by('store_pictures.stores_id');
         return $this->db->get($this->table)->result();
     }

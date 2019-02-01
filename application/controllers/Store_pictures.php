@@ -18,11 +18,11 @@ class Store_pictures extends CI_Controller
 
         if ($row) {
             $this->Store_pictures_model->delete($id);
-            $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('store_pictures'));
+            $this->session->set_flashdata('message', '<div class="alert alert-success">Data Berhasil dihapus.</div>');
+            redirect(site_url('stores/update/' .$row->stores_id));
         } else {
-            $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('store_pictures'));
+            $this->session->set_flashdata('message', '<div class="alert alert-danger">Data Yang Di cari Tidak Ditemukan.</div>');
+            redirect(site_url('dashboard'));
         }
     }
 

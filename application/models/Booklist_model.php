@@ -90,6 +90,7 @@ class Booklist_model extends CI_Model
         $this->db->join('categories', 'categories.books_id=books.books_id');
         $this->db->like('books.title', $q);
         $this->db->like('categories.categories_name', $kateg);
+        $this->db->where('booklist.booklist_id');
         
         $this->db->group_by(array('booklist.booklist_id'));
         
