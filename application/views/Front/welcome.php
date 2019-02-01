@@ -70,7 +70,7 @@
 									</div>
 								</div>
 								<div class="block2-txt p-t-20">
-									<a href="product-detail.html" class="block2-name t-left dis-block s-text33 p-b-5"><?php echo $value->stores_name ?></a>
+									<a href="<?php echo site_url('welcome/detail/'. $value->stores_id) ?>" class="block2-name t-left dis-block s-text33 p-b-5"><?php echo $value->stores_name ?></a>
 									<a href="#" class="fs-12">
 									<span class="block2-price m-text6 p-r-5">
 									<p class="fa fa-phone tegak"></p>
@@ -84,7 +84,7 @@
 									<?php echo $string;  ?></a>
 									<hr>
 									<span class="block2-price m-text6 p-r-8 ">
-									 <a class="size26" href ="<?php echo 'welcome/detail/'. $value->stores_id ?>">Detail</a>
+									 <a class="size26" href ="<?php echo site_url('welcome/detail/'. $value->stores_id) ?>">Detail</a>
 									</span>
 								</div>
 							</div>
