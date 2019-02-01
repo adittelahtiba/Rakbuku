@@ -57,8 +57,16 @@
 			<div class="input-group">
 				<select name="kateg" class="form-control col-lg-2" >
 					<option value="">Semua Kategori</option>
-					<?php foreach ($kategori as $kateg) { ?>
-		      			<option><?php echo $kateg->categories_name; ?></option>
+					<?php
+
+						foreach ($kategori as $dom) { 
+							if ($kateg == $dom->categories_name) {
+								$select = 'selected';
+							}else{
+								$select = '';
+							}
+					?>
+		      			<option <?php echo $select ?>><?php echo $dom->categories_name; ?></option>
 				    <?php } ?>
 			    </select>
 				<input type="text" class="form-control col-lg-8 m-l-20" name="q" value="<?php echo $q; ?>"  placeholder="Cari Buku atau Toko Buku ...">
@@ -191,8 +199,15 @@
 					<div class="input-group">
 						<select name="kateg" class="form-control col-lg-2 m-r-10" >
 							<option value="">Semua Kategori</option>
-							<?php foreach ($kategori as $kateg) { ?>
-				      			<option><?php echo $kateg->categories_name; ?></option>
+							<?php
+								foreach ($kategori as $dom) { 
+									if ($kateg == $dom->categories_name) {
+								$select = 'selected';
+								}else{
+									$select = '';
+								}
+							?>
+				      			<option <?php echo $select; ?>><?php echo $dom->categories_name; ?></option>
 						    <?php } ?>
 						</select>
 						<input type="text" class="form-control" name="q" value="<?php echo $q; ?>" placeholder="Cari Buku atau Toko Buku ...">
@@ -236,8 +251,15 @@
 						<div class="input-group">
 							<select name="kateg" class="form-control col-sm-12 m-r-10" >
 							<option value="">Semua Kategori</option>
-								<?php foreach ($kategori as $kateg) { ?>
-					      			<option><?php echo $kateg->categories_name; ?></option>
+								<?php
+									foreach ($kategori as $dom) { 
+										if ($kateg == $dom->categories_name) {
+								$select = 'selected';
+								}else{
+									$select = '';
+								}
+								?>
+					      			<option <?php echo $select; ?>><?php echo $dom->categories_name; ?></option>
 							    <?php } ?>
 							</select>
 							

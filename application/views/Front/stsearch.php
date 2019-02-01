@@ -22,7 +22,7 @@
 
 					<!-- Product -->
 					<div class="row">
-						<?php if (!$thedata or $q=="") { ?>
+						<?php if (!$thedata or $q=="" or $q==strpos($q, ' ')) { ?>
 							<div style="margin-left: 40%;">
 								<h2>Oops, Toko tidak ditemukan :(</h2>	
 								<p>Hasil pencarian untuk "<?php echo $q; ?>" tidak ditemukan. Coba keyword lain?</p>

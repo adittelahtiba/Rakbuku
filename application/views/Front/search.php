@@ -16,7 +16,7 @@
 						</div>
 						<div class="row">
 
-						<?php if (!$thedata or $q=="" and $kateg=="") { ?>
+						<?php if (!$thedata or $q=="" and $kateg=="" or $q==strpos($q, ' ') and $kateg =="" ) { ?>
 							<div style="margin-left: 40%;">
 								<h2>Oops, buku tidak ditemukan :(</h2>	
 								<p>Hasil pencarian untuk "<?php echo $q; ?>" <?php echo $kateg !== "" ? 'dengan kategori "'. $kateg .'"' : "" ?> tidak ditemukan. Coba keyword lain?</p>

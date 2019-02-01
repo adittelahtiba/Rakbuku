@@ -64,9 +64,10 @@
                                                 <label for="image">Gambar</label>
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <?php if ($img !== '') { ?>
-                                                        <img src="<?php echo base_url('upload/adverts/'. $img);?>" width="180" height="200" id="preview">
+                                                        <img name="img" src="<?php echo base_url('upload/adverts/'. $img);?>" width="180" height="200" id="preview">
+                                                        <input type="hidden" name="imgname" value="<?php echo $img ?>">
                                                     <?php }else{ ?>
-                                                        <img src="<?php echo base_url('upload/adverts/Noimage.jpg');?>" width="180" height="200" id="preview">
+                                                        <img name="img" src="<?php echo base_url('upload/adverts/Noimage.jpg');?>" width="180" height="200" id="preview">
                                                     <?php } ?>
                                                     
                                                         <span class="btn btn-default btn-file">
@@ -76,6 +77,7 @@
                                                   </div>
                                                 <?php echo $error; ?>
                                             </div>
+                                            <input type="hidden" name="adverts_id" value="<?php echo $adverts_id; ?>" /> 
                                     	    <button type="submit" class="btn btn-primary"><?php echo 'Tambah' ?></button> 
                                     	    <a href="<?php echo site_url('adverts') ?>" class="btn btn-default">Batal</a>
                                     	</form>

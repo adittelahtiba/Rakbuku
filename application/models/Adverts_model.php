@@ -124,7 +124,7 @@ class Adverts_model extends CI_Model
     function update($id, $data)
     {
         $this->db->where($this->id, $id);
-        $this->db->update($this->table, $data);
+        $this->db->update('adverts', $data);
     }
 
     function update_b( $data, $id)

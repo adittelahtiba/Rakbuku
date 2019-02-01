@@ -11,7 +11,7 @@
 					</div>		
 				<?php }else{ ?>
 				<?php $i=0; foreach ($Adverts as $key => $value){ ?>
-					<div class="carousel-item <?php echo $i++ =='1' ? 'active' : ''  ?>">
+					<div class="carousel-item <?php echo $i++ =='0' ? 'active' : ''  ?>">
 					    <a href="<?php echo site_url('welcome/detail/'. $value->stores_id); ?>">
 					        <img class="d-block w-100" src="<?php echo base_url('upload/adverts/'.$value->img); ?>" alt="First slide" style="height:330px; width:1170px;">
 						</a>

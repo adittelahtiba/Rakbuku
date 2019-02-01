@@ -59,6 +59,7 @@ class Adverts extends CI_Controller
             'button' => 'Create',
             'get_store' => $this->Adverts_model->get_store(),
             'action' => site_url('adverts/create_action'),
+            'adverts_id' => set_value('adverts_id'),
             'date_of_order' => set_value('date_of_order'),
             'date_of_com' => set_value('date_of_com'),
             'img' => set_value('img'),
@@ -143,28 +144,74 @@ class Adverts extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('adverts_id', TRUE));
         } else {
-            $config['upload_path']          = './upload/adverts/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['file_name']            = $this->input->post('img',TRUE);
-            $config['overwrite']            = true;
-            $config['max_size']             = 1024; // 1MB
-            // $config['max_width']            = 1024;
-            // $config['max_height']           = 768;
+            if ($this->input->post('img',TRUE) !== "") {
+               $config['upload_path']          = './upload/adverts/';
+                $config['allowed_types']        = 'gif|jpg|png';
+                $config['file_name']            = $this->input->post('imgname');
+                $config['overwrite']            = true;
+                $config['max_size']             = 5024;
+                // $config['max_width']            = 1024;
+                // $config['max_height']           = 768;
 
-            $this->load->library('upload', $config);
-            $this->upload->do_upload('img');
+                $this->load->library('upload', $config);
+                $this->upload->do_upload('img');
+                $fileData = $this->upload->data();
 
-            $data = array(
-                'adverts_id' => $this->input->post('adverts_id',TRUE),
-                  'date_of_order' => $this->input->post('date_of_order',TRUE),
-                'date_of_com' => $this->input->post('date_of_com',TRUE),
-                'img' => $fileData['file_name'],
-                'stores_id' => $this->input->post('stores_id',TRUE),
-           );
-
-            $this->Adverts_model->update($this->input->post('adverts_id', TRUE), $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
-            redirect(site_url('adverts'));
+                if ($this->upload->do_upload('img')) {
+                    if ($this->input->post('date_of_com',TRUE) > date("Y-m-d")) {
+                        $is_active = 1;
+                        $data = array(
+                            'adverts_id' => $this->input->post('adverts_id',TRUE),
+                            'date_of_order' => $this->input->post('date_of_order',TRUE),
+                            'date_of_com' => $this->input->post('date_of_com',TRUE),
+                            'img' => $fileData['file_name'],
+                            'stores_id' => $this->input->post('stores_id',TRUE),
+                            'is_active' => $is_active,
+                        );
+                    }else{
+                        $data = array(
+                            'adverts_id' => $this->input->post('adverts_id',TRUE),
+                            'date_of_order' => $this->input->post('date_of_order',TRUE),
+                            'date_of_com' => $this->input->post('date_of_com',TRUE),
+                            'img' => $fileData['file_name'],
+                            'stores_id' => $this->input->post('stores_id',TRUE),
+                        );
+                    }
+                    // echo "<pre>";
+                    //     echo print_r($data);
+                    // echo "</pre>";
+                    $this->Adverts_model->update($this->input->post('adverts_id', TRUE), $data);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
+                    redirect(site_url('adverts'));
+                    }else{
+                        $error = array('error' => $this->upload->display_errors());
+                        $this->update($this->input->post('adverts_id', TRUE), $error);
+                    }
+            }else{
+                    if ($this->input->post('date_of_com',TRUE) > date("Y-m-d")) {
+                        $is_active = 1;
+                        $data = array(
+                            'adverts_id' => $this->input->post('adverts_id',TRUE),
+                            'date_of_order' => $this->input->post('date_of_order',TRUE),
+                            'date_of_com' => $this->input->post('date_of_com',TRUE),
+                            'stores_id' => $this->input->post('stores_id',TRUE),
+                            'is_active' => $is_active,
+                        );
+                    }else{
+                        $data = array(
+                            'adverts_id' => $this->input->post('adverts_id',TRUE),
+                            'date_of_order' => $this->input->post('date_of_order',TRUE),
+                            'date_of_com' => $this->input->post('date_of_com',TRUE),
+                            'stores_id' => $this->input->post('stores_id',TRUE),
+                        );
+                    }
+                    // echo "<pre>";
+                    //     echo print_r($data);
+                    // echo "</pre>";
+                    $this->Adverts_model->update($this->input->post('adverts_id', TRUE), $data);
+                    $this->session->set_flashdata('message', '<div class="alert alert-success">Ubah Data Berhasil.</div>');
+                    redirect(site_url('adverts'));
+            }
         }
     }
     
